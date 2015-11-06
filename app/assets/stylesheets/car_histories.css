@@ -1,0 +1,55 @@
+.car-history {
+	margin-left: 10px;
+	border: 1px solid;
+	padding-top: 10px;
+	padding-right: 40px;
+	width: 400px;
+	padding-left: 20px;
+	padding-bottom: 20px;
+}
+
+.select1 {
+	width: 100px;
+}
+
+.title {
+	text-decoration: underline;
+	font-weight: bold;
+	margin-bottom: 20px;
+	color: gray;
+}
+
+.input-spare-part {
+	margin-left: 10px;
+	border: 1px solid;
+	padding-top: 10px;
+	padding-right: 40px;
+	width: 400px;
+	padding-left: 20px;
+	padding-bottom: 20px;
+	margin-top: 20px
+}
+
+.spare-part {
+	text-decoration: underline;
+	font-weight: bold;
+	margin-bottom: 20px;
+	color: gray;
+}
+
+.spare-part-detail {
+	width: 65%;
+	float: right;
+}
+
+.calculation {
+	margin-left: 10px;
+	border: 1px solid;
+	padding-top: 10px;
+	padding-right: 40px;
+	width: 400px;
+	padding-left: 20px;
+	padding-bottom: 20px;
+	margin-top: 20px;
+	height: 150px;
+}

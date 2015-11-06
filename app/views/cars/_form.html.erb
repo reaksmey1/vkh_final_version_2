@@ -1,0 +1,7 @@
+<%= bootstrap_form_for(@car, layout: :horizontal ,label_col: "col-sm-2", control_col: "col-sm-3") do |f| %>
+  <%= f.text_field :plate_number, :label => "ផ្លាកលេខឡាន" %>
+  <%= f.text_field :name, :label => "ប្រភេទ" %>
+  <%= f.form_group do %>
+    <%= f.submit "រក្សាទុក" %>
+  <% end %>
+<% end %>

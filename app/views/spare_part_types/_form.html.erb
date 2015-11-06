@@ -1,0 +1,6 @@
+<%= bootstrap_form_for(@spare_part_type, layout: :horizontal ,label_col: "col-sm-2", control_col: "col-sm-3") do |f| %>
+  <%= f.text_field :name %>
+  <%= f.form_group do %>
+    <%= f.submit %>
+  <% end %>
+<% end %>

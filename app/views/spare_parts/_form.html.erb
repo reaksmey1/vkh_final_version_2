@@ -1,0 +1,11 @@
+<%= bootstrap_form_for(@spare_part, layout: :horizontal ,label_col: "col-sm-2", control_col: "col-sm-3") do |f| %>
+  <%= f.text_field :code, :label => "លេខកូដ" %>
+  <%= f.text_field :name, :label => "ឈ្មោះ" %>
+  <%= f.collection_select :spare_part_type_id, SparePartType.all, :id, :name, :label => "ប្រភព" %>
+  <%= f.number_field	:amount_in_stock , :label => "ចំនួនក្នុងឃ្លាំង" %>
+  <%= f.number_field	:based_price, :step => 'any', :label => "តំលៃដើម" %>
+  <%= f.number_field	:selling_price, :step => 'any', :label => "តំលៃលក់" %>
+  <%= f.form_group do %>
+    <%= f.submit "រក្សាទុក" %>
+  <% end %>
+<% end %>

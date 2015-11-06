@@ -1,0 +1,31 @@
+<div class="row">
+	<div class="col-md-1"></div>
+	<div class="col-md-8">
+		<div class="nav">
+		<%= form_tag alerts_path, :method => 'get', :class => "form-inline" do %>
+			<div class="navbar-nav navbar-left" style="margin-bottom: 10px;">
+				<%= text_field_tag :search, params[:search], class: "form-control", placeholder: "Search ..." %>
+				<%= submit_tag "Search", :class => "btn btn-default" %>
+			</div>
+		<% end %>
+  	</div>
+  	<h4> បង្ហាញព័តមាន ប្រសិនបើ Stock សល់តិចជាង ៖ <%= @alert.amount %> </h4>
+  	<% if !@alerts.empty? %>
+		  <div class="panel panel-default">
+				<table class="table table-striped table-hover">
+					<th style="width: 25%"> លេខកូដ </th>
+					<th style="width: 25%"> ឈ្មោះ </th>
+					<th style="width: 25%"> ចំនួននៅសល់ </th>
+
+					<% @alerts.each do |alert| %>
+						<tr>
+							<td> <%= alert.code %> </td>
+							<td> <%= alert.name %> </td>
+							<td> <%= alert.amount_in_stock %> </td>
+						</tr>
+					<% end %>	
+				</table>
+			</div>
+		<% end %>
+	</div>
+</div>

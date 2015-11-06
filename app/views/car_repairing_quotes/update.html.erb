@@ -1,0 +1,52 @@
+<%= form_tag new_car_repairing_quote_path, method: :put do %>
+	<%= text_field_tag 'car', @car.plate_number %>
+	<%= text_field_tag 'car_history', @car_history.entry_date, :style => "width: 200px;" %>
+	<div class="panel panel-default">
+		<table class="table table-striped table-hover" id="spare_part_detail">
+			<tr>
+				<th> ការវាយតំលៃលើការខូចខាត (Demage rating) </th>
+				<th> បានធ្វើ </th>
+				<th> មិនបានធ្វើ </th>
+				<th> ធ្វើរួចរាល់ </th>
+			</tr>
+			<% existed = "" %>
+			<% @problem_lists.each do |pl| %>
+				<% if pl.problem_type == "exterior of vehicle" %>
+					<% if pl.problem_type != existed %>
+						<% existed = pl.problem_type %>
+						<tr>
+							<th colspan="4"> ផ្នែកខាងក្រៅរថយន្ត (Exterior of vehicle - outside) </th>
+						</tr>
+					<% end %>
+				<% elsif pl.problem_type == "while driving in" && pl.problem_type != existed %>
+					<% existed = pl.problem_type %>
+					<tr>
+						<th colspan="4"> ពេលបើកបររថយន្ត (While driving in) </th>
+					</tr>
+				<% elsif pl.problem_type == "engine bay" && pl.problem_type != existed %>
+					<% existed = pl.problem_type %>
+					<tr>
+						<th colspan="4"> ប្លុកម៉ាសីុន (Engine bay) </th>
+					</tr>
+				<% elsif pl.problem_type == "vehicle half lifted" && pl.problem_type != existed %>
+					<% existed = pl.problem_type %>
+					<tr>
+						<th colspan="4"> ដូយរថយន្តឡើងពាក់កណ្តាល (Vehicle half lifted) </th>
+					</tr>
+				<% elsif pl.problem_type == "vehicle fully lifted" && pl.problem_type != existed %>
+					<% existed = pl.problem_type %>
+					<tr>
+						<th colspan="4"> ដួយរថយន្តឡើងផុត (Vehicle fully lifted) </th>
+					</tr>
+				<% end %>
+				<tr>
+						<td style="width: 55%"> <%= pl.name %> </td>
+						<td style="width: 15%"> <%= radio_button_tag "problems_status[#{pl.id}][status_ids][]", "1", @car_repairing_quotes_status.find_by_car_repairing_quote_id_and_status(pl.id, "1").nil? ? false : true %> </td>
+						<td style="width: 15%"> <%= radio_button_tag "problems_status[#{pl.id}][status_ids][]", "2", @car_repairing_quotes_status.find_by_car_repairing_quote_id_and_status(pl.id, "2").nil? ? false : true %> </td>
+						<td style="width: 15%"> <%= radio_button_tag "problems_status[#{pl.id}][status_ids][]", "3", @car_repairing_quotes_status.find_by_car_repairing_quote_id_and_status(pl.id, "3").nil? ? false : true %> </td>
+					</tr>
+			<% end %>
+		</table>
+		<%= submit_tag "Save" %>
+	</div>
+<% end %>

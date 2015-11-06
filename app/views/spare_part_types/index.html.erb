@@ -1,0 +1,45 @@
+<div class="row">
+	<div class="col-md-1"></div>
+	<div class="col-md-8">
+		<div class="nav">
+		<%= form_tag spare_part_types_path, :method => 'get', :class => "form-inline" do %>
+			<div class="navbar-nav navbar-left" style="margin-bottom: 10px;">
+				<%= text_field_tag :search, params[:search], class: "form-control", placeholder: "Search ..." %>
+				<%= submit_tag "Search", :class => "btn btn-default" %>
+			</div>
+		<% end %>
+	  <div class="navbar-nav navbar-right" style="margin-right: 0px;">
+	  	<%= button_to "Add New", new_spare_part_type_path, :class => "btn btn-default", :method => "get" %>
+	  </div>
+  	</div>
+  	<% if !@spare_part_types.empty? %>
+		  <div class="panel panel-default">
+				<table class="table table-striped table-hover">
+					<th style="width: 20%"> ឈ្មោះ </th>
+					<th style="width: 15%"> </th>
+
+					<% @spare_part_types.each do |spare_part_type| %>
+						<tr>
+							<td> <%= spare_part_type.name %> </td>
+							<td>
+								<div>
+									<span style = "margin-right: 10px;">
+										<%= link_to "", edit_spare_part_type_path(spare_part_type), class: "glyphicon glyphicon-pencil" %>
+									</span>
+									<span style = "margin-right: 10px;">
+										<%= link_to "", spare_part_type_path(spare_part_type), method: :delete, data: {confirm: "Are you sure want to delete this item?"}, class: "glyphicon glyphicon-trash" %>
+									</span>
+								</div>
+							</td>
+						</tr>
+					<% end %>	
+				</table>
+			</div>
+		<% end %>
+		<div style="margin-top: -25px;">
+			<% if !@spare_part_types.empty? %>
+			<%= will_paginate @spare_part_types, renderer: BootstrapPagination::Rails %>
+			<% end %>
+		</div>
+	</div>
+</div>

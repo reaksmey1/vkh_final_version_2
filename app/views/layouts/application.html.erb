@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>VkhProject</title>
+  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+	<%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+	<%= csrf_meta_tags %>
+</head>
+<body>
+
+
+<% if notice %>
+  <p class="alert alert-success"><%= notice %></p>
+<% end %>
+<% if alert %>
+  <p class="alert alert-danger"><%= alert %></p>
+<% end %>
+
+<% if current_user%>
+	<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header" style="margin-left: 90px;">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">VKH Management System</a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li class=<%= section_active("car_histories")  %> style="padding-left: 20px; padding-right: 10px;"> <%= link_to raw('<i class="glyphicon glyphicon-usd" style="margin-right: 5px;"></i> Sell '), car_histories_path, :method => :get %> </li>
+         <li class="nav-divider"></li>
+        <li class=<%= section_active("historical_reports")  %> style="padding-left: 20px; padding-right: 10px;"> <%= link_to raw('<i class="glyphicon glyphicon-eye-open" style="margin-right: 5px;"></i>  History '), historical_reports_path, :method => :get %> </li>
+        <li class="divider"></li>
+        <li class="dropdown <%= section_active("spare_parts")  %>"> <%= link_to raw('<i class="glyphicon glyphicon-folder-open" style="margin-right: 5px;"></i> Spare Parts <span class="caret"></span>'), spare_parts_path, :method => :get, :'data-toggle' => 'dropdown', :target => "_blank" %>
+          <ul class="dropdown-menu" role="menu">
+            <li><%= link_to "Manage Type", spare_part_types_path %></li>
+            <li><%= link_to "Import", import_page_spare_parts_path %></li>
+          </ul>
+        </li>
+        <li class=<%= section_active("cars")  %> style="padding-left: 20px; padding-right: 10px;"> <%= link_to raw('<i class="glyphicon glyphicon-folder-open" style="margin-right: 5px;"></i>  Car '), cars_path, :method => :get %> </li>
+          <ul class="dropdown-menu" role="menu">
+            <li><a href="#">Manage Type</a></li>
+          </ul>
+        </li>
+        <li class="divider-vertical"></li>
+        <li class="dropdown <%= section_active("alerts")  %>"> <%= link_to raw('<i class="glyphicon glyphicon-folder-open" style="margin-right: 5px;"></i> Alert <span class="badge">'"#{SparePart.where('amount_in_stock <= ?', Alert.first.amount).count}"' <span class="caret"></span>'), alerts_path, :method => :get, :'data-toggle' => 'dropdown' %>
+          <ul class="dropdown-menu" role="menu">
+            <li><%= link_to "Manage Alert", edit_alert_path(Alert.first) %></li>
+          </ul>
+        </li>
+        <li class="divider-vertical"></li>
+       <!--  <li><a class="glyphicon glyphicon-user" href="#"> User </a></li> -->
+      </ul>
+      <div class="btn-group pull-right">
+				<a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+					<i class="icon-user"></i> <%= current_user.email || "UNKNOWN" %> <span class="caret"></span>
+				</a>
+				<ul class="dropdown-menu">
+					<li><%= link_to " Profile", edit_user_path(current_user), :method => :get, :class => 'icon-user' %>
+					<li class="divider"></li>
+					<li><%= link_to " Change Password", change_password_user_path(current_user), :method => :get, :class => 'icon-cog' %>
+					<li class="divider"></li>
+					<li><%= link_to " Sign out", destroy_user_session_path, :method => :delete, :class => 'icon-share' %></li>
+				</ul>
+			</div>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+<% end %>
+
+
+<%= yield %>
+
+</body>
+</html>

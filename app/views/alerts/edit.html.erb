@@ -1,0 +1,9 @@
+<div id="wrapper">
+
+	<%= bootstrap_form_for(@alert, layout: :horizontal ,label_col: "col-sm-5", control_col: "col-sm-1") do |f| %>
+	  <%= f.text_field :amount, :label => "ព័តមាននឹងត្រូវបានបង្ហាញ ប្រសិនបើចំនួនក្នុង Stock សល់តិចជាង" %>
+	  <%= f.form_group do %>
+	    <%= f.submit %>
+	  <% end %>
+	<% end %>
+</div>
