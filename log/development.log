@@ -3369,3 +3369,2377 @@ Started GET "/assets/jquery.datetimepicker/init.js?body=1" for 127.0.0.1 at 2015
 
 
 Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2015-11-06 15:14:53 +0700
+  [1m[36m (2.7ms)[0m  [1mCREATE TABLE "schema_migrations" ("version" varchar(255) NOT NULL) [0m
+  [1m[35m (0.1ms)[0m  select sqlite_version(*)
+  [1m[36m (1.6ms)[0m  [1mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.1ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+Migrating to DeviseCreateUsers (20150125052520)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.6ms)[0m  CREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "email" varchar(255) DEFAULT '' NOT NULL, "encrypted_password" varchar(255) DEFAULT '' NOT NULL, "reset_password_token" varchar(255), "reset_password_sent_at" datetime, "remember_created_at" datetime, "sign_in_count" integer DEFAULT 0 NOT NULL, "current_sign_in_at" datetime, "last_sign_in_at" datetime, "current_sign_in_ip" varchar(255), "last_sign_in_ip" varchar(255), "created_at" datetime, "updated_at" datetime) 
+  [1m[36m (1.3ms)[0m  [1mCREATE UNIQUE INDEX "index_users_on_email" ON "users" ("email")[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_users_on_email' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_users_on_email' AND type='index'
+
+  [1m[36m (0.4ms)[0m  [1mCREATE UNIQUE INDEX "index_users_on_reset_password_token" ON "users" ("reset_password_token")[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20150125052520"]]
+  [1m[36m (3.1ms)[0m  [1mcommit transaction[0m
+Migrating to CreateCars (20150126034636)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.3ms)[0m  [1mCREATE TABLE "cars" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "plate_number" varchar(255), "name" varchar(255), "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20150126034636"]]
+  [1m[36m (2.5ms)[0m  [1mcommit transaction[0m
+Migrating to AddTypeEntryDateDetailToCar (20150223085325)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.5ms)[0m  [1mALTER TABLE "cars" ADD "type" integer[0m
+  [1m[35m (0.3ms)[0m  ALTER TABLE "cars" ADD "entry_date" datetime
+  [1m[36m (0.2ms)[0m  [1mALTER TABLE "cars" ADD "detail" varchar(255)[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20150223085325"]]
+  [1m[36m (2.5ms)[0m  [1mcommit transaction[0m
+Migrating to CreateTableCarType (20150223090154)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.3ms)[0m  [1mCREATE TABLE "car_types" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20150223090154"]]
+  [1m[36m (2.1ms)[0m  [1mcommit transaction[0m
+Migrating to CreateSpareParts (20150224085533)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.4ms)[0m  [1mCREATE TABLE "spare_parts" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "code" integer, "name" varchar(255), "amount_in_stock" integer, "based_price" float, "selling_price" float, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20150224085533"]]
+  [1m[36m (2.2ms)[0m  [1mcommit transaction[0m
+Migrating to CreateSparePartType (20150224091527)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.3ms)[0m  [1mCREATE TABLE "spare_part_types" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20150224091527"]]
+  [1m[36m (2.0ms)[0m  [1mcommit transaction[0m
+Migrating to AddColumnTypeToSpareParts (20150224092208)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.3ms)[0m  [1mALTER TABLE "spare_parts" ADD "spare_part_type_id" varchar(255)[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20150224092208"]]
+  [1m[36m (2.3ms)[0m  [1mcommit transaction[0m
+Migrating to ChangeColumnCodeToString (20150224094323)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.4ms)[0m  [1mCREATE TEMPORARY TABLE "aspare_parts" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "code" integer, "name" varchar(255), "amount_in_stock" integer, "based_price" float, "selling_price" float, "created_at" datetime, "updated_at" datetime, "spare_part_type_id" varchar(255)) [0m
+  [1m[35m (0.0ms)[0m  SELECT * FROM "spare_parts"
+  [1m[36m (0.2ms)[0m  [1mDROP TABLE "spare_parts"[0m
+  [1m[35m (0.1ms)[0m  CREATE TABLE "spare_parts" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "code" varchar(255), "name" varchar(255), "amount_in_stock" integer, "based_price" float, "selling_price" float, "created_at" datetime, "updated_at" datetime, "spare_part_type_id" varchar(255)) 
+  [1m[36m (0.1ms)[0m  [1mSELECT * FROM "aspare_parts"[0m
+  [1m[35m (0.2ms)[0m  DROP TABLE "aspare_parts"
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20150224094323"]]
+  [1m[35m (6.7ms)[0m  commit transaction
+Migrating to CreateCarHistories (20150302001432)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.3ms)[0m  CREATE TABLE "car_histories" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "car_id" integer, "problem" varchar(255), "created_at" datetime, "updated_at" datetime) 
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20150302001432"]]
+  [1m[35m (2.0ms)[0m  commit transaction
+Migrating to CreateCarHistorySpareParts (20150302001706)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.4ms)[0m  CREATE TABLE "car_history_spare_parts" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "car_history_id" integer, "spare_part_id" integer, "amount" integer, "unit_price" float, "total_price" float, "created_at" datetime, "updated_at" datetime) 
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20150302001706"]]
+  [1m[35m (3.3ms)[0m  commit transaction
+Migrating to CreateCarRepairingQuotes (20150323070551)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.3ms)[0m  CREATE TABLE "car_repairing_quotes" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "problem_type" varchar(255), "created_at" datetime, "updated_at" datetime) 
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20150323070551"]]
+  [1m[35m (1.8ms)[0m  commit transaction
+Migrating to CreateCarRepairingQuoteStatuses (20150323071522)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.3ms)[0m  CREATE TABLE "car_repairing_quote_statuses" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "car_id" integer, "car_repairing_quote_id" integer, "status" varchar(255), "created_at" datetime, "updated_at" datetime) 
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20150323071522"]]
+  [1m[35m (2.9ms)[0m  commit transaction
+Migrating to AddColumnEntryDateToCarHistory (20150408020933)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.3ms)[0m  ALTER TABLE "car_histories" ADD "entry_date" datetime
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20150408020933"]]
+  [1m[35m (1.9ms)[0m  commit transaction
+Migrating to AddKiloMetreToCarHistories (20150408030341)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.3ms)[0m  ALTER TABLE "car_histories" ADD "kilo_metre" varchar(255)
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20150408030341"]]
+  [1m[35m (2.3ms)[0m  commit transaction
+Migrating to CreateSellReports (20150421063126)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.3ms)[0m  CREATE TABLE "sell_reports" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "car_id" integer, "spare_part_id" integer, "unit" float, "selling_price" float, "total_price" float, "recieved" float, "sub_total" float, "return" float, "status" varchar(255), "created_at" datetime, "updated_at" datetime) 
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20150421063126"]]
+  [1m[35m (2.4ms)[0m  commit transaction
+Migrating to AddCarHistoryIdToSellReport (20150422082129)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.3ms)[0m  ALTER TABLE "sell_reports" ADD "car_history_id" integer
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20150422082129"]]
+  [1m[35m (1.9ms)[0m  commit transaction
+Migrating to CreateAlerts (20150601062244)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.3ms)[0m  CREATE TABLE "alerts" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "amount" integer, "created_at" datetime, "updated_at" datetime) 
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20150601062244"]]
+  [1m[35m (4.2ms)[0m  commit transaction
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_users_on_reset_password_token' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_users_on_reset_password_token' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_users_on_email' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_users_on_email' AND type='index'
+[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "car_repairing_quotes" ("created_at", "name", "problem_type", "updated_at") VALUES (?, ?, ?, ?)[0m  [["created_at", "2015-11-11 07:52:25.243787"], ["name", "កញ្ចក់រថយន្ត៖ ប្រះ ( ) ដំុថ្មកាត់ ( ) ឆ្កូត"], ["problem_type", "exterior of vehicle"], ["updated_at", "2015-11-11 07:52:25.243787"]]
+  [1m[35m (2.8ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "car_repairing_quotes" ("created_at", "name", "problem_type", "updated_at") VALUES (?, ?, ?, ?)  [["created_at", "2015-11-11 07:52:25.249859"], ["name", "ផ្លឹតទឹក"], ["problem_type", "exterior of vehicle"], ["updated_at", "2015-11-11 07:52:25.249859"]]
+  [1m[36m (2.8ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "car_repairing_quotes" ("created_at", "name", "problem_type", "updated_at") VALUES (?, ?, ?, ?)[0m  [["created_at", "2015-11-11 07:52:25.254051"], ["name", "ស្បែកហ្រាំង / ថាសហ្រាំង"], ["problem_type", "exterior of vehicle"], ["updated_at", "2015-11-11 07:52:25.254051"]]
+  [1m[35m (2.5ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "car_repairing_quotes" ("created_at", "name", "problem_type", "updated_at") VALUES (?, ?, ?, ?)  [["created_at", "2015-11-11 07:52:25.257902"], ["name", "តួរថយន្ត"], ["problem_type", "exterior of vehicle"], ["updated_at", "2015-11-11 07:52:25.257902"]]
+  [1m[36m (2.9ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "car_repairing_quotes" ("created_at", "name", "problem_type", "updated_at") VALUES (?, ?, ?, ?)[0m  [["created_at", "2015-11-11 07:52:25.262176"], ["name", "ថាសកង់"], ["problem_type", "exterior of vehicle"], ["updated_at", "2015-11-11 07:52:25.262176"]]
+  [1m[35m (2.9ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "car_repairing_quotes" ("created_at", "name", "problem_type", "updated_at") VALUES (?, ?, ?, ?)  [["created_at", "2015-11-11 07:52:25.266476"], ["name", "ភ្លើងសញ្ញា់"], ["problem_type", "while driving in"], ["updated_at", "2015-11-11 07:52:25.266476"]]
+  [1m[36m (2.1ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "car_repairing_quotes" ("created_at", "name", "problem_type", "updated_at") VALUES (?, ?, ?, ?)[0m  [["created_at", "2015-11-11 07:52:25.269805"], ["name", "ភ្លើងតាប្លួ់"], ["problem_type", "while driving in"], ["updated_at", "2015-11-11 07:52:25.269805"]]
+  [1m[35m (2.5ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "car_repairing_quotes" ("created_at", "name", "problem_type", "updated_at") VALUES (?, ?, ?, ?)  [["created_at", "2015-11-11 07:52:25.273534"], ["name", "ក្លិនក្នុងរថយន្ត"], ["problem_type", "while driving in"], ["updated_at", "2015-11-11 07:52:25.273534"]]
+  [1m[36m (3.1ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "car_repairing_quotes" ("created_at", "name", "problem_type", "updated_at") VALUES (?, ?, ?, ?)[0m  [["created_at", "2015-11-11 07:52:25.277947"], ["name", "កំរាលជើង"], ["problem_type", "while driving in"], ["updated_at", "2015-11-11 07:52:25.277947"]]
+  [1m[35m (2.6ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "car_repairing_quotes" ("created_at", "name", "problem_type", "updated_at") VALUES (?, ?, ?, ?)  [["created_at", "2015-11-11 07:52:25.281898"], ["name", "ម៉ាសីុនប្រអប់លេខ ( សំលេងដំណើរការ )"], ["problem_type", "while driving in"], ["updated_at", "2015-11-11 07:52:25.281898"]]
+  [1m[36m (2.9ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "car_repairing_quotes" ("created_at", "name", "problem_type", "updated_at") VALUES (?, ?, ?, ?)[0m  [["created_at", "2015-11-11 07:52:25.286182"], ["name", "ប្រព័ន្ធបាញ់ទឹកកញ្ចក់ / ទំហំុបាញ់ ( រួមបញ្ចូលទាំង ចង្កៀងបំភ្លឺខាងមុខ )"], ["problem_type", "while driving in"], ["updated_at", "2015-11-11 07:52:25.286182"]]
+  [1m[35m (2.9ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "car_repairing_quotes" ("created_at", "name", "problem_type", "updated_at") VALUES (?, ?, ?, ?)  [["created_at", "2015-11-11 07:52:25.290407"], ["name", "ម៉ាកេប្រេងម៉ាសុីន / ប្រេងប្រអប់លេខ"], ["problem_type", "engine bay"], ["updated_at", "2015-11-11 07:52:25.290407"]]
+  [1m[36m (3.4ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "car_repairing_quotes" ("created_at", "name", "problem_type", "updated_at") VALUES (?, ?, ?, ?)[0m  [["created_at", "2015-11-11 07:52:25.295164"], ["name", "ប្លុកម៉ាសុីន"], ["problem_type", "engine bay"], ["updated_at", "2015-11-11 07:52:25.295164"]]
+  [1m[35m (2.9ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "car_repairing_quotes" ("created_at", "name", "problem_type", "updated_at") VALUES (?, ?, ?, ?)  [["created_at", "2015-11-11 07:52:25.299473"], ["name", "កំរិតទឹក collant"], ["problem_type", "engine bay"], ["updated_at", "2015-11-11 07:52:25.299473"]]
+  [1m[36m (2.9ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "car_repairing_quotes" ("created_at", "name", "problem_type", "updated_at") VALUES (?, ?, ?, ?)[0m  [["created_at", "2015-11-11 07:52:25.303682"], ["name", "ប្រេងហ្រវាំង / មានជាតិទឹក"], ["problem_type", "engine bay"], ["updated_at", "2015-11-11 07:52:25.303682"]]
+  [1m[35m (2.1ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "car_repairing_quotes" ("created_at", "name", "problem_type", "updated_at") VALUES (?, ?, ?, ?)  [["created_at", "2015-11-11 07:52:25.306921"], ["name", "ទឹកបាញ់កញ្ចក់រថយន្ត / បរិមាណទឹក"], ["problem_type", "engine bay"], ["updated_at", "2015-11-11 07:52:25.306921"]]
+  [1m[36m (2.9ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "car_repairing_quotes" ("created_at", "name", "problem_type", "updated_at") VALUES (?, ?, ?, ?)[0m  [["created_at", "2015-11-11 07:52:25.310983"], ["name", "ខ្សែពាន ខ្សែភ្លើង ទុយោ"], ["problem_type", "engine bay"], ["updated_at", "2015-11-11 07:52:25.310983"]]
+  [1m[35m (2.9ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "car_repairing_quotes" ("created_at", "name", "problem_type", "updated_at") VALUES (?, ?, ?, ?)  [["created_at", "2015-11-11 07:52:25.315242"], ["name", "ពិនិត្រអាគុយ"], ["problem_type", "engine bay"], ["updated_at", "2015-11-11 07:52:25.315242"]]
+  [1m[36m (2.6ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "car_repairing_quotes" ("created_at", "name", "problem_type", "updated_at") VALUES (?, ?, ?, ?)[0m  [["created_at", "2015-11-11 07:52:25.319176"], ["name", "ម៉ាសីុនត្រជាក់ ( ដល់ពេលកំណត់សេវាកម្មរឺនៅ ? )"], ["problem_type", "engine bay"], ["updated_at", "2015-11-11 07:52:25.319176"]]
+  [1m[35m (2.9ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "car_repairing_quotes" ("created_at", "name", "problem_type", "updated_at") VALUES (?, ?, ?, ?)  [["created_at", "2015-11-11 07:52:25.323432"], ["name", "ពិនិត្រកង់ ( ភាពសឹក អាយុកាល ស្តានភាពកង់ )"], ["problem_type", "vehicle half lifted"], ["updated_at", "2015-11-11 07:52:25.323432"]]
+  [1m[36m (3.0ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "car_repairing_quotes" ("created_at", "name", "problem_type", "updated_at") VALUES (?, ?, ?, ?)[0m  [["created_at", "2015-11-11 07:52:25.327765"], ["name", "ការលិចរឺជ្រាប ( ម៉ាសីុន / ប្រអប់លេខ )"], ["problem_type", "vehicle fully lifted"], ["updated_at", "2015-11-11 07:52:25.327765"]]
+  [1m[35m (2.1ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "car_repairing_quotes" ("created_at", "name", "problem_type", "updated_at") VALUES (?, ?, ?, ?)  [["created_at", "2015-11-11 07:52:25.331004"], ["name", "បំព្ង់សីុមុាំង ( លេចធ្លុះ កៅស៊ូ )"], ["problem_type", "vehicle fully lifted"], ["updated_at", "2015-11-11 07:52:25.331004"]]
+  [1m[36m (2.8ms)[0m  [1mcommit transaction[0m
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "alerts" ("amount", "created_at", "updated_at") VALUES (?, ?, ?)  [["amount", 2], ["created_at", "2015-11-11 07:54:17.480748"], ["updated_at", "2015-11-11 07:54:17.480748"]]
+  [1m[36m (2.1ms)[0m  [1mcommit transaction[0m
+
+
+Started GET "/" for 127.0.0.1 at 2015-11-11 14:54:26 +0700
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+
+
+Started GET "/car_histories" for 127.0.0.1 at 2015-11-11 14:54:26 +0700
+Processing by CarHistoriesController#index as HTML
+Completed 401 Unauthorized in 23ms
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2015-11-11 14:54:26 +0700
+Processing by Devise::SessionsController#new as HTML
+  Rendered /Users/mrreaksmey/.rbenv/versions/2.1.6/lib/ruby/gems/2.1.0/gems/devise-3.5.2/app/views/devise/shared/_links.html.erb (1.2ms)
+  Rendered /Users/mrreaksmey/.rbenv/versions/2.1.6/lib/ruby/gems/2.1.0/gems/devise-3.5.2/app/views/devise/sessions/new.html.erb within layouts/application (50.1ms)
+Completed 200 OK in 3936ms (Views: 3926.1ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/assets/alert.css?body=1" for 127.0.0.1 at 2015-11-11 14:54:30 +0700
+
+
+Started GET "/assets/cars.css?body=1" for 127.0.0.1 at 2015-11-11 14:54:30 +0700
+
+
+Started GET "/assets/alerts_controller.css?body=1" for 127.0.0.1 at 2015-11-11 14:54:30 +0700
+
+
+Started GET "/assets/historical_reports.css?body=1" for 127.0.0.1 at 2015-11-11 14:54:30 +0700
+
+
+Started GET "/assets/car_repairing_quotes.css?body=1" for 127.0.0.1 at 2015-11-11 14:54:30 +0700
+
+
+Started GET "/assets/car_histories.css?body=1" for 127.0.0.1 at 2015-11-11 14:54:30 +0700
+
+
+Started GET "/assets/home.css?body=1" for 127.0.0.1 at 2015-11-11 14:54:30 +0700
+
+
+Started GET "/assets/main.css?body=1" for 127.0.0.1 at 2015-11-11 14:54:30 +0700
+
+
+Started GET "/assets/spare_part_types.css?body=1" for 127.0.0.1 at 2015-11-11 14:54:30 +0700
+
+
+Started GET "/assets/spare_parts.css?body=1" for 127.0.0.1 at 2015-11-11 14:54:30 +0700
+
+
+Started GET "/assets/users.css?body=1" for 127.0.0.1 at 2015-11-11 14:54:30 +0700
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2015-11-11 14:54:30 +0700
+
+
+Started GET "/assets/rails_bootstrap_forms.css?body=1" for 127.0.0.1 at 2015-11-11 14:54:30 +0700
+
+
+Started GET "/assets/jquery.datetimepicker.css?body=1" for 127.0.0.1 at 2015-11-11 14:54:30 +0700
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2015-11-11 14:54:30 +0700
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2015-11-11 14:54:30 +0700
+
+
+Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2015-11-11 14:54:30 +0700
+
+
+Started GET "/assets/bootstrap/affix.js?body=1" for 127.0.0.1 at 2015-11-11 14:54:30 +0700
+
+
+Started GET "/assets/bootstrap/alert.js?body=1" for 127.0.0.1 at 2015-11-11 14:54:30 +0700
+
+
+Started GET "/assets/bootstrap/carousel.js?body=1" for 127.0.0.1 at 2015-11-11 14:54:30 +0700
+
+
+Started GET "/assets/bootstrap/collapse.js?body=1" for 127.0.0.1 at 2015-11-11 14:54:30 +0700
+
+
+Started GET "/assets/bootstrap/dropdown.js?body=1" for 127.0.0.1 at 2015-11-11 14:54:30 +0700
+
+
+Started GET "/assets/bootstrap/tab.js?body=1" for 127.0.0.1 at 2015-11-11 14:54:30 +0700
+
+
+Started GET "/assets/bootstrap/transition.js?body=1" for 127.0.0.1 at 2015-11-11 14:54:30 +0700
+
+
+Started GET "/assets/bootstrap/button.js?body=1" for 127.0.0.1 at 2015-11-11 14:54:30 +0700
+
+
+Started GET "/assets/bootstrap/scrollspy.js?body=1" for 127.0.0.1 at 2015-11-11 14:54:30 +0700
+
+
+Started GET "/assets/bootstrap/modal.js?body=1" for 127.0.0.1 at 2015-11-11 14:54:30 +0700
+
+
+Started GET "/assets/bootstrap/tooltip.js?body=1" for 127.0.0.1 at 2015-11-11 14:54:30 +0700
+
+
+Started GET "/assets/bootstrap/popover.js?body=1" for 127.0.0.1 at 2015-11-11 14:54:30 +0700
+
+
+Started GET "/assets/alert.js?body=1" for 127.0.0.1 at 2015-11-11 14:54:30 +0700
+
+
+Started GET "/assets/bootstrap-sprockets.js?body=1" for 127.0.0.1 at 2015-11-11 14:54:30 +0700
+
+
+Started GET "/assets/alerts_controller.js?body=1" for 127.0.0.1 at 2015-11-11 14:54:30 +0700
+
+
+Started GET "/assets/car_histories.js?body=1" for 127.0.0.1 at 2015-11-11 14:54:30 +0700
+
+
+Started GET "/assets/car_repairing_quotes.js?body=1" for 127.0.0.1 at 2015-11-11 14:54:30 +0700
+
+
+Started GET "/assets/cars.js?body=1" for 127.0.0.1 at 2015-11-11 14:54:30 +0700
+
+
+Started GET "/assets/historical_reports.js?body=1" for 127.0.0.1 at 2015-11-11 14:54:30 +0700
+
+
+Started GET "/assets/home.js?body=1" for 127.0.0.1 at 2015-11-11 14:54:30 +0700
+
+
+Started GET "/assets/spare_part_types.js?body=1" for 127.0.0.1 at 2015-11-11 14:54:30 +0700
+
+
+Started GET "/assets/spare_parts.js?body=1" for 127.0.0.1 at 2015-11-11 14:54:30 +0700
+
+
+Started GET "/assets/users.js?body=1" for 127.0.0.1 at 2015-11-11 14:54:30 +0700
+
+
+Started GET "/assets/jquery.datetimepicker.js?body=1" for 127.0.0.1 at 2015-11-11 14:54:30 +0700
+
+
+Started GET "/assets/jquery.datetimepicker/init.js?body=1" for 127.0.0.1 at 2015-11-11 14:54:30 +0700
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2015-11-11 14:54:30 +0700
+
+
+Started GET "/users/sign_up" for 127.0.0.1 at 2015-11-11 14:54:36 +0700
+Processing by Devise::RegistrationsController#new as HTML
+  Rendered /Users/mrreaksmey/.rbenv/versions/2.1.6/lib/ruby/gems/2.1.0/gems/devise-3.5.2/app/views/devise/shared/_links.html.erb (0.3ms)
+  Rendered /Users/mrreaksmey/.rbenv/versions/2.1.6/lib/ruby/gems/2.1.0/gems/devise-3.5.2/app/views/devise/registrations/new.html.erb within layouts/application (4.6ms)
+Completed 200 OK in 371ms (Views: 369.5ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users" for 127.0.0.1 at 2015-11-11 14:54:54 +0700
+Processing by Devise::RegistrationsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"0GnsO4AjmvG2jPkhxJyyT6Sn8hnKRWuNNCdR53lsOdE=", "user"=>{"email"=>"reaksmey@enspiral.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}, "commit"=>"Sign up"}
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.2ms)[0m  [1mSELECT  1 AS one FROM "users"  WHERE "users"."email" = 'reaksmey@enspiral.com' LIMIT 1[0m
+Binary data inserted for `string` type on column `encrypted_password`
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "users" ("created_at", "email", "encrypted_password", "updated_at") VALUES (?, ?, ?, ?)  [["created_at", "2015-11-11 07:54:54.923417"], ["email", "reaksmey@enspiral.com"], ["encrypted_password", "$2a$10$SPvI3kslTfp0ANFEYV8Op./a9qoVfu.SKsvRPkCCLPihvATQ4c8Ay"], ["updated_at", "2015-11-11 07:54:54.923417"]]
+  [1m[36m (2.4ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+Binary data inserted for `string` type on column `current_sign_in_ip`
+Binary data inserted for `string` type on column `last_sign_in_ip`
+  [1m[36mSQL (0.3ms)[0m  [1mUPDATE "users" SET "current_sign_in_at" = ?, "current_sign_in_ip" = ?, "last_sign_in_at" = ?, "last_sign_in_ip" = ?, "sign_in_count" = ?, "updated_at" = ? WHERE "users"."id" = 1[0m  [["current_sign_in_at", "2015-11-11 07:54:54.929801"], ["current_sign_in_ip", "127.0.0.1"], ["last_sign_in_at", "2015-11-11 07:54:54.929801"], ["last_sign_in_ip", "127.0.0.1"], ["sign_in_count", 1], ["updated_at", "2015-11-11 07:54:54.930706"]]
+  [1m[35m (2.1ms)[0m  commit transaction
+Redirected to http://localhost:3000/car_histories
+Completed 302 Found in 179ms (ActiveRecord: 5.6ms)
+
+
+Started GET "/car_histories" for 127.0.0.1 at 2015-11-11 14:54:54 +0700
+Processing by CarHistoriesController#index as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = 1  ORDER BY "users"."id" ASC LIMIT 1[0m
+  [1m[35mCar Load (0.2ms)[0m  SELECT "cars".* FROM "cars"
+  Rendered car_histories/index.html.erb within layouts/application (31.3ms)
+  [1m[36mAlert Load (0.2ms)[0m  [1mSELECT  "alerts".* FROM "alerts"   ORDER BY "alerts"."id" ASC LIMIT 1[0m
+  [1m[35m (0.2ms)[0m  SELECT COUNT(*) FROM "spare_parts"  WHERE (amount_in_stock <= 2)
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "alerts".* FROM "alerts"   ORDER BY "alerts"."id" ASC LIMIT 1[0m
+Completed 200 OK in 447ms (Views: 430.0ms | ActiveRecord: 2.0ms)
+
+
+Started GET "/assets/bootstrap/glyphicons-halflings-regular.woff" for 127.0.0.1 at 2015-11-11 14:54:55 +0700
+
+
+Started GET "/spare_parts" for 127.0.0.1 at 2015-11-11 14:55:14 +0700
+Processing by SparePartsController#index as HTML
+  Parameters: {"authenticity_token"=>"0GnsO4AjmvG2jPkhxJyyT6Sn8hnKRWuNNCdR53lsOdE="}
+  [1m[35mUser Load (0.3ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."id" = 1  ORDER BY "users"."id" ASC LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "spare_parts"[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT COUNT(*) FROM "spare_parts"
+  Rendered spare_parts/index.html.erb within layouts/application (3.2ms)
+  [1m[36mAlert Load (0.3ms)[0m  [1mSELECT  "alerts".* FROM "alerts"   ORDER BY "alerts"."id" ASC LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "spare_parts"  WHERE (amount_in_stock <= 2)
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "alerts".* FROM "alerts"   ORDER BY "alerts"."id" ASC LIMIT 1[0m
+Completed 200 OK in 403ms (Views: 400.4ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/spare_parts/import_page" for 127.0.0.1 at 2015-11-11 14:55:18 +0700
+Processing by SparePartsController#import_page as HTML
+  [1m[35mUser Load (0.2ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."id" = 1  ORDER BY "users"."id" ASC LIMIT 1
+  Rendered spare_parts/import_page.html.erb within layouts/application (0.8ms)
+  [1m[36mAlert Load (0.1ms)[0m  [1mSELECT  "alerts".* FROM "alerts"   ORDER BY "alerts"."id" ASC LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "spare_parts"  WHERE (amount_in_stock <= 2)
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "alerts".* FROM "alerts"   ORDER BY "alerts"."id" ASC LIMIT 1[0m
+Completed 200 OK in 351ms (Views: 349.4ms | ActiveRecord: 0.4ms)
+
+
+Started POST "/spare_parts/import" for 127.0.0.1 at 2015-11-11 14:55:27 +0700
+Processing by SparePartsController#import as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"0GnsO4AjmvG2jPkhxJyyT6Sn8hnKRWuNNCdR53lsOdE=", "file"=>#<ActionDispatch::Http::UploadedFile:0x007fd7372b53c0 @tempfile=#<Tempfile:/var/folders/6b/zw310dx905175nmj_p4v1byw0000gn/T/RackMultipart20151111-1119-hjepix>, @original_filename="Workbook1.csv", @content_type="text/csv", @headers="Content-Disposition: form-data; name=\"file\"; filename=\"Workbook1.csv\"\r\nContent-Type: text/csv\r\n">, "commit"=>"Import"}
+  [1m[35mUser Load (0.2ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."id" = 1  ORDER BY "users"."id" ASC LIMIT 1
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "spare_parts" ("amount_in_stock", "based_price", "code", "created_at", "name", "selling_price", "spare_part_type_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["amount_in_stock", 10], ["based_price", 12.3], ["code", "00001"], ["created_at", "2015-11-11 07:55:27.415377"], ["name", "___"], ["selling_price", 12.4], ["spare_part_type_id", "1"], ["updated_at", "2015-11-11 07:55:27.415377"]]
+  [1m[36m (3.7ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "spare_parts" ("amount_in_stock", "based_price", "code", "created_at", "name", "selling_price", "spare_part_type_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?)[0m  [["amount_in_stock", 10], ["based_price", 12.3], ["code", "00002"], ["created_at", "2015-11-11 07:55:27.420876"], ["name", "___"], ["selling_price", 12.4], ["spare_part_type_id", "1"], ["updated_at", "2015-11-11 07:55:27.420876"]]
+  [1m[35m (2.5ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "spare_parts" ("amount_in_stock", "based_price", "code", "created_at", "name", "selling_price", "spare_part_type_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["amount_in_stock", 10], ["based_price", 12.3], ["code", "00003"], ["created_at", "2015-11-11 07:55:27.424990"], ["name", "___"], ["selling_price", 12.4], ["spare_part_type_id", "1"], ["updated_at", "2015-11-11 07:55:27.424990"]]
+  [1m[36m (1.9ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "spare_parts" ("amount_in_stock", "based_price", "code", "created_at", "name", "selling_price", "spare_part_type_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?)[0m  [["amount_in_stock", 10], ["based_price", 12.3], ["code", "00004"], ["created_at", "2015-11-11 07:55:27.428493"], ["name", "___"], ["selling_price", 12.4], ["spare_part_type_id", "1"], ["updated_at", "2015-11-11 07:55:27.428493"]]
+  [1m[35m (2.2ms)[0m  commit transaction
+Redirected to http://localhost:3000/
+Completed 302 Found in 19ms (ActiveRecord: 11.4ms)
+
+
+Started GET "/" for 127.0.0.1 at 2015-11-11 14:55:27 +0700
+
+
+Started GET "/car_histories" for 127.0.0.1 at 2015-11-11 14:55:27 +0700
+Processing by CarHistoriesController#index as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = 1  ORDER BY "users"."id" ASC LIMIT 1[0m
+  [1m[35mCar Load (0.1ms)[0m  SELECT "cars".* FROM "cars"
+  Rendered car_histories/index.html.erb within layouts/application (3.2ms)
+  [1m[36mAlert Load (0.1ms)[0m  [1mSELECT  "alerts".* FROM "alerts"   ORDER BY "alerts"."id" ASC LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "spare_parts"  WHERE (amount_in_stock <= 2)
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "alerts".* FROM "alerts"   ORDER BY "alerts"."id" ASC LIMIT 1[0m
+Completed 200 OK in 394ms (Views: 391.8ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/spare_parts" for 127.0.0.1 at 2015-11-11 14:55:31 +0700
+Processing by SparePartsController#index as HTML
+  Parameters: {"authenticity_token"=>"0GnsO4AjmvG2jPkhxJyyT6Sn8hnKRWuNNCdR53lsOdE="}
+  [1m[35mUser Load (0.3ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."id" = 1  ORDER BY "users"."id" ASC LIMIT 1
+  [1m[36m (0.2ms)[0m  [1mSELECT COUNT(*) FROM "spare_parts"[0m
+  [1m[35mSparePart Load (0.2ms)[0m  SELECT  "spare_parts".* FROM "spare_parts"   ORDER BY id LIMIT 10 OFFSET 0
+  Rendered spare_parts/index.html.erb within layouts/application (4.3ms)
+  [1m[36mAlert Load (0.2ms)[0m  [1mSELECT  "alerts".* FROM "alerts"   ORDER BY "alerts"."id" ASC LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "spare_parts"  WHERE (amount_in_stock <= 2)
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "alerts".* FROM "alerts"   ORDER BY "alerts"."id" ASC LIMIT 1[0m
+Completed 200 OK in 386ms (Views: 382.7ms | ActiveRecord: 0.9ms)
+  [1m[35mSparePart Load (0.2ms)[0m  SELECT "spare_parts".* FROM "spare_parts"
+  [1m[36mSparePart Load (0.2ms)[0m  [1mSELECT "spare_parts".* FROM "spare_parts"[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.6ms)[0m  [1mDELETE FROM "spare_parts" WHERE "spare_parts"."id" = ?[0m  [["id", 1]]
+  [1m[35m (9.4ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  DELETE FROM "spare_parts" WHERE "spare_parts"."id" = ?  [["id", 2]]
+  [1m[36m (1.8ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.1ms)[0m  [1mDELETE FROM "spare_parts" WHERE "spare_parts"."id" = ?[0m  [["id", 3]]
+  [1m[35m (1.7ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.1ms)[0m  DELETE FROM "spare_parts" WHERE "spare_parts"."id" = ?  [["id", 4]]
+  [1m[36m (1.7ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "spare_part_types" ("created_at", "name", "updated_at") VALUES (?, ?, ?)[0m  [["created_at", "2015-11-11 08:01:08.300082"], ["name", "Thailand"], ["updated_at", "2015-11-11 08:01:08.300082"]]
+  [1m[35m (7.4ms)[0m  commit transaction
+
+
+Started GET "/spare_parts" for 127.0.0.1 at 2015-11-11 15:01:15 +0700
+Processing by SparePartsController#index as HTML
+  [1m[35mUser Load (0.2ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."id" = 1  ORDER BY "users"."id" ASC LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "spare_parts"[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT COUNT(*) FROM "spare_parts"
+  Rendered spare_parts/index.html.erb within layouts/application (1.6ms)
+  [1m[36mAlert Load (0.2ms)[0m  [1mSELECT  "alerts".* FROM "alerts"   ORDER BY "alerts"."id" ASC LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "spare_parts"  WHERE (amount_in_stock <= 2)
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "alerts".* FROM "alerts"   ORDER BY "alerts"."id" ASC LIMIT 1[0m
+Completed 200 OK in 382ms (Views: 380.2ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2015-11-11 15:01:15 +0700
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2015-11-11 15:01:15 +0700
+
+
+Started GET "/spare_parts/import_page" for 127.0.0.1 at 2015-11-11 15:01:18 +0700
+Processing by SparePartsController#import_page as HTML
+  [1m[35mUser Load (0.2ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."id" = 1  ORDER BY "users"."id" ASC LIMIT 1
+  Rendered spare_parts/import_page.html.erb within layouts/application (0.4ms)
+  [1m[36mAlert Load (0.2ms)[0m  [1mSELECT  "alerts".* FROM "alerts"   ORDER BY "alerts"."id" ASC LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "spare_parts"  WHERE (amount_in_stock <= 2)
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "alerts".* FROM "alerts"   ORDER BY "alerts"."id" ASC LIMIT 1[0m
+Completed 200 OK in 361ms (Views: 359.8ms | ActiveRecord: 0.5ms)
+
+
+Started POST "/spare_parts/import" for 127.0.0.1 at 2015-11-11 15:01:25 +0700
+Processing by SparePartsController#import as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"0GnsO4AjmvG2jPkhxJyyT6Sn8hnKRWuNNCdR53lsOdE=", "file"=>#<ActionDispatch::Http::UploadedFile:0x007fd736db1b58 @tempfile=#<Tempfile:/var/folders/6b/zw310dx905175nmj_p4v1byw0000gn/T/RackMultipart20151111-1119-106k22g>, @original_filename="Workbook2.csv", @content_type="text/csv", @headers="Content-Disposition: form-data; name=\"file\"; filename=\"Workbook2.csv\"\r\nContent-Type: text/csv\r\n">, "commit"=>"Import"}
+  [1m[35mUser Load (0.2ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."id" = 1  ORDER BY "users"."id" ASC LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "spare_parts" ("amount_in_stock", "based_price", "code", "created_at", "name", "selling_price", "spare_part_type_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["amount_in_stock", 10], ["based_price", 12.2], ["code", "00001"], ["created_at", "2015-11-11 08:01:25.264757"], ["name", "____"], ["selling_price", 12.3], ["spare_part_type_id", "1"], ["updated_at", "2015-11-11 08:01:25.264757"]]
+  [1m[36m (2.2ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "spare_parts" ("amount_in_stock", "based_price", "code", "created_at", "name", "selling_price", "spare_part_type_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?)[0m  [["amount_in_stock", 10], ["based_price", 12.2], ["code", "00002"], ["created_at", "2015-11-11 08:01:25.268723"], ["name", "____"], ["selling_price", 12.3], ["spare_part_type_id", "1"], ["updated_at", "2015-11-11 08:01:25.268723"]]
+  [1m[35m (2.1ms)[0m  commit transaction
+Redirected to http://localhost:3000/
+Completed 302 Found in 10ms (ActiveRecord: 5.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2015-11-11 15:01:25 +0700
+
+
+Started GET "/car_histories" for 127.0.0.1 at 2015-11-11 15:01:25 +0700
+Processing by CarHistoriesController#index as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = 1  ORDER BY "users"."id" ASC LIMIT 1[0m
+  [1m[35mCar Load (0.1ms)[0m  SELECT "cars".* FROM "cars"
+  Rendered car_histories/index.html.erb within layouts/application (2.9ms)
+  [1m[36mAlert Load (0.1ms)[0m  [1mSELECT  "alerts".* FROM "alerts"   ORDER BY "alerts"."id" ASC LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "spare_parts"  WHERE (amount_in_stock <= 2)
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "alerts".* FROM "alerts"   ORDER BY "alerts"."id" ASC LIMIT 1[0m
+Completed 200 OK in 391ms (Views: 389.2ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2015-11-11 15:01:25 +0700
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2015-11-11 15:01:25 +0700
+
+
+Started GET "/spare_parts" for 127.0.0.1 at 2015-11-11 15:01:28 +0700
+Processing by SparePartsController#index as HTML
+  Parameters: {"authenticity_token"=>"0GnsO4AjmvG2jPkhxJyyT6Sn8hnKRWuNNCdR53lsOdE="}
+  [1m[35mUser Load (0.2ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."id" = 1  ORDER BY "users"."id" ASC LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "spare_parts"[0m
+  [1m[35mSparePart Load (0.1ms)[0m  SELECT  "spare_parts".* FROM "spare_parts"   ORDER BY id LIMIT 10 OFFSET 0
+  Rendered spare_parts/index.html.erb within layouts/application (2.6ms)
+  [1m[36mAlert Load (0.2ms)[0m  [1mSELECT  "alerts".* FROM "alerts"   ORDER BY "alerts"."id" ASC LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "spare_parts"  WHERE (amount_in_stock <= 2)
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "alerts".* FROM "alerts"   ORDER BY "alerts"."id" ASC LIMIT 1[0m
+Completed 200 OK in 406ms (Views: 403.4ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2015-11-11 15:01:28 +0700
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2015-11-11 15:01:28 +0700
+
+
+Started GET "/spare_parts/import_page" for 127.0.0.1 at 2015-11-11 15:04:37 +0700
+Processing by SparePartsController#import_page as HTML
+  [1m[35mUser Load (0.2ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."id" = 1  ORDER BY "users"."id" ASC LIMIT 1
+  Rendered spare_parts/import_page.html.erb within layouts/application (0.4ms)
+  [1m[36mAlert Load (0.1ms)[0m  [1mSELECT  "alerts".* FROM "alerts"   ORDER BY "alerts"."id" ASC LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "spare_parts"  WHERE (amount_in_stock <= 2)
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "alerts".* FROM "alerts"   ORDER BY "alerts"."id" ASC LIMIT 1[0m
+Completed 200 OK in 345ms (Views: 343.8ms | ActiveRecord: 0.4ms)
+
+
+Started POST "/spare_parts/import" for 127.0.0.1 at 2015-11-11 15:04:39 +0700
+Processing by SparePartsController#import as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"0GnsO4AjmvG2jPkhxJyyT6Sn8hnKRWuNNCdR53lsOdE=", "commit"=>"Import"}
+  [1m[35mUser Load (0.2ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."id" = 1  ORDER BY "users"."id" ASC LIMIT 1
+Completed 500 Internal Server Error in 1ms
+
+NoMethodError (undefined method `path' for nil:NilClass):
+  app/models/spare_part.rb:8:in `import'
+  app/controllers/spare_parts_controller.rb:55:in `import'
+
+
+  Rendered /Users/mrreaksmey/.rbenv/versions/2.1.6/lib/ruby/gems/2.1.0/gems/actionpack-4.1.8/lib/action_dispatch/middleware/templates/rescues/_source.erb (0.8ms)
+  Rendered /Users/mrreaksmey/.rbenv/versions/2.1.6/lib/ruby/gems/2.1.0/gems/actionpack-4.1.8/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.2ms)
+  Rendered /Users/mrreaksmey/.rbenv/versions/2.1.6/lib/ruby/gems/2.1.0/gems/actionpack-4.1.8/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.8ms)
+  Rendered /Users/mrreaksmey/.rbenv/versions/2.1.6/lib/ruby/gems/2.1.0/gems/actionpack-4.1.8/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (34.1ms)
+
+
+Started GET "/spare_parts/import_page" for 127.0.0.1 at 2015-11-11 15:04:42 +0700
+Processing by SparePartsController#import_page as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = 1  ORDER BY "users"."id" ASC LIMIT 1[0m
+  Rendered spare_parts/import_page.html.erb within layouts/application (0.7ms)
+  [1m[35mAlert Load (0.1ms)[0m  SELECT  "alerts".* FROM "alerts"   ORDER BY "alerts"."id" ASC LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "spare_parts"  WHERE (amount_in_stock <= 2)[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "alerts".* FROM "alerts"   ORDER BY "alerts"."id" ASC LIMIT 1
+Completed 200 OK in 369ms (Views: 367.1ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/car_histories" for 127.0.0.1 at 2015-11-11 15:08:16 +0700
+Processing by CarHistoriesController#index as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = 1  ORDER BY "users"."id" ASC LIMIT 1[0m
+  [1m[35mCar Load (0.1ms)[0m  SELECT "cars".* FROM "cars"
+  Rendered car_histories/index.html.erb within layouts/application (3.0ms)
+  [1m[36mAlert Load (0.2ms)[0m  [1mSELECT  "alerts".* FROM "alerts"   ORDER BY "alerts"."id" ASC LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "spare_parts"  WHERE (amount_in_stock <= 2)
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "alerts".* FROM "alerts"   ORDER BY "alerts"."id" ASC LIMIT 1[0m
+Completed 200 OK in 386ms (Views: 384.0ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/assets/alert.css?body=1" for 127.0.0.1 at 2015-11-11 15:08:17 +0700
+
+
+Started GET "/assets/car_repairing_quotes.css?body=1" for 127.0.0.1 at 2015-11-11 15:08:17 +0700
+
+
+Started GET "/assets/historical_reports.css?body=1" for 127.0.0.1 at 2015-11-11 15:08:17 +0700
+
+
+Started GET "/assets/alerts_controller.css?body=1" for 127.0.0.1 at 2015-11-11 15:08:17 +0700
+
+
+Started GET "/assets/home.css?body=1" for 127.0.0.1 at 2015-11-11 15:08:17 +0700
+
+
+Started GET "/assets/car_histories.css?body=1" for 127.0.0.1 at 2015-11-11 15:08:17 +0700
+
+
+Started GET "/assets/cars.css?body=1" for 127.0.0.1 at 2015-11-11 15:08:17 +0700
+
+
+Started GET "/assets/spare_part_types.css?body=1" for 127.0.0.1 at 2015-11-11 15:08:17 +0700
+
+
+Started GET "/assets/users.css?body=1" for 127.0.0.1 at 2015-11-11 15:08:17 +0700
+
+
+Started GET "/assets/main.css?body=1" for 127.0.0.1 at 2015-11-11 15:08:17 +0700
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2015-11-11 15:08:17 +0700
+
+
+Started GET "/assets/spare_parts.css?body=1" for 127.0.0.1 at 2015-11-11 15:08:17 +0700
+
+
+Started GET "/assets/jquery.datetimepicker.css?body=1" for 127.0.0.1 at 2015-11-11 15:08:17 +0700
+
+
+Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2015-11-11 15:08:17 +0700
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2015-11-11 15:08:17 +0700
+
+
+Started GET "/assets/bootstrap/affix.js?body=1" for 127.0.0.1 at 2015-11-11 15:08:17 +0700
+
+
+Started GET "/assets/bootstrap/button.js?body=1" for 127.0.0.1 at 2015-11-11 15:08:17 +0700
+
+
+Started GET "/assets/rails_bootstrap_forms.css?body=1" for 127.0.0.1 at 2015-11-11 15:08:17 +0700
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2015-11-11 15:08:17 +0700
+
+
+Started GET "/assets/bootstrap/transition.js?body=1" for 127.0.0.1 at 2015-11-11 15:08:17 +0700
+
+
+Started GET "/assets/bootstrap/modal.js?body=1" for 127.0.0.1 at 2015-11-11 15:08:17 +0700
+
+
+Started GET "/assets/bootstrap/alert.js?body=1" for 127.0.0.1 at 2015-11-11 15:08:17 +0700
+
+
+Started GET "/assets/alert.js?body=1" for 127.0.0.1 at 2015-11-11 15:08:17 +0700
+
+
+Started GET "/assets/bootstrap/collapse.js?body=1" for 127.0.0.1 at 2015-11-11 15:08:17 +0700
+
+
+Started GET "/assets/bootstrap/scrollspy.js?body=1" for 127.0.0.1 at 2015-11-11 15:08:17 +0700
+
+
+Started GET "/assets/bootstrap/carousel.js?body=1" for 127.0.0.1 at 2015-11-11 15:08:17 +0700
+
+
+Started GET "/assets/bootstrap/tooltip.js?body=1" for 127.0.0.1 at 2015-11-11 15:08:17 +0700
+
+
+Started GET "/assets/bootstrap/popover.js?body=1" for 127.0.0.1 at 2015-11-11 15:08:17 +0700
+
+
+Started GET "/assets/car_histories.js?body=1" for 127.0.0.1 at 2015-11-11 15:08:17 +0700
+
+
+Started GET "/assets/bootstrap/dropdown.js?body=1" for 127.0.0.1 at 2015-11-11 15:08:17 +0700
+
+
+Started GET "/assets/alerts_controller.js?body=1" for 127.0.0.1 at 2015-11-11 15:08:17 +0700
+
+
+Started GET "/assets/bootstrap/tab.js?body=1" for 127.0.0.1 at 2015-11-11 15:08:17 +0700
+
+
+Started GET "/assets/spare_part_types.js?body=1" for 127.0.0.1 at 2015-11-11 15:08:17 +0700
+
+
+Started GET "/assets/bootstrap-sprockets.js?body=1" for 127.0.0.1 at 2015-11-11 15:08:17 +0700
+
+
+Started GET "/assets/jquery.datetimepicker/init.js?body=1" for 127.0.0.1 at 2015-11-11 15:08:17 +0700
+
+
+Started GET "/assets/car_repairing_quotes.js?body=1" for 127.0.0.1 at 2015-11-11 15:08:17 +0700
+
+
+Started GET "/assets/historical_reports.js?body=1" for 127.0.0.1 at 2015-11-11 15:08:17 +0700
+
+
+Started GET "/assets/home.js?body=1" for 127.0.0.1 at 2015-11-11 15:08:17 +0700
+
+
+Started GET "/assets/users.js?body=1" for 127.0.0.1 at 2015-11-11 15:08:17 +0700
+
+
+Started GET "/assets/jquery.datetimepicker.js?body=1" for 127.0.0.1 at 2015-11-11 15:08:17 +0700
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2015-11-11 15:08:17 +0700
+
+
+Started GET "/assets/cars.js?body=1" for 127.0.0.1 at 2015-11-11 15:08:17 +0700
+
+
+Started GET "/assets/spare_parts.js?body=1" for 127.0.0.1 at 2015-11-11 15:08:17 +0700
+
+
+Started GET "/assets/bootstrap/glyphicons-halflings-regular.woff" for 127.0.0.1 at 2015-11-11 15:08:17 +0700
+
+
+Started GET "/spare_parts/import_page" for 127.0.0.1 at 2015-11-11 15:08:21 +0700
+Processing by SparePartsController#import_page as HTML
+  [1m[35mUser Load (0.2ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."id" = 1  ORDER BY "users"."id" ASC LIMIT 1
+  Rendered spare_parts/import_page.html.erb within layouts/application (0.4ms)
+  [1m[36mAlert Load (0.1ms)[0m  [1mSELECT  "alerts".* FROM "alerts"   ORDER BY "alerts"."id" ASC LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "spare_parts"  WHERE (amount_in_stock <= 2)
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "alerts".* FROM "alerts"   ORDER BY "alerts"."id" ASC LIMIT 1[0m
+Completed 200 OK in 333ms (Views: 331.8ms | ActiveRecord: 0.4ms)
+
+
+Started POST "/spare_parts/import" for 127.0.0.1 at 2015-11-11 15:08:32 +0700
+Processing by SparePartsController#import as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"0GnsO4AjmvG2jPkhxJyyT6Sn8hnKRWuNNCdR53lsOdE=", "file"=>#<ActionDispatch::Http::UploadedFile:0x007fd737237ab0 @tempfile=#<Tempfile:/var/folders/6b/zw310dx905175nmj_p4v1byw0000gn/T/RackMultipart20151111-1119-7vt9zw>, @original_filename="text.csv", @content_type="text/csv", @headers="Content-Disposition: form-data; name=\"file\"; filename=\"text.csv\"\r\nContent-Type: text/csv\r\n">, "commit"=>"Import"}
+  [1m[35mUser Load (0.2ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."id" = 1  ORDER BY "users"."id" ASC LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "spare_parts" ("amount_in_stock", "based_price", "code", "created_at", "name", "selling_price", "spare_part_type_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["amount_in_stock", 2], ["based_price", 12.0], ["code", "00001"], ["created_at", "2015-11-11 08:08:32.314089"], ["name", "សសស"], ["selling_price", 12.0], ["spare_part_type_id", "1"], ["updated_at", "2015-11-11 08:08:32.314089"]]
+  [1m[36m (2.5ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "spare_parts" ("amount_in_stock", "based_price", "code", "created_at", "name", "selling_price", "spare_part_type_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?)[0m  [["amount_in_stock", 2], ["based_price", 12.0], ["code", "00002"], ["created_at", "2015-11-11 08:08:32.318364"], ["name", "ដដដដ"], ["selling_price", 12.0], ["spare_part_type_id", "1"], ["updated_at", "2015-11-11 08:08:32.318364"]]
+  [1m[35m (2.2ms)[0m  commit transaction
+Redirected to http://localhost:3000/
+Completed 302 Found in 10ms (ActiveRecord: 5.5ms)
+
+
+Started GET "/" for 127.0.0.1 at 2015-11-11 15:08:32 +0700
+
+
+Started GET "/car_histories" for 127.0.0.1 at 2015-11-11 15:08:32 +0700
+Processing by CarHistoriesController#index as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = 1  ORDER BY "users"."id" ASC LIMIT 1[0m
+  [1m[35mCar Load (0.1ms)[0m  SELECT "cars".* FROM "cars"
+  Rendered car_histories/index.html.erb within layouts/application (3.4ms)
+  [1m[36mAlert Load (0.2ms)[0m  [1mSELECT  "alerts".* FROM "alerts"   ORDER BY "alerts"."id" ASC LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "spare_parts"  WHERE (amount_in_stock <= 2)
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "alerts".* FROM "alerts"   ORDER BY "alerts"."id" ASC LIMIT 1[0m
+Completed 200 OK in 379ms (Views: 377.3ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/assets/car_histories.css?body=1" for 127.0.0.1 at 2015-11-11 15:08:32 +0700
+
+
+Started GET "/assets/spare_parts.css?body=1" for 127.0.0.1 at 2015-11-11 15:08:32 +0700
+
+
+Started GET "/assets/cars.css?body=1" for 127.0.0.1 at 2015-11-11 15:08:32 +0700
+
+
+Started GET "/assets/rails_bootstrap_forms.css?body=1" for 127.0.0.1 at 2015-11-11 15:08:32 +0700
+
+
+Started GET "/assets/main.css?body=1" for 127.0.0.1 at 2015-11-11 15:08:32 +0700
+
+
+Started GET "/assets/jquery.datetimepicker.css?body=1" for 127.0.0.1 at 2015-11-11 15:08:32 +0700
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2015-11-11 15:08:32 +0700
+
+
+Started GET "/assets/bootstrap/affix.js?body=1" for 127.0.0.1 at 2015-11-11 15:08:32 +0700
+
+
+Started GET "/assets/bootstrap/button.js?body=1" for 127.0.0.1 at 2015-11-11 15:08:32 +0700
+
+
+Started GET "/assets/bootstrap/dropdown.js?body=1" for 127.0.0.1 at 2015-11-11 15:08:32 +0700
+
+
+Started GET "/assets/bootstrap/transition.js?body=1" for 127.0.0.1 at 2015-11-11 15:08:32 +0700
+
+
+Started GET "/assets/bootstrap/modal.js?body=1" for 127.0.0.1 at 2015-11-11 15:08:32 +0700
+
+
+Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2015-11-11 15:08:32 +0700
+
+
+Started GET "/assets/bootstrap/alert.js?body=1" for 127.0.0.1 at 2015-11-11 15:08:32 +0700
+
+
+Started GET "/assets/bootstrap/collapse.js?body=1" for 127.0.0.1 at 2015-11-11 15:08:32 +0700
+
+
+Started GET "/assets/bootstrap/tab.js?body=1" for 127.0.0.1 at 2015-11-11 15:08:32 +0700
+
+
+Started GET "/assets/bootstrap/scrollspy.js?body=1" for 127.0.0.1 at 2015-11-11 15:08:32 +0700
+
+
+Started GET "/assets/bootstrap/tooltip.js?body=1" for 127.0.0.1 at 2015-11-11 15:08:32 +0700
+
+
+Started GET "/assets/bootstrap/carousel.js?body=1" for 127.0.0.1 at 2015-11-11 15:08:32 +0700
+
+
+Started GET "/assets/alerts_controller.js?body=1" for 127.0.0.1 at 2015-11-11 15:08:32 +0700
+
+
+Started GET "/assets/bootstrap-sprockets.js?body=1" for 127.0.0.1 at 2015-11-11 15:08:32 +0700
+
+
+Started GET "/assets/car_repairing_quotes.js?body=1" for 127.0.0.1 at 2015-11-11 15:08:32 +0700
+
+
+Started GET "/assets/historical_reports.js?body=1" for 127.0.0.1 at 2015-11-11 15:08:32 +0700
+
+
+Started GET "/assets/bootstrap/popover.js?body=1" for 127.0.0.1 at 2015-11-11 15:08:32 +0700
+
+
+Started GET "/assets/spare_part_types.js?body=1" for 127.0.0.1 at 2015-11-11 15:08:32 +0700
+
+
+Started GET "/assets/car_histories.js?body=1" for 127.0.0.1 at 2015-11-11 15:08:32 +0700
+
+
+Started GET "/assets/alert.js?body=1" for 127.0.0.1 at 2015-11-11 15:08:32 +0700
+
+
+Started GET "/assets/cars.js?body=1" for 127.0.0.1 at 2015-11-11 15:08:32 +0700
+
+
+Started GET "/assets/home.js?body=1" for 127.0.0.1 at 2015-11-11 15:08:32 +0700
+
+
+Started GET "/assets/users.js?body=1" for 127.0.0.1 at 2015-11-11 15:08:32 +0700
+
+
+Started GET "/assets/spare_parts.js?body=1" for 127.0.0.1 at 2015-11-11 15:08:32 +0700
+
+
+Started GET "/assets/jquery.datetimepicker/init.js?body=1" for 127.0.0.1 at 2015-11-11 15:08:32 +0700
+
+
+Started GET "/assets/jquery.datetimepicker.js?body=1" for 127.0.0.1 at 2015-11-11 15:08:32 +0700
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2015-11-11 15:08:32 +0700
+
+
+Started GET "/spare_parts" for 127.0.0.1 at 2015-11-11 15:08:35 +0700
+Processing by SparePartsController#index as HTML
+  Parameters: {"authenticity_token"=>"0GnsO4AjmvG2jPkhxJyyT6Sn8hnKRWuNNCdR53lsOdE="}
+  [1m[35mUser Load (0.4ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."id" = 1  ORDER BY "users"."id" ASC LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "spare_parts"[0m
+  [1m[35mSparePart Load (0.1ms)[0m  SELECT  "spare_parts".* FROM "spare_parts"   ORDER BY id LIMIT 10 OFFSET 0
+  Rendered spare_parts/index.html.erb within layouts/application (2.8ms)
+  [1m[36mAlert Load (0.2ms)[0m  [1mSELECT  "alerts".* FROM "alerts"   ORDER BY "alerts"."id" ASC LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "spare_parts"  WHERE (amount_in_stock <= 2)
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "alerts".* FROM "alerts"   ORDER BY "alerts"."id" ASC LIMIT 1[0m
+Completed 200 OK in 400ms (Views: 397.8ms | ActiveRecord: 0.9ms)
+
+
+Started GET "/assets/cars.css?body=1" for 127.0.0.1 at 2015-11-11 15:08:35 +0700
+
+
+Started GET "/assets/car_histories.css?body=1" for 127.0.0.1 at 2015-11-11 15:08:35 +0700
+
+
+Started GET "/assets/spare_parts.css?body=1" for 127.0.0.1 at 2015-11-11 15:08:35 +0700
+
+
+Started GET "/assets/main.css?body=1" for 127.0.0.1 at 2015-11-11 15:08:35 +0700
+
+
+Started GET "/assets/rails_bootstrap_forms.css?body=1" for 127.0.0.1 at 2015-11-11 15:08:35 +0700
+
+
+Started GET "/assets/jquery.datetimepicker.css?body=1" for 127.0.0.1 at 2015-11-11 15:08:35 +0700
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2015-11-11 15:08:35 +0700
+
+
+Started GET "/assets/bootstrap/affix.js?body=1" for 127.0.0.1 at 2015-11-11 15:08:35 +0700
+
+
+Started GET "/assets/bootstrap/button.js?body=1" for 127.0.0.1 at 2015-11-11 15:08:35 +0700
+
+
+Started GET "/assets/bootstrap/collapse.js?body=1" for 127.0.0.1 at 2015-11-11 15:08:35 +0700
+
+
+Started GET "/assets/bootstrap/tab.js?body=1" for 127.0.0.1 at 2015-11-11 15:08:35 +0700
+
+
+Started GET "/assets/bootstrap/scrollspy.js?body=1" for 127.0.0.1 at 2015-11-11 15:08:35 +0700
+
+
+Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2015-11-11 15:08:35 +0700
+
+
+Started GET "/assets/bootstrap/alert.js?body=1" for 127.0.0.1 at 2015-11-11 15:08:35 +0700
+
+
+Started GET "/assets/bootstrap/carousel.js?body=1" for 127.0.0.1 at 2015-11-11 15:08:35 +0700
+
+
+Started GET "/assets/bootstrap/dropdown.js?body=1" for 127.0.0.1 at 2015-11-11 15:08:35 +0700
+
+
+Started GET "/assets/bootstrap/transition.js?body=1" for 127.0.0.1 at 2015-11-11 15:08:35 +0700
+
+
+Started GET "/assets/bootstrap/modal.js?body=1" for 127.0.0.1 at 2015-11-11 15:08:35 +0700
+
+
+Started GET "/assets/bootstrap/tooltip.js?body=1" for 127.0.0.1 at 2015-11-11 15:08:35 +0700
+
+
+Started GET "/assets/alerts_controller.js?body=1" for 127.0.0.1 at 2015-11-11 15:08:35 +0700
+
+
+Started GET "/assets/bootstrap-sprockets.js?body=1" for 127.0.0.1 at 2015-11-11 15:08:35 +0700
+
+
+Started GET "/assets/car_repairing_quotes.js?body=1" for 127.0.0.1 at 2015-11-11 15:08:35 +0700
+
+
+Started GET "/assets/historical_reports.js?body=1" for 127.0.0.1 at 2015-11-11 15:08:35 +0700
+
+
+Started GET "/assets/spare_part_types.js?body=1" for 127.0.0.1 at 2015-11-11 15:08:35 +0700
+
+
+Started GET "/assets/bootstrap/popover.js?body=1" for 127.0.0.1 at 2015-11-11 15:08:35 +0700
+
+
+Started GET "/assets/car_histories.js?body=1" for 127.0.0.1 at 2015-11-11 15:08:35 +0700
+
+
+Started GET "/assets/alert.js?body=1" for 127.0.0.1 at 2015-11-11 15:08:35 +0700
+
+
+Started GET "/assets/cars.js?body=1" for 127.0.0.1 at 2015-11-11 15:08:35 +0700
+
+
+Started GET "/assets/home.js?body=1" for 127.0.0.1 at 2015-11-11 15:08:35 +0700
+
+
+Started GET "/assets/spare_parts.js?body=1" for 127.0.0.1 at 2015-11-11 15:08:35 +0700
+
+
+Started GET "/assets/users.js?body=1" for 127.0.0.1 at 2015-11-11 15:08:35 +0700
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2015-11-11 15:08:35 +0700
+
+
+Started GET "/assets/jquery.datetimepicker/init.js?body=1" for 127.0.0.1 at 2015-11-11 15:08:35 +0700
+
+
+Started GET "/assets/jquery.datetimepicker.js?body=1" for 127.0.0.1 at 2015-11-11 15:08:35 +0700
+  [1m[36mSparePart Load (0.3ms)[0m  [1mSELECT "spare_parts".* FROM "spare_parts"[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.3ms)[0m  [1mDELETE FROM "spare_parts" WHERE "spare_parts"."id" = ?[0m  [["id", 5]]
+  [1m[35m (2.7ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  DELETE FROM "spare_parts" WHERE "spare_parts"."id" = ?  [["id", 6]]
+  [1m[36m (1.9ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mDELETE FROM "spare_parts" WHERE "spare_parts"."id" = ?[0m  [["id", 7]]
+  [1m[35m (3.5ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  DELETE FROM "spare_parts" WHERE "spare_parts"."id" = ?  [["id", 8]]
+  [1m[36m (1.8ms)[0m  [1mcommit transaction[0m
+
+
+Started GET "/spare_parts" for 127.0.0.1 at 2015-11-11 15:09:07 +0700
+Processing by SparePartsController#index as HTML
+  Parameters: {"authenticity_token"=>"0GnsO4AjmvG2jPkhxJyyT6Sn8hnKRWuNNCdR53lsOdE="}
+  [1m[35mUser Load (0.2ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."id" = 1  ORDER BY "users"."id" ASC LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "spare_parts"[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT COUNT(*) FROM "spare_parts"
+  Rendered spare_parts/index.html.erb within layouts/application (1.4ms)
+  [1m[36mAlert Load (0.2ms)[0m  [1mSELECT  "alerts".* FROM "alerts"   ORDER BY "alerts"."id" ASC LIMIT 1[0m
+  [1m[35m (0.2ms)[0m  SELECT COUNT(*) FROM "spare_parts"  WHERE (amount_in_stock <= 2)
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "alerts".* FROM "alerts"   ORDER BY "alerts"."id" ASC LIMIT 1[0m
+Completed 200 OK in 400ms (Views: 397.8ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/assets/car_histories.css?body=1" for 127.0.0.1 at 2015-11-11 15:09:07 +0700
+
+
+Started GET "/assets/rails_bootstrap_forms.css?body=1" for 127.0.0.1 at 2015-11-11 15:09:07 +0700
+
+
+Started GET "/assets/cars.css?body=1" for 127.0.0.1 at 2015-11-11 15:09:07 +0700
+
+
+Started GET "/assets/spare_parts.css?body=1" for 127.0.0.1 at 2015-11-11 15:09:07 +0700
+
+
+Started GET "/assets/main.css?body=1" for 127.0.0.1 at 2015-11-11 15:09:07 +0700
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2015-11-11 15:09:07 +0700
+
+
+Started GET "/assets/jquery.datetimepicker.css?body=1" for 127.0.0.1 at 2015-11-11 15:09:07 +0700
+
+
+Started GET "/assets/bootstrap/affix.js?body=1" for 127.0.0.1 at 2015-11-11 15:09:07 +0700
+
+
+Started GET "/assets/bootstrap/button.js?body=1" for 127.0.0.1 at 2015-11-11 15:09:07 +0700
+
+
+Started GET "/assets/bootstrap/collapse.js?body=1" for 127.0.0.1 at 2015-11-11 15:09:07 +0700
+
+
+Started GET "/assets/bootstrap/tab.js?body=1" for 127.0.0.1 at 2015-11-11 15:09:07 +0700
+
+
+Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2015-11-11 15:09:07 +0700
+
+
+Started GET "/assets/bootstrap/tooltip.js?body=1" for 127.0.0.1 at 2015-11-11 15:09:07 +0700
+
+
+Started GET "/assets/bootstrap/alert.js?body=1" for 127.0.0.1 at 2015-11-11 15:09:07 +0700
+
+
+Started GET "/assets/bootstrap/carousel.js?body=1" for 127.0.0.1 at 2015-11-11 15:09:07 +0700
+
+
+Started GET "/assets/bootstrap/dropdown.js?body=1" for 127.0.0.1 at 2015-11-11 15:09:07 +0700
+
+
+Started GET "/assets/bootstrap/transition.js?body=1" for 127.0.0.1 at 2015-11-11 15:09:07 +0700
+
+
+Started GET "/assets/bootstrap/popover.js?body=1" for 127.0.0.1 at 2015-11-11 15:09:07 +0700
+
+
+Started GET "/assets/bootstrap/scrollspy.js?body=1" for 127.0.0.1 at 2015-11-11 15:09:07 +0700
+
+
+Started GET "/assets/bootstrap-sprockets.js?body=1" for 127.0.0.1 at 2015-11-11 15:09:07 +0700
+
+
+Started GET "/assets/alerts_controller.js?body=1" for 127.0.0.1 at 2015-11-11 15:09:07 +0700
+
+
+Started GET "/assets/car_repairing_quotes.js?body=1" for 127.0.0.1 at 2015-11-11 15:09:07 +0700
+
+
+Started GET "/assets/historical_reports.js?body=1" for 127.0.0.1 at 2015-11-11 15:09:07 +0700
+
+
+Started GET "/assets/users.js?body=1" for 127.0.0.1 at 2015-11-11 15:09:07 +0700
+
+
+Started GET "/assets/bootstrap/modal.js?body=1" for 127.0.0.1 at 2015-11-11 15:09:07 +0700
+
+
+Started GET "/assets/alert.js?body=1" for 127.0.0.1 at 2015-11-11 15:09:07 +0700
+
+
+Started GET "/assets/car_histories.js?body=1" for 127.0.0.1 at 2015-11-11 15:09:07 +0700
+
+
+Started GET "/assets/cars.js?body=1" for 127.0.0.1 at 2015-11-11 15:09:07 +0700
+
+
+Started GET "/assets/home.js?body=1" for 127.0.0.1 at 2015-11-11 15:09:07 +0700
+
+
+Started GET "/assets/jquery.datetimepicker.js?body=1" for 127.0.0.1 at 2015-11-11 15:09:07 +0700
+
+
+Started GET "/assets/spare_part_types.js?body=1" for 127.0.0.1 at 2015-11-11 15:09:07 +0700
+
+
+Started GET "/assets/jquery.datetimepicker/init.js?body=1" for 127.0.0.1 at 2015-11-11 15:09:07 +0700
+
+
+Started GET "/assets/spare_parts.js?body=1" for 127.0.0.1 at 2015-11-11 15:09:07 +0700
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2015-11-11 15:09:07 +0700
+
+
+Started GET "/" for 127.0.0.1 at 2015-11-11 15:22:19 +0700
+
+
+Started GET "/car_histories" for 127.0.0.1 at 2015-11-11 15:22:19 +0700
+Processing by CarHistoriesController#index as HTML
+  [1m[35mUser Load (0.2ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."id" = 1  ORDER BY "users"."id" ASC LIMIT 1
+  [1m[36mCar Load (0.1ms)[0m  [1mSELECT "cars".* FROM "cars"[0m
+  Rendered car_histories/index.html.erb within layouts/application (3.0ms)
+  [1m[35mAlert Load (0.1ms)[0m  SELECT  "alerts".* FROM "alerts"   ORDER BY "alerts"."id" ASC LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "spare_parts"  WHERE (amount_in_stock <= 2)[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "alerts".* FROM "alerts"   ORDER BY "alerts"."id" ASC LIMIT 1
+Completed 200 OK in 407ms (Views: 404.9ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/car_histories" for 127.0.0.1 at 2015-11-11 15:22:20 +0700
+Processing by CarHistoriesController#index as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = 1  ORDER BY "users"."id" ASC LIMIT 1[0m
+  [1m[35mCar Load (0.1ms)[0m  SELECT "cars".* FROM "cars"
+  Rendered car_histories/index.html.erb within layouts/application (3.1ms)
+  [1m[36mAlert Load (0.1ms)[0m  [1mSELECT  "alerts".* FROM "alerts"   ORDER BY "alerts"."id" ASC LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "spare_parts"  WHERE (amount_in_stock <= 2)
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "alerts".* FROM "alerts"   ORDER BY "alerts"."id" ASC LIMIT 1[0m
+Completed 200 OK in 413ms (Views: 411.2ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/assets/alert.css?body=1" for 127.0.0.1 at 2015-11-11 15:22:20 +0700
+
+
+Started GET "/assets/alerts_controller.css?body=1" for 127.0.0.1 at 2015-11-11 15:22:20 +0700
+
+
+Started GET "/assets/car_histories.css?body=1" for 127.0.0.1 at 2015-11-11 15:22:20 +0700
+
+
+Started GET "/assets/historical_reports.css?body=1" for 127.0.0.1 at 2015-11-11 15:22:20 +0700
+
+
+Started GET "/assets/car_repairing_quotes.css?body=1" for 127.0.0.1 at 2015-11-11 15:22:20 +0700
+
+
+Started GET "/assets/cars.css?body=1" for 127.0.0.1 at 2015-11-11 15:22:20 +0700
+
+
+Started GET "/assets/home.css?body=1" for 127.0.0.1 at 2015-11-11 15:22:20 +0700
+
+
+Started GET "/assets/main.css?body=1" for 127.0.0.1 at 2015-11-11 15:22:20 +0700
+
+
+Started GET "/assets/spare_part_types.css?body=1" for 127.0.0.1 at 2015-11-11 15:22:20 +0700
+
+
+Started GET "/assets/spare_parts.css?body=1" for 127.0.0.1 at 2015-11-11 15:22:20 +0700
+
+
+Started GET "/assets/users.css?body=1" for 127.0.0.1 at 2015-11-11 15:22:20 +0700
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2015-11-11 15:22:20 +0700
+
+
+Started GET "/assets/rails_bootstrap_forms.css?body=1" for 127.0.0.1 at 2015-11-11 15:22:20 +0700
+
+
+Started GET "/assets/jquery.datetimepicker.css?body=1" for 127.0.0.1 at 2015-11-11 15:22:20 +0700
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2015-11-11 15:22:20 +0700
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2015-11-11 15:22:20 +0700
+
+
+Started GET "/assets/bootstrap/affix.js?body=1" for 127.0.0.1 at 2015-11-11 15:22:20 +0700
+
+
+Started GET "/assets/bootstrap/alert.js?body=1" for 127.0.0.1 at 2015-11-11 15:22:20 +0700
+
+
+Started GET "/assets/bootstrap/button.js?body=1" for 127.0.0.1 at 2015-11-11 15:22:20 +0700
+
+
+Started GET "/assets/bootstrap/carousel.js?body=1" for 127.0.0.1 at 2015-11-11 15:22:20 +0700
+
+
+Started GET "/assets/bootstrap/collapse.js?body=1" for 127.0.0.1 at 2015-11-11 15:22:20 +0700
+
+
+Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2015-11-11 15:22:20 +0700
+
+
+Started GET "/assets/bootstrap/dropdown.js?body=1" for 127.0.0.1 at 2015-11-11 15:22:20 +0700
+
+
+Started GET "/assets/bootstrap/tab.js?body=1" for 127.0.0.1 at 2015-11-11 15:22:20 +0700
+
+
+Started GET "/assets/bootstrap/transition.js?body=1" for 127.0.0.1 at 2015-11-11 15:22:20 +0700
+
+
+Started GET "/assets/bootstrap/scrollspy.js?body=1" for 127.0.0.1 at 2015-11-11 15:22:20 +0700
+
+
+Started GET "/assets/bootstrap/modal.js?body=1" for 127.0.0.1 at 2015-11-11 15:22:20 +0700
+
+
+Started GET "/assets/bootstrap/tooltip.js?body=1" for 127.0.0.1 at 2015-11-11 15:22:20 +0700
+
+
+Started GET "/assets/bootstrap/popover.js?body=1" for 127.0.0.1 at 2015-11-11 15:22:20 +0700
+
+
+Started GET "/assets/bootstrap-sprockets.js?body=1" for 127.0.0.1 at 2015-11-11 15:22:20 +0700
+
+
+Started GET "/assets/alert.js?body=1" for 127.0.0.1 at 2015-11-11 15:22:20 +0700
+
+
+Started GET "/assets/alerts_controller.js?body=1" for 127.0.0.1 at 2015-11-11 15:22:20 +0700
+
+
+Started GET "/assets/car_histories.js?body=1" for 127.0.0.1 at 2015-11-11 15:22:20 +0700
+
+
+Started GET "/assets/car_repairing_quotes.js?body=1" for 127.0.0.1 at 2015-11-11 15:22:20 +0700
+
+
+Started GET "/assets/cars.js?body=1" for 127.0.0.1 at 2015-11-11 15:22:20 +0700
+
+
+Started GET "/assets/historical_reports.js?body=1" for 127.0.0.1 at 2015-11-11 15:22:20 +0700
+
+
+Started GET "/assets/home.js?body=1" for 127.0.0.1 at 2015-11-11 15:22:20 +0700
+
+
+Started GET "/assets/spare_part_types.js?body=1" for 127.0.0.1 at 2015-11-11 15:22:20 +0700
+
+
+Started GET "/assets/spare_parts.js?body=1" for 127.0.0.1 at 2015-11-11 15:22:20 +0700
+
+
+Started GET "/assets/users.js?body=1" for 127.0.0.1 at 2015-11-11 15:22:20 +0700
+
+
+Started GET "/assets/jquery.datetimepicker.js?body=1" for 127.0.0.1 at 2015-11-11 15:22:20 +0700
+
+
+Started GET "/assets/jquery.datetimepicker/init.js?body=1" for 127.0.0.1 at 2015-11-11 15:22:20 +0700
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2015-11-11 15:22:20 +0700
+
+
+Started GET "/assets/bootstrap/glyphicons-halflings-regular.woff" for 127.0.0.1 at 2015-11-11 15:22:20 +0700
+
+
+Started GET "/spare_parts" for 127.0.0.1 at 2015-11-11 15:22:23 +0700
+Processing by SparePartsController#index as HTML
+  Parameters: {"authenticity_token"=>"0GnsO4AjmvG2jPkhxJyyT6Sn8hnKRWuNNCdR53lsOdE="}
+  [1m[35mUser Load (0.2ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."id" = 1  ORDER BY "users"."id" ASC LIMIT 1
+  [1m[36m (0.2ms)[0m  [1mSELECT COUNT(*) FROM "spare_parts"[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT COUNT(*) FROM "spare_parts"
+  Rendered spare_parts/index.html.erb within layouts/application (2.0ms)
+  [1m[36mAlert Load (0.2ms)[0m  [1mSELECT  "alerts".* FROM "alerts"   ORDER BY "alerts"."id" ASC LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "spare_parts"  WHERE (amount_in_stock <= 2)
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "alerts".* FROM "alerts"   ORDER BY "alerts"."id" ASC LIMIT 1[0m
+Completed 200 OK in 404ms (Views: 401.8ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/spare_parts/import_page" for 127.0.0.1 at 2015-11-11 15:22:25 +0700
+Processing by SparePartsController#import_page as HTML
+  [1m[35mUser Load (0.2ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."id" = 1  ORDER BY "users"."id" ASC LIMIT 1
+  Rendered spare_parts/import_page.html.erb within layouts/application (0.4ms)
+  [1m[36mAlert Load (0.1ms)[0m  [1mSELECT  "alerts".* FROM "alerts"   ORDER BY "alerts"."id" ASC LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "spare_parts"  WHERE (amount_in_stock <= 2)
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "alerts".* FROM "alerts"   ORDER BY "alerts"."id" ASC LIMIT 1[0m
+Completed 200 OK in 358ms (Views: 356.6ms | ActiveRecord: 0.4ms)
+
+
+Started POST "/spare_parts/import" for 127.0.0.1 at 2015-11-11 15:22:37 +0700
+Processing by SparePartsController#import as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"0GnsO4AjmvG2jPkhxJyyT6Sn8hnKRWuNNCdR53lsOdE=", "file"=>#<ActionDispatch::Http::UploadedFile:0x007fd73771c260 @tempfile=#<Tempfile:/var/folders/6b/zw310dx905175nmj_p4v1byw0000gn/T/RackMultipart20151111-1119-oky4sh>, @original_filename="Untitled spreadsheet - Sheet1.csv", @content_type="text/csv", @headers="Content-Disposition: form-data; name=\"file\"; filename=\"Untitled spreadsheet - Sheet1.csv\"\r\nContent-Type: text/csv\r\n">, "commit"=>"Import"}
+  [1m[35mUser Load (0.2ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."id" = 1  ORDER BY "users"."id" ASC LIMIT 1
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "spare_parts" ("amount_in_stock", "based_price", "code", "created_at", "name", "selling_price", "spare_part_type_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["amount_in_stock", 12], ["based_price", 10.0], ["code", "00001"], ["created_at", "2015-11-11 08:22:37.483671"], ["name", "សសដដ"], ["selling_price", 10.0], ["spare_part_type_id", "1"], ["updated_at", "2015-11-11 08:22:37.483671"]]
+  [1m[36m (2.7ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "spare_parts" ("amount_in_stock", "based_price", "code", "created_at", "name", "selling_price", "spare_part_type_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?)[0m  [["amount_in_stock", 12], ["based_price", 10.0], ["code", "00002"], ["created_at", "2015-11-11 08:22:37.488091"], ["name", "េេសសស"], ["selling_price", 10.0], ["spare_part_type_id", "1"], ["updated_at", "2015-11-11 08:22:37.488091"]]
+  [1m[35m (2.8ms)[0m  commit transaction
+Redirected to http://localhost:3000/
+Completed 302 Found in 11ms (ActiveRecord: 6.3ms)
+
+
+Started GET "/" for 127.0.0.1 at 2015-11-11 15:22:37 +0700
+
+
+Started GET "/car_histories" for 127.0.0.1 at 2015-11-11 15:22:37 +0700
+Processing by CarHistoriesController#index as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = 1  ORDER BY "users"."id" ASC LIMIT 1[0m
+  [1m[35mCar Load (0.1ms)[0m  SELECT "cars".* FROM "cars"
+  Rendered car_histories/index.html.erb within layouts/application (3.9ms)
+  [1m[36mAlert Load (0.2ms)[0m  [1mSELECT  "alerts".* FROM "alerts"   ORDER BY "alerts"."id" ASC LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "spare_parts"  WHERE (amount_in_stock <= 2)
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "alerts".* FROM "alerts"   ORDER BY "alerts"."id" ASC LIMIT 1[0m
+Completed 200 OK in 386ms (Views: 384.2ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/spare_parts" for 127.0.0.1 at 2015-11-11 15:22:40 +0700
+Processing by SparePartsController#index as HTML
+  Parameters: {"authenticity_token"=>"0GnsO4AjmvG2jPkhxJyyT6Sn8hnKRWuNNCdR53lsOdE="}
+  [1m[35mUser Load (0.3ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."id" = 1  ORDER BY "users"."id" ASC LIMIT 1
+  [1m[36m (0.2ms)[0m  [1mSELECT COUNT(*) FROM "spare_parts"[0m
+  [1m[35mSparePart Load (0.1ms)[0m  SELECT  "spare_parts".* FROM "spare_parts"   ORDER BY id LIMIT 10 OFFSET 0
+  Rendered spare_parts/index.html.erb within layouts/application (3.2ms)
+  [1m[36mAlert Load (0.2ms)[0m  [1mSELECT  "alerts".* FROM "alerts"   ORDER BY "alerts"."id" ASC LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "spare_parts"  WHERE (amount_in_stock <= 2)
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "alerts".* FROM "alerts"   ORDER BY "alerts"."id" ASC LIMIT 1[0m
+Completed 200 OK in 403ms (Views: 400.2ms | ActiveRecord: 0.9ms)
+
+
+Started GET "/" for 127.0.0.1 at 2015-11-11 15:48:57 +0700
+
+
+Started GET "/car_histories" for 127.0.0.1 at 2015-11-11 15:48:57 +0700
+Processing by CarHistoriesController#index as HTML
+  [1m[35mUser Load (0.2ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."id" = 1  ORDER BY "users"."id" ASC LIMIT 1
+  [1m[36mCar Load (0.1ms)[0m  [1mSELECT "cars".* FROM "cars"[0m
+  Rendered car_histories/index.html.erb within layouts/application (3.0ms)
+  [1m[35mAlert Load (0.2ms)[0m  SELECT  "alerts".* FROM "alerts"   ORDER BY "alerts"."id" ASC LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "spare_parts"  WHERE (amount_in_stock <= 2)[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "alerts".* FROM "alerts"   ORDER BY "alerts"."id" ASC LIMIT 1
+Completed 200 OK in 420ms (Views: 418.1ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/assets/alert.css?body=1" for 127.0.0.1 at 2015-11-11 15:48:57 +0700
+
+
+Started GET "/assets/alerts_controller.css?body=1" for 127.0.0.1 at 2015-11-11 15:48:57 +0700
+
+
+Started GET "/assets/car_histories.css?body=1" for 127.0.0.1 at 2015-11-11 15:48:57 +0700
+
+
+Started GET "/assets/car_repairing_quotes.css?body=1" for 127.0.0.1 at 2015-11-11 15:48:57 +0700
+
+
+Started GET "/assets/main.css?body=1" for 127.0.0.1 at 2015-11-11 15:48:57 +0700
+
+
+Started GET "/assets/historical_reports.css?body=1" for 127.0.0.1 at 2015-11-11 15:48:57 +0700
+
+
+Started GET "/assets/cars.css?body=1" for 127.0.0.1 at 2015-11-11 15:48:57 +0700
+
+
+Started GET "/assets/home.css?body=1" for 127.0.0.1 at 2015-11-11 15:48:57 +0700
+
+
+Started GET "/assets/spare_part_types.css?body=1" for 127.0.0.1 at 2015-11-11 15:48:57 +0700
+
+
+Started GET "/assets/spare_parts.css?body=1" for 127.0.0.1 at 2015-11-11 15:48:57 +0700
+
+
+Started GET "/assets/users.css?body=1" for 127.0.0.1 at 2015-11-11 15:48:57 +0700
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2015-11-11 15:48:57 +0700
+
+
+Started GET "/assets/rails_bootstrap_forms.css?body=1" for 127.0.0.1 at 2015-11-11 15:48:57 +0700
+
+
+Started GET "/assets/jquery.datetimepicker.css?body=1" for 127.0.0.1 at 2015-11-11 15:48:57 +0700
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2015-11-11 15:48:57 +0700
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2015-11-11 15:48:57 +0700
+
+
+Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2015-11-11 15:48:57 +0700
+
+
+Started GET "/assets/bootstrap/affix.js?body=1" for 127.0.0.1 at 2015-11-11 15:48:57 +0700
+
+
+Started GET "/assets/bootstrap/alert.js?body=1" for 127.0.0.1 at 2015-11-11 15:48:57 +0700
+
+
+Started GET "/assets/bootstrap/button.js?body=1" for 127.0.0.1 at 2015-11-11 15:48:57 +0700
+
+
+Started GET "/assets/bootstrap/carousel.js?body=1" for 127.0.0.1 at 2015-11-11 15:48:57 +0700
+
+
+Started GET "/assets/bootstrap/collapse.js?body=1" for 127.0.0.1 at 2015-11-11 15:48:57 +0700
+
+
+Started GET "/assets/bootstrap/dropdown.js?body=1" for 127.0.0.1 at 2015-11-11 15:48:57 +0700
+
+
+Started GET "/assets/bootstrap/tab.js?body=1" for 127.0.0.1 at 2015-11-11 15:48:57 +0700
+
+
+Started GET "/assets/bootstrap/transition.js?body=1" for 127.0.0.1 at 2015-11-11 15:48:57 +0700
+
+
+Started GET "/assets/bootstrap/scrollspy.js?body=1" for 127.0.0.1 at 2015-11-11 15:48:57 +0700
+
+
+Started GET "/assets/bootstrap/modal.js?body=1" for 127.0.0.1 at 2015-11-11 15:48:57 +0700
+
+
+Started GET "/assets/bootstrap/tooltip.js?body=1" for 127.0.0.1 at 2015-11-11 15:48:57 +0700
+
+
+Started GET "/assets/bootstrap/popover.js?body=1" for 127.0.0.1 at 2015-11-11 15:48:57 +0700
+
+
+Started GET "/assets/alert.js?body=1" for 127.0.0.1 at 2015-11-11 15:48:57 +0700
+
+
+Started GET "/assets/bootstrap-sprockets.js?body=1" for 127.0.0.1 at 2015-11-11 15:48:57 +0700
+
+
+Started GET "/assets/alerts_controller.js?body=1" for 127.0.0.1 at 2015-11-11 15:48:57 +0700
+
+
+Started GET "/assets/car_histories.js?body=1" for 127.0.0.1 at 2015-11-11 15:48:57 +0700
+
+
+Started GET "/assets/car_repairing_quotes.js?body=1" for 127.0.0.1 at 2015-11-11 15:48:57 +0700
+
+
+Started GET "/assets/cars.js?body=1" for 127.0.0.1 at 2015-11-11 15:48:57 +0700
+
+
+Started GET "/assets/historical_reports.js?body=1" for 127.0.0.1 at 2015-11-11 15:48:57 +0700
+
+
+Started GET "/assets/home.js?body=1" for 127.0.0.1 at 2015-11-11 15:48:57 +0700
+
+
+Started GET "/assets/spare_part_types.js?body=1" for 127.0.0.1 at 2015-11-11 15:48:57 +0700
+
+
+Started GET "/assets/spare_parts.js?body=1" for 127.0.0.1 at 2015-11-11 15:48:57 +0700
+
+
+Started GET "/assets/users.js?body=1" for 127.0.0.1 at 2015-11-11 15:48:57 +0700
+
+
+Started GET "/assets/jquery.datetimepicker.js?body=1" for 127.0.0.1 at 2015-11-11 15:48:57 +0700
+
+
+Started GET "/assets/jquery.datetimepicker/init.js?body=1" for 127.0.0.1 at 2015-11-11 15:48:57 +0700
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2015-11-11 15:48:57 +0700
+
+
+Started GET "/assets/bootstrap/glyphicons-halflings-regular.woff" for 127.0.0.1 at 2015-11-11 15:48:57 +0700
+
+
+Started GET "/spare_parts/import_page" for 127.0.0.1 at 2015-11-11 15:49:03 +0700
+Processing by SparePartsController#import_page as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = 1  ORDER BY "users"."id" ASC LIMIT 1[0m
+  Rendered spare_parts/import_page.html.erb within layouts/application (0.4ms)
+  [1m[35mAlert Load (0.1ms)[0m  SELECT  "alerts".* FROM "alerts"   ORDER BY "alerts"."id" ASC LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "spare_parts"  WHERE (amount_in_stock <= 2)[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "alerts".* FROM "alerts"   ORDER BY "alerts"."id" ASC LIMIT 1
+Completed 200 OK in 349ms (Views: 347.4ms | ActiveRecord: 0.4ms)
+
+
+Started POST "/spare_parts/import" for 127.0.0.1 at 2015-11-11 15:49:13 +0700
+Processing by SparePartsController#import as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"0GnsO4AjmvG2jPkhxJyyT6Sn8hnKRWuNNCdR53lsOdE=", "file"=>#<ActionDispatch::Http::UploadedFile:0x007fd7375b6498 @tempfile=#<Tempfile:/var/folders/6b/zw310dx905175nmj_p4v1byw0000gn/T/RackMultipart20151111-1119-dbx3tl>, @original_filename="vkh spare part - Sheet1.csv", @content_type="text/csv", @headers="Content-Disposition: form-data; name=\"file\"; filename=\"vkh spare part - Sheet1.csv\"\r\nContent-Type: text/csv\r\n">, "commit"=>"Import"}
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = 1  ORDER BY "users"."id" ASC LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "spare_parts" ("amount_in_stock", "based_price", "code", "created_at", "name", "spare_part_type_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["amount_in_stock", 10], ["based_price", 10.0], ["code", "00001"], ["created_at", "2015-11-11 08:49:13.626575"], ["name", "Logo LED ទ្វារ"], ["spare_part_type_id", "10"], ["updated_at", "2015-11-11 08:49:13.626575"]]
+  [1m[35m (20.6ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "spare_parts" ("amount_in_stock", "based_price", "code", "created_at", "name", "spare_part_type_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)  [["amount_in_stock", 10], ["based_price", 10.0], ["code", "00002"], ["created_at", "2015-11-11 08:49:13.649533"], ["name", "ទទឹក"], ["spare_part_type_id", "10"], ["updated_at", "2015-11-11 08:49:13.649533"]]
+  [1m[36m (121.0ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "spare_parts" ("amount_in_stock", "based_price", "code", "created_at", "name", "spare_part_type_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["amount_in_stock", 10], ["based_price", 10.0], ["code", "00003"], ["created_at", "2015-11-11 08:49:13.772888"], ["name", "សំណាញ់ជ័រ"], ["spare_part_type_id", "10"], ["updated_at", "2015-11-11 08:49:13.772888"]]
+  [1m[35m (2.6ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "spare_parts" ("amount_in_stock", "based_price", "code", "created_at", "name", "spare_part_type_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)  [["amount_in_stock", 10], ["based_price", 10.0], ["code", "00004"], ["created_at", "2015-11-11 08:49:13.777983"], ["name", "គុជដាក់ក្នុងចង្កៀង"], ["spare_part_type_id", "10"], ["updated_at", "2015-11-11 08:49:13.777983"]]
+  [1m[36m (3.8ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "spare_parts" ("amount_in_stock", "based_price", "code", "created_at", "name", "spare_part_type_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["amount_in_stock", 10], ["based_price", 10.0], ["code", "00005"], ["created_at", "2015-11-11 08:49:13.784124"], ["name", "ក្រម៉េការពារកញ្ចក់ពីក្រោយ"], ["spare_part_type_id", "10"], ["updated_at", "2015-11-11 08:49:13.784124"]]
+  [1m[35m (2.9ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "spare_parts" ("amount_in_stock", "based_price", "code", "created_at", "name", "spare_part_type_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)  [["amount_in_stock", 10], ["based_price", 10.0], ["code", "00006"], ["created_at", "2015-11-11 08:49:13.788826"], ["name", "កន្ទុយត្រី Spoiler"], ["spare_part_type_id", "10"], ["updated_at", "2015-11-11 08:49:13.788826"]]
+  [1m[36m (3.5ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "spare_parts" ("amount_in_stock", "based_price", "code", "created_at", "name", "spare_part_type_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["amount_in_stock", 10], ["based_price", 10.0], ["code", "00007"], ["created_at", "2015-11-11 08:49:13.794446"], ["name", "កន្ទុុយសីុមាំង"], ["spare_part_type_id", "10"], ["updated_at", "2015-11-11 08:49:13.794446"]]
+  [1m[35m (2.4ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "spare_parts" ("amount_in_stock", "based_price", "code", "created_at", "name", "spare_part_type_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)  [["amount_in_stock", 10], ["based_price", 10.0], ["code", "00008"], ["created_at", "2015-11-11 08:49:13.798461"], ["name", "ស៊ុមផ្លាកលេខ"], ["spare_part_type_id", "10"], ["updated_at", "2015-11-11 08:49:13.798461"]]
+  [1m[36m (9.3ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "spare_parts" ("amount_in_stock", "based_price", "code", "created_at", "name", "spare_part_type_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["amount_in_stock", 10], ["based_price", 10.0], ["code", "00009"], ["created_at", "2015-11-11 08:49:13.809469"], ["name", "តេឡេ"], ["spare_part_type_id", "10"], ["updated_at", "2015-11-11 08:49:13.809469"]]
+  [1m[35m (2.8ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "spare_parts" ("amount_in_stock", "based_price", "code", "created_at", "name", "spare_part_type_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)  [["amount_in_stock", 10], ["based_price", 10.0], ["code", "00010"], ["created_at", "2015-11-11 08:49:13.814135"], ["name", "ភ្លើងព្រិលក្រោម"], ["spare_part_type_id", "10"], ["updated_at", "2015-11-11 08:49:13.814135"]]
+  [1m[36m (2.8ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "spare_parts" ("amount_in_stock", "based_price", "code", "created_at", "name", "spare_part_type_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["amount_in_stock", 10], ["based_price", 10.0], ["code", "00011"], ["created_at", "2015-11-11 08:49:13.818223"], ["name", "ហ៊ុយសីុទប់ភ្លើង"], ["spare_part_type_id", "10"], ["updated_at", "2015-11-11 08:49:13.818223"]]
+  [1m[35m (2.5ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "spare_parts" ("amount_in_stock", "based_price", "code", "created_at", "name", "spare_part_type_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)  [["amount_in_stock", 10], ["based_price", 10.0], ["code", "00012"], ["created_at", "2015-11-11 08:49:13.822559"], ["name", "កង់ដង់"], ["spare_part_type_id", "10"], ["updated_at", "2015-11-11 08:49:13.822559"]]
+  [1m[36m (7.6ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "spare_parts" ("amount_in_stock", "based_price", "code", "created_at", "name", "spare_part_type_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["amount_in_stock", 10], ["based_price", 10.0], ["code", "00013"], ["created_at", "2015-11-11 08:49:13.831925"], ["name", "ដៃលេខ"], ["spare_part_type_id", "10"], ["updated_at", "2015-11-11 08:49:13.831925"]]
+  [1m[35m (27.0ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "spare_parts" ("amount_in_stock", "based_price", "code", "created_at", "name", "spare_part_type_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)  [["amount_in_stock", 10], ["based_price", 10.0], ["code", "00014"], ["created_at", "2015-11-11 08:49:13.861082"], ["name", "អេគុយ"], ["spare_part_type_id", "10"], ["updated_at", "2015-11-11 08:49:13.861082"]]
+  [1m[36m (35.8ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "spare_parts" ("amount_in_stock", "based_price", "code", "created_at", "name", "spare_part_type_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["amount_in_stock", 10], ["based_price", 10.0], ["code", "00015"], ["created_at", "2015-11-11 08:49:13.899574"], ["name", "អ៊ុបប៉ាល័រ"], ["spare_part_type_id", "10"], ["updated_at", "2015-11-11 08:49:13.899574"]]
+  [1m[35m (13.2ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "spare_parts" ("amount_in_stock", "based_price", "code", "created_at", "name", "spare_part_type_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)  [["amount_in_stock", 10], ["based_price", 10.0], ["code", "00016"], ["created_at", "2015-11-11 08:49:13.915347"], ["name", "Solo"], ["spare_part_type_id", "10"], ["updated_at", "2015-11-11 08:49:13.915347"]]
+  [1m[36m (13.6ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "spare_parts" ("amount_in_stock", "based_price", "code", "created_at", "name", "spare_part_type_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["amount_in_stock", 10], ["based_price", 10.0], ["code", "00017"], ["created_at", "2015-11-11 08:49:13.931602"], ["name", "អំភ្លី"], ["spare_part_type_id", "10"], ["updated_at", "2015-11-11 08:49:13.931602"]]
+  [1m[35m (6.7ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "spare_parts" ("amount_in_stock", "based_price", "code", "created_at", "name", "spare_part_type_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)  [["amount_in_stock", 10], ["based_price", 10.0], ["code", "00018"], ["created_at", "2015-11-11 08:49:13.940320"], ["name", "ក្រហ្វិក"], ["spare_part_type_id", "10"], ["updated_at", "2015-11-11 08:49:13.940320"]]
+  [1m[36m (15.6ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "spare_parts" ("amount_in_stock", "based_price", "code", "created_at", "name", "spare_part_type_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["amount_in_stock", 10], ["based_price", 10.0], ["code", "00019"], ["created_at", "2015-11-11 08:49:13.958009"], ["name", "ម៉ាញ៉េ"], ["spare_part_type_id", "10"], ["updated_at", "2015-11-11 08:49:13.958009"]]
+  [1m[35m (20.9ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "spare_parts" ("amount_in_stock", "based_price", "code", "created_at", "name", "spare_part_type_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)  [["amount_in_stock", 10], ["based_price", 10.0], ["code", "00020"], ["created_at", "2015-11-11 08:49:13.981179"], ["name", "ភ្លើងលោតតាមប៉ាស"], ["spare_part_type_id", "10"], ["updated_at", "2015-11-11 08:49:13.981179"]]
+  [1m[36m (30.8ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.6ms)[0m  [1mINSERT INTO "spare_parts" ("amount_in_stock", "based_price", "code", "created_at", "name", "spare_part_type_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["amount_in_stock", 10], ["based_price", 10.0], ["code", "00021"], ["created_at", "2015-11-11 08:49:14.014127"], ["name", "គ្រាប់កិបផ្លាកលេខ"], ["spare_part_type_id", "10"], ["updated_at", "2015-11-11 08:49:14.014127"]]
+  [1m[35m (8.8ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "spare_parts" ("amount_in_stock", "based_price", "code", "created_at", "name", "spare_part_type_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)  [["amount_in_stock", 10], ["based_price", 10.0], ["code", "00022"], ["created_at", "2015-11-11 08:49:14.025463"], ["name", "Camara មុខក្រោយ"], ["spare_part_type_id", "10"], ["updated_at", "2015-11-11 08:49:14.025463"]]
+  [1m[36m (1.6ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "spare_parts" ("amount_in_stock", "based_price", "code", "created_at", "name", "spare_part_type_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["amount_in_stock", 10], ["based_price", 10.0], ["code", "00023"], ["created_at", "2015-11-11 08:49:14.028882"], ["name", "Camara ផ្លាកលេខ"], ["spare_part_type_id", "10"], ["updated_at", "2015-11-11 08:49:14.028882"]]
+  [1m[35m (2.8ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "spare_parts" ("amount_in_stock", "based_price", "code", "created_at", "name", "spare_part_type_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)  [["amount_in_stock", 10], ["based_price", 10.0], ["code", "00024"], ["created_at", "2015-11-11 08:49:14.033575"], ["name", "ចង្កូតឈើ Original"], ["spare_part_type_id", "10"], ["updated_at", "2015-11-11 08:49:14.033575"]]
+  [1m[36m (1.7ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "spare_parts" ("amount_in_stock", "based_price", "code", "created_at", "name", "spare_part_type_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["amount_in_stock", 10], ["based_price", 10.0], ["code", "00025"], ["created_at", "2015-11-11 08:49:14.036913"], ["name", "ខ្សែរកូវអាគុយ"], ["spare_part_type_id", "10"], ["updated_at", "2015-11-11 08:49:14.036913"]]
+  [1m[35m (8.9ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "spare_parts" ("amount_in_stock", "based_price", "code", "created_at", "name", "spare_part_type_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)  [["amount_in_stock", 10], ["based_price", 10.0], ["code", "00026"], ["created_at", "2015-11-11 08:49:14.047442"], ["name", "ឈ្នាន់ហ្គែ + ហ្វ្រាំងលែង"], ["spare_part_type_id", "10"], ["updated_at", "2015-11-11 08:49:14.047442"]]
+  [1m[36m (2.3ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "spare_parts" ("amount_in_stock", "based_price", "code", "created_at", "name", "spare_part_type_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["amount_in_stock", 10], ["based_price", 10.0], ["code", "00027"], ["created_at", "2015-11-11 08:49:14.051373"], ["name", "ស្ព្រៃបាំងពូក"], ["spare_part_type_id", "10"], ["updated_at", "2015-11-11 08:49:14.051373"]]
+  [1m[35m (2.1ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "spare_parts" ("amount_in_stock", "based_price", "code", "created_at", "name", "spare_part_type_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)  [["amount_in_stock", 10], ["based_price", 10.0], ["code", "00028"], ["created_at", "2015-11-11 08:49:14.055166"], ["name", "ស្ព្រៃបាញ់តាបប្លូ"], ["spare_part_type_id", "10"], ["updated_at", "2015-11-11 08:49:14.055166"]]
+  [1m[36m (6.0ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "spare_parts" ("amount_in_stock", "based_price", "code", "created_at", "name", "spare_part_type_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["amount_in_stock", 10], ["based_price", 10.0], ["code", "00029"], ["created_at", "2015-11-11 08:49:14.062830"], ["name", "ថ្នាំប៉ូលា"], ["spare_part_type_id", "10"], ["updated_at", "2015-11-11 08:49:14.062830"]]
+  [1m[35m (3.2ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "spare_parts" ("amount_in_stock", "based_price", "code", "created_at", "name", "spare_part_type_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)  [["amount_in_stock", 10], ["based_price", 10.0], ["code", "00030"], ["created_at", "2015-11-11 08:49:14.067651"], ["name", "ស្ព្រៃបាញ់់កង់"], ["spare_part_type_id", "10"], ["updated_at", "2015-11-11 08:49:14.067651"]]
+  [1m[36m (2.0ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "spare_parts" ("amount_in_stock", "based_price", "code", "created_at", "name", "spare_part_type_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["amount_in_stock", 10], ["based_price", 10.0], ["code", "00031"], ["created_at", "2015-11-11 08:49:14.071314"], ["name", "កង់់ទ័រលេង"], ["spare_part_type_id", "10"], ["updated_at", "2015-11-11 08:49:14.071314"]]
+  [1m[35m (1.9ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "spare_parts" ("amount_in_stock", "based_price", "code", "created_at", "name", "spare_part_type_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)  [["amount_in_stock", 10], ["based_price", 10.0], ["code", "00032"], ["created_at", "2015-11-11 08:49:14.074668"], ["name", "កៅស៊ូទ្រាប់រស៊រ"], ["spare_part_type_id", "10"], ["updated_at", "2015-11-11 08:49:14.074668"]]
+  [1m[36m (1.6ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "spare_parts" ("amount_in_stock", "based_price", "code", "created_at", "name", "spare_part_type_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["amount_in_stock", 10], ["based_price", 10.0], ["code", "00033"], ["created_at", "2015-11-11 08:49:14.077830"], ["name", "ទឹកអប់"], ["spare_part_type_id", "10"], ["updated_at", "2015-11-11 08:49:14.077830"]]
+  [1m[35m (3.9ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "spare_parts" ("amount_in_stock", "based_price", "code", "created_at", "name", "spare_part_type_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)  [["amount_in_stock", 10], ["based_price", 10.0], ["code", "00034"], ["created_at", "2015-11-11 08:49:14.083337"], ["name", "កៅអីស្ព័រ"], ["spare_part_type_id", "10"], ["updated_at", "2015-11-11 08:49:14.083337"]]
+  [1m[36m (1.8ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "spare_parts" ("amount_in_stock", "based_price", "code", "created_at", "name", "spare_part_type_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["amount_in_stock", 10], ["based_price", 10.0], ["code", "00035"], ["created_at", "2015-11-11 08:49:14.086560"], ["name", "LED ដាក់លើដំបូល"], ["spare_part_type_id", "10"], ["updated_at", "2015-11-11 08:49:14.086560"]]
+  [1m[35m (2.1ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "spare_parts" ("amount_in_stock", "based_price", "code", "created_at", "name", "spare_part_type_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)  [["amount_in_stock", 10], ["based_price", 10.0], ["code", "00036"], ["created_at", "2015-11-11 08:49:14.090173"], ["name", "អំពូលភ្លើង Original"], ["spare_part_type_id", "10"], ["updated_at", "2015-11-11 08:49:14.090173"]]
+  [1m[36m (3.2ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "spare_parts" ("amount_in_stock", "based_price", "code", "created_at", "name", "spare_part_type_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["amount_in_stock", 10], ["based_price", 10.0], ["code", "00037"], ["created_at", "2015-11-11 08:49:14.094970"], ["name", "ភ្លើងរន្ទះ"], ["spare_part_type_id", "10"], ["updated_at", "2015-11-11 08:49:14.094970"]]
+  [1m[35m (2.5ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "spare_parts" ("amount_in_stock", "based_price", "code", "created_at", "name", "spare_part_type_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)  [["amount_in_stock", 10], ["based_price", 10.0], ["code", "00038"], ["created_at", "2015-11-11 08:49:14.099042"], ["name", "កង់ដាក់ក្នុងចង្កៀង"], ["spare_part_type_id", "10"], ["updated_at", "2015-11-11 08:49:14.099042"]]
+  [1m[36m (8.8ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "spare_parts" ("amount_in_stock", "based_price", "code", "created_at", "name", "spare_part_type_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["amount_in_stock", 10], ["based_price", 10.0], ["code", "00039"], ["created_at", "2015-11-11 08:49:14.109915"], ["name", "ភ្លើងដំបូល"], ["spare_part_type_id", "10"], ["updated_at", "2015-11-11 08:49:14.109915"]]
+  [1m[35m (2.7ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "spare_parts" ("amount_in_stock", "based_price", "code", "created_at", "name", "spare_part_type_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)  [["amount_in_stock", 10], ["based_price", 10.0], ["code", "00040"], ["created_at", "2015-11-11 08:49:14.114730"], ["name", "ស្តុបឡាន"], ["spare_part_type_id", "10"], ["updated_at", "2015-11-11 08:49:14.114730"]]
+  [1m[36m (9.5ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "spare_parts" ("amount_in_stock", "based_price", "code", "created_at", "name", "spare_part_type_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["amount_in_stock", 10], ["based_price", 10.0], ["code", "00041"], ["created_at", "2015-11-11 08:49:14.126035"], ["name", "ប្រដាប់វាស់ខ្យលកង់"], ["spare_part_type_id", "10"], ["updated_at", "2015-11-11 08:49:14.126035"]]
+  [1m[35m (1.7ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "spare_parts" ("amount_in_stock", "based_price", "code", "created_at", "name", "spare_part_type_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)  [["amount_in_stock", 10], ["based_price", 10.0], ["code", "00042"], ["created_at", "2015-11-11 08:49:14.129510"], ["name", "សាប់ក្រោយកៅអី"], ["spare_part_type_id", "10"], ["updated_at", "2015-11-11 08:49:14.129510"]]
+  [1m[36m (3.3ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "spare_parts" ("amount_in_stock", "based_price", "code", "created_at", "name", "spare_part_type_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["amount_in_stock", 10], ["based_price", 10.0], ["code", "00043"], ["created_at", "2015-11-11 08:49:14.134607"], ["name", "ចង្កូូតស្ព័រ"], ["spare_part_type_id", "10"], ["updated_at", "2015-11-11 08:49:14.134607"]]
+  [1m[35m (1.7ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "spare_parts" ("amount_in_stock", "based_price", "code", "created_at", "name", "spare_part_type_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)  [["amount_in_stock", 10], ["based_price", 10.0], ["code", "00044"], ["created_at", "2015-11-11 08:49:14.137859"], ["name", "កំបាំងថ្ងៃ"], ["spare_part_type_id", "10"], ["updated_at", "2015-11-11 08:49:14.137859"]]
+  [1m[36m (2.1ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "spare_parts" ("amount_in_stock", "based_price", "code", "created_at", "name", "spare_part_type_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["amount_in_stock", 10], ["based_price", 10.0], ["code", "00045"], ["created_at", "2015-11-11 08:49:14.141583"], ["name", "ស្លឹកឈើ"], ["spare_part_type_id", "10"], ["updated_at", "2015-11-11 08:49:14.141583"]]
+  [1m[35m (3.3ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "spare_parts" ("amount_in_stock", "based_price", "code", "created_at", "name", "spare_part_type_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)  [["amount_in_stock", 10], ["based_price", 10.0], ["code", "00046"], ["created_at", "2015-11-11 08:49:14.146772"], ["name", "ត្រើយអូស"], ["spare_part_type_id", "10"], ["updated_at", "2015-11-11 08:49:14.146772"]]
+  [1m[36m (1.9ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "spare_parts" ("amount_in_stock", "based_price", "code", "created_at", "name", "spare_part_type_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["amount_in_stock", 10], ["based_price", 10.0], ["code", "00047"], ["created_at", "2015-11-11 08:49:14.150124"], ["name", "កាងមុខលេង"], ["spare_part_type_id", "10"], ["updated_at", "2015-11-11 08:49:14.150124"]]
+  [1m[35m (8.7ms)[0m  commit transaction
+  [1m[36m (0.2ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "spare_parts" ("amount_in_stock", "based_price", "code", "created_at", "name", "spare_part_type_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)  [["amount_in_stock", 10], ["based_price", 10.0], ["code", "00048"], ["created_at", "2015-11-11 08:49:14.160834"], ["name", "កាងក្រោយលេង"], ["spare_part_type_id", "10"], ["updated_at", "2015-11-11 08:49:14.160834"]]
+  [1m[36m (2.6ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "spare_parts" ("amount_in_stock", "based_price", "code", "created_at", "name", "spare_part_type_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["amount_in_stock", 10], ["based_price", 10.0], ["code", "00049"], ["created_at", "2015-11-11 08:49:14.165594"], ["name", "ស្មាច់ចំហៀងឡាន"], ["spare_part_type_id", "10"], ["updated_at", "2015-11-11 08:49:14.165594"]]
+  [1m[35m (2.4ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "spare_parts" ("amount_in_stock", "based_price", "code", "created_at", "name", "spare_part_type_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)  [["amount_in_stock", 10], ["based_price", 10.0], ["code", "00050"], ["created_at", "2015-11-11 08:49:14.169848"], ["name", "ដំបូលស្មាច់លេង"], ["spare_part_type_id", "10"], ["updated_at", "2015-11-11 08:49:14.169848"]]
+  [1m[36m (8.1ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "spare_parts" ("amount_in_stock", "based_price", "code", "created_at", "name", "spare_part_type_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["amount_in_stock", 10], ["based_price", 10.0], ["code", "00051"], ["created_at", "2015-11-11 08:49:14.179694"], ["name", "ចង្កៀង Original មួយទឹក"], ["spare_part_type_id", "10"], ["updated_at", "2015-11-11 08:49:14.179694"]]
+  [1m[35m (2.1ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "spare_parts" ("amount_in_stock", "based_price", "code", "created_at", "name", "spare_part_type_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)  [["amount_in_stock", 10], ["based_price", 10.0], ["code", "00052"], ["created_at", "2015-11-11 08:49:14.183528"], ["name", "ស្តុុប Original មួយទឹក"], ["spare_part_type_id", "10"], ["updated_at", "2015-11-11 08:49:14.183528"]]
+  [1m[36m (7.4ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "spare_parts" ("amount_in_stock", "based_price", "code", "created_at", "name", "spare_part_type_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["amount_in_stock", 10], ["based_price", 10.0], ["code", "00053"], ["created_at", "2015-11-11 08:49:14.192807"], ["name", "Laser Original"], ["spare_part_type_id", "10"], ["updated_at", "2015-11-11 08:49:14.192807"]]
+  [1m[35m (2.8ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "spare_parts" ("amount_in_stock", "based_price", "code", "created_at", "name", "spare_part_type_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)  [["amount_in_stock", 10], ["based_price", 10.0], ["code", "00054"], ["created_at", "2015-11-11 08:49:14.197837"], ["name", "កញ្ចក់មើលក្រោយ Original"], ["spare_part_type_id", "10"], ["updated_at", "2015-11-11 08:49:14.197837"]]
+  [1m[36m (20.6ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "spare_parts" ("amount_in_stock", "based_price", "code", "created_at", "name", "spare_part_type_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["amount_in_stock", 10], ["based_price", 10.0], ["code", "00055"], ["created_at", "2015-11-11 08:49:14.220365"], ["name", "កញ្ចក់់ក្តោបលេង"], ["spare_part_type_id", "10"], ["updated_at", "2015-11-11 08:49:14.220365"]]
+  [1m[35m (2.5ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "spare_parts" ("amount_in_stock", "based_price", "code", "created_at", "name", "spare_part_type_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)  [["amount_in_stock", 10], ["based_price", 10.0], ["code", "00056"], ["created_at", "2015-11-11 08:49:14.224997"], ["name", "កាង Original"], ["spare_part_type_id", "10"], ["updated_at", "2015-11-11 08:49:14.224997"]]
+  [1m[36m (1.8ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "spare_parts" ("amount_in_stock", "based_price", "code", "created_at", "name", "spare_part_type_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["amount_in_stock", 10], ["based_price", 10.0], ["code", "00057"], ["created_at", "2015-11-11 08:49:14.228568"], ["name", "អ៊ែរម៉ាសីុន"], ["spare_part_type_id", "10"], ["updated_at", "2015-11-11 08:49:14.228568"]]
+  [1m[35m (1.6ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "spare_parts" ("amount_in_stock", "based_price", "code", "created_at", "name", "spare_part_type_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)  [["amount_in_stock", 10], ["based_price", 10.0], ["code", "00058"], ["created_at", "2015-11-11 08:49:14.231721"], ["name", "អ៊ែរម៉ា់សីុនត្រជាក់"], ["spare_part_type_id", "10"], ["updated_at", "2015-11-11 08:49:14.231721"]]
+  [1m[36m (13.9ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "spare_parts" ("amount_in_stock", "based_price", "code", "created_at", "name", "spare_part_type_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["amount_in_stock", 10], ["based_price", 10.0], ["code", "00059"], ["created_at", "2015-11-11 08:49:14.247360"], ["name", "តំរងប្រេង"], ["spare_part_type_id", "10"], ["updated_at", "2015-11-11 08:49:14.247360"]]
+  [1m[35m (2.8ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "spare_parts" ("amount_in_stock", "based_price", "code", "created_at", "name", "spare_part_type_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)  [["amount_in_stock", 10], ["based_price", 10.0], ["code", "00060"], ["created_at", "2015-11-11 08:49:14.252070"], ["name", "គំរបគ្របឡាន"], ["spare_part_type_id", "10"], ["updated_at", "2015-11-11 08:49:14.252070"]]
+  [1m[36m (2.9ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "spare_parts" ("amount_in_stock", "based_price", "code", "created_at", "name", "spare_part_type_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["amount_in_stock", 10], ["based_price", 10.0], ["code", "00061"], ["created_at", "2015-11-11 08:49:14.256772"], ["name", "ចង្កៀង"], ["spare_part_type_id", "10"], ["updated_at", "2015-11-11 08:49:14.256772"]]
+  [1m[35m (9.8ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "spare_parts" ("amount_in_stock", "based_price", "code", "created_at", "name", "spare_part_type_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)  [["amount_in_stock", 10], ["based_price", 10.0], ["code", "00062"], ["created_at", "2015-11-11 08:49:14.268553"], ["name", "ពិលកាង"], ["spare_part_type_id", "10"], ["updated_at", "2015-11-11 08:49:14.268553"]]
+  [1m[36m (2.8ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "spare_parts" ("amount_in_stock", "based_price", "code", "created_at", "name", "spare_part_type_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["amount_in_stock", 10], ["based_price", 10.0], ["code", "00063"], ["created_at", "2015-11-11 08:49:14.273219"], ["name", "កាងមុុខ"], ["spare_part_type_id", "10"], ["updated_at", "2015-11-11 08:49:14.273219"]]
+  [1m[35m (8.4ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "spare_parts" ("amount_in_stock", "based_price", "code", "created_at", "name", "spare_part_type_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)  [["amount_in_stock", 10], ["based_price", 10.0], ["code", "00064"], ["created_at", "2015-11-11 08:49:14.283400"], ["name", "បាឡាងដាស់"], ["spare_part_type_id", "10"], ["updated_at", "2015-11-11 08:49:14.283400"]]
+  [1m[36m (3.0ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "spare_parts" ("amount_in_stock", "based_price", "code", "created_at", "name", "spare_part_type_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["amount_in_stock", 10], ["based_price", 10.0], ["code", "00065"], ["created_at", "2015-11-11 08:49:14.288606"], ["name", "អំពូុល"], ["spare_part_type_id", "10"], ["updated_at", "2015-11-11 08:49:14.288606"]]
+  [1m[35m (9.2ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "spare_parts" ("amount_in_stock", "based_price", "code", "created_at", "name", "spare_part_type_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)  [["amount_in_stock", 10], ["based_price", 10.0], ["code", "00066"], ["created_at", "2015-11-11 08:49:14.299875"], ["name", "ផ្លឹតទឹក"], ["spare_part_type_id", "10"], ["updated_at", "2015-11-11 08:49:14.299875"]]
+  [1m[36m (2.9ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "spare_parts" ("amount_in_stock", "based_price", "code", "created_at", "name", "spare_part_type_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["amount_in_stock", 10], ["based_price", 10.0], ["code", "00067"], ["created_at", "2015-11-11 08:49:14.304836"], ["name", "សីុភ្លេ"], ["spare_part_type_id", "10"], ["updated_at", "2015-11-11 08:49:14.304836"]]
+  [1m[35m (3.7ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "spare_parts" ("amount_in_stock", "based_price", "code", "created_at", "name", "spare_part_type_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)  [["amount_in_stock", 10], ["based_price", 10.0], ["code", "00068"], ["created_at", "2015-11-11 08:49:14.310277"], ["name", "ចង្កូត"], ["spare_part_type_id", "10"], ["updated_at", "2015-11-11 08:49:14.310277"]]
+  [1m[36m (8.9ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "spare_parts" ("amount_in_stock", "based_price", "code", "created_at", "name", "spare_part_type_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["amount_in_stock", 10], ["based_price", 10.0], ["code", "00069"], ["created_at", "2015-11-11 08:49:14.320836"], ["name", "HID"], ["spare_part_type_id", "10"], ["updated_at", "2015-11-11 08:49:14.320836"]]
+  [1m[35m (2.1ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "spare_parts" ("amount_in_stock", "based_price", "code", "created_at", "name", "spare_part_type_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)  [["amount_in_stock", 10], ["based_price", 10.0], ["code", "00070"], ["created_at", "2015-11-11 08:49:14.324935"], ["name", "ភ្លើង LED"], ["spare_part_type_id", "10"], ["updated_at", "2015-11-11 08:49:14.324935"]]
+  [1m[36m (2.5ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "spare_parts" ("amount_in_stock", "based_price", "code", "created_at", "name", "spare_part_type_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["amount_in_stock", 10], ["based_price", 10.0], ["code", "00071"], ["created_at", "2015-11-11 08:49:14.329257"], ["name", "បណ្តោងសោរ"], ["spare_part_type_id", "10"], ["updated_at", "2015-11-11 08:49:14.329257"]]
+  [1m[35m (1.6ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "spare_parts" ("amount_in_stock", "based_price", "code", "created_at", "name", "spare_part_type_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)  [["amount_in_stock", 10], ["based_price", 10.0], ["code", "00072"], ["created_at", "2015-11-11 08:49:14.332291"], ["name", "បាណា"], ["spare_part_type_id", "10"], ["updated_at", "2015-11-11 08:49:14.332291"]]
+  [1m[36m (10.3ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "spare_parts" ("amount_in_stock", "based_price", "code", "created_at", "name", "spare_part_type_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["amount_in_stock", 10], ["based_price", 10.0], ["code", "00073"], ["created_at", "2015-11-11 08:49:14.344362"], ["name", "កំរាលជើង"], ["spare_part_type_id", "10"], ["updated_at", "2015-11-11 08:49:14.344362"]]
+  [1m[35m (2.2ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "spare_parts" ("amount_in_stock", "based_price", "code", "created_at", "name", "spare_part_type_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)  [["amount_in_stock", 10], ["based_price", 10.0], ["code", "00074"], ["created_at", "2015-11-11 08:49:14.348821"], ["name", "អ៊ែលែង"], ["spare_part_type_id", "10"], ["updated_at", "2015-11-11 08:49:14.348821"]]
+  [1m[36m (2.7ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "spare_parts" ("amount_in_stock", "based_price", "code", "created_at", "name", "spare_part_type_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["amount_in_stock", 10], ["based_price", 10.0], ["code", "00075"], ["created_at", "2015-11-11 08:49:14.353712"], ["name", "អង់តែង"], ["spare_part_type_id", "10"], ["updated_at", "2015-11-11 08:49:14.353712"]]
+  [1m[35m (2.1ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "spare_parts" ("amount_in_stock", "based_price", "code", "created_at", "name", "spare_part_type_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)  [["amount_in_stock", 10], ["based_price", 10.0], ["code", "00076"], ["created_at", "2015-11-11 08:49:14.357800"], ["name", "Logo"], ["spare_part_type_id", "10"], ["updated_at", "2015-11-11 08:49:14.357800"]]
+  [1m[36m (2.7ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "spare_parts" ("amount_in_stock", "based_price", "code", "created_at", "name", "spare_part_type_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["amount_in_stock", 10], ["based_price", 10.0], ["code", "00077"], ["created_at", "2015-11-11 08:49:14.362415"], ["name", "ត្រឡោកកញ្ចក់មើលក្រោយ"], ["spare_part_type_id", "10"], ["updated_at", "2015-11-11 08:49:14.362415"]]
+  [1m[35m (2.2ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "spare_parts" ("amount_in_stock", "based_price", "code", "created_at", "name", "spare_part_type_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)  [["amount_in_stock", 10], ["based_price", 10.0], ["code", "00078"], ["created_at", "2015-11-11 08:49:14.366392"], ["name", "ស្រោមពូក"], ["spare_part_type_id", "10"], ["updated_at", "2015-11-11 08:49:14.366392"]]
+  [1m[36m (9.7ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "spare_parts" ("amount_in_stock", "based_price", "code", "created_at", "name", "spare_part_type_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["amount_in_stock", 10], ["based_price", 10.0], ["code", "00079"], ["created_at", "2015-11-11 08:49:14.377963"], ["name", "ស្រោមសោ"], ["spare_part_type_id", "10"], ["updated_at", "2015-11-11 08:49:14.377963"]]
+  [1m[35m (2.3ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "spare_parts" ("amount_in_stock", "based_price", "code", "created_at", "name", "spare_part_type_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)  [["amount_in_stock", 10], ["based_price", 10.0], ["code", "00080"], ["created_at", "2015-11-11 08:49:14.382506"], ["name", "ស្រោមចង្កូត"], ["spare_part_type_id", "10"], ["updated_at", "2015-11-11 08:49:14.382506"]]
+  [1m[36m (3.0ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "spare_parts" ("amount_in_stock", "based_price", "code", "created_at", "name", "spare_part_type_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["amount_in_stock", 10], ["based_price", 10.0], ["code", "00081"], ["created_at", "2015-11-11 08:49:14.387316"], ["name", "គំរបហ្រ្វាំង"], ["spare_part_type_id", "10"], ["updated_at", "2015-11-11 08:49:14.387316"]]
+  [1m[35m (3.4ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "spare_parts" ("amount_in_stock", "based_price", "code", "created_at", "name", "spare_part_type_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)  [["amount_in_stock", 10], ["based_price", 10.0], ["code", "00082"], ["created_at", "2015-11-11 08:49:14.392964"], ["name", "កញ្ចក់ចំហៀង"], ["spare_part_type_id", "10"], ["updated_at", "2015-11-11 08:49:14.392964"]]
+  [1m[36m (2.9ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "spare_parts" ("amount_in_stock", "based_price", "code", "created_at", "name", "spare_part_type_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["amount_in_stock", 10], ["based_price", 10.0], ["code", "00083"], ["created_at", "2015-11-11 08:49:14.397821"], ["name", "ខ្នើយ"], ["spare_part_type_id", "10"], ["updated_at", "2015-11-11 08:49:14.397821"]]
+  [1m[35m (1.6ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "spare_parts" ("amount_in_stock", "based_price", "code", "created_at", "name", "spare_part_type_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)  [["amount_in_stock", 10], ["based_price", 10.0], ["code", "00084"], ["created_at", "2015-11-11 08:49:14.400929"], ["name", "LOCK ទ្វារ"], ["spare_part_type_id", "10"], ["updated_at", "2015-11-11 08:49:14.400929"]]
+  [1m[36m (2.9ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "spare_parts" ("amount_in_stock", "based_price", "code", "created_at", "name", "spare_part_type_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["amount_in_stock", 10], ["based_price", 10.0], ["code", "00085"], ["created_at", "2015-11-11 08:49:14.405408"], ["name", "រីស័រទំលាក់ទាបមួយតឹក"], ["spare_part_type_id", "10"], ["updated_at", "2015-11-11 08:49:14.405408"]]
+  [1m[35m (2.2ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "spare_parts" ("amount_in_stock", "based_price", "code", "created_at", "name", "spare_part_type_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)  [["amount_in_stock", 10], ["based_price", 10.0], ["code", "00086"], ["created_at", "2015-11-11 08:49:14.409226"], ["name", "ម៉ា់ញ៉េឡាន"], ["spare_part_type_id", "10"], ["updated_at", "2015-11-11 08:49:14.409226"]]
+  [1m[36m (1.6ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "spare_parts" ("amount_in_stock", "based_price", "code", "created_at", "name", "spare_part_type_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["amount_in_stock", 10], ["based_price", 10.0], ["code", "00087"], ["created_at", "2015-11-11 08:49:14.412548"], ["name", "ប្រេងម៉ាសីុន"], ["spare_part_type_id", "10"], ["updated_at", "2015-11-11 08:49:14.412548"]]
+  [1m[35m (3.6ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "spare_parts" ("amount_in_stock", "based_price", "code", "created_at", "name", "spare_part_type_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)  [["amount_in_stock", 10], ["based_price", 10.0], ["code", "00088"], ["created_at", "2015-11-11 08:49:14.417706"], ["name", "ប្រេងជំនួយក្រវ់ាត់"], ["spare_part_type_id", "10"], ["updated_at", "2015-11-11 08:49:14.417706"]]
+  [1m[36m (2.4ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "spare_parts" ("amount_in_stock", "based_price", "code", "created_at", "name", "spare_part_type_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["amount_in_stock", 10], ["based_price", 10.0], ["code", "00089"], ["created_at", "2015-11-11 08:49:14.421749"], ["name", "ប្រេងប្រអប់លេខ"], ["spare_part_type_id", "10"], ["updated_at", "2015-11-11 08:49:14.421749"]]
+  [1m[35m (2.9ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "spare_parts" ("amount_in_stock", "based_price", "code", "created_at", "name", "spare_part_type_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)  [["amount_in_stock", 10], ["based_price", 10.0], ["code", "00090"], ["created_at", "2015-11-11 08:49:14.426162"], ["name", "ប្រេងហ្វ្រាំង"], ["spare_part_type_id", "10"], ["updated_at", "2015-11-11 08:49:14.426162"]]
+  [1m[36m (2.1ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "spare_parts" ("amount_in_stock", "based_price", "code", "created_at", "name", "spare_part_type_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["amount_in_stock", 10], ["based_price", 10.0], ["code", "00091"], ["created_at", "2015-11-11 08:49:14.429884"], ["name", "ប្រងបូមចង្កូត"], ["spare_part_type_id", "10"], ["updated_at", "2015-11-11 08:49:14.429884"]]
+  [1m[35m (9.4ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "spare_parts" ("amount_in_stock", "based_price", "code", "created_at", "name", "spare_part_type_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)  [["amount_in_stock", 10], ["based_price", 10.0], ["code", "00092"], ["created_at", "2015-11-11 08:49:14.441579"], ["name", "ថ្នាំលេងសំអាតបិុចសាំង"], ["spare_part_type_id", "10"], ["updated_at", "2015-11-11 08:49:14.441579"]]
+  [1m[36m (2.4ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (1.5ms)[0m  [1mINSERT INTO "spare_parts" ("amount_in_stock", "based_price", "code", "created_at", "name", "spare_part_type_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["amount_in_stock", 10], ["based_price", 10.0], ["code", "00093"], ["created_at", "2015-11-11 08:49:14.446475"], ["name", "ស្ព្រៃបាំងលាងហ្គែរ"], ["spare_part_type_id", "10"], ["updated_at", "2015-11-11 08:49:14.446475"]]
+  [1m[35m (15.9ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "spare_parts" ("amount_in_stock", "based_price", "code", "created_at", "name", "spare_part_type_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)  [["amount_in_stock", 10], ["based_price", 10.0], ["code", "00094"], ["created_at", "2015-11-11 08:49:14.465755"], ["name", "ទឹកចាក់ធុង Coolant"], ["spare_part_type_id", "10"], ["updated_at", "2015-11-11 08:49:14.465755"]]
+  [1m[36m (6.8ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "spare_parts" ("amount_in_stock", "based_price", "code", "created_at", "name", "spare_part_type_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["amount_in_stock", 10], ["based_price", 10.0], ["code", "00095"], ["created_at", "2015-11-11 08:49:14.474958"], ["name", "ទឹកលាងអ៊ែរ"], ["spare_part_type_id", "10"], ["updated_at", "2015-11-11 08:49:14.474958"]]
+  [1m[35m (2.2ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "spare_parts" ("amount_in_stock", "based_price", "code", "created_at", "name", "spare_part_type_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)  [["amount_in_stock", 10], ["based_price", 10.0], ["code", "00096"], ["created_at", "2015-11-11 08:49:14.479701"], ["name", "ថ្នាំចាក់ចូលធុងទឹកការពារជ្រាប"], ["spare_part_type_id", "10"], ["updated_at", "2015-11-11 08:49:14.479701"]]
+  [1m[36m (2.0ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "spare_parts" ("amount_in_stock", "based_price", "code", "created_at", "name", "spare_part_type_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["amount_in_stock", 10], ["based_price", 10.0], ["code", "00097"], ["created_at", "2015-11-11 08:49:14.483262"], ["name", "ថ្នាំកំចាត់ជាតិពុលក្នុងសាំង"], ["spare_part_type_id", "10"], ["updated_at", "2015-11-11 08:49:14.483262"]]
+  [1m[35m (13.4ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "spare_parts" ("amount_in_stock", "based_price", "code", "created_at", "name", "spare_part_type_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)  [["amount_in_stock", 10], ["based_price", 10.0], ["code", "00098"], ["created_at", "2015-11-11 08:49:14.498322"], ["name", "សាប់៊ូបាញ់កញ្ចក់"], ["spare_part_type_id", "10"], ["updated_at", "2015-11-11 08:49:14.498322"]]
+  [1m[36m (2.4ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "spare_parts" ("amount_in_stock", "based_price", "code", "created_at", "name", "spare_part_type_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["amount_in_stock", 10], ["based_price", 10.0], ["code", "00099"], ["created_at", "2015-11-11 08:49:14.502513"], ["name", "ដៃទ្វាក្រូមេ៉"], ["spare_part_type_id", "10"], ["updated_at", "2015-11-11 08:49:14.502513"]]
+  [1m[35m (7.0ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "spare_parts" ("amount_in_stock", "based_price", "code", "created_at", "name", "spare_part_type_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)  [["amount_in_stock", 10], ["based_price", 10.0], ["code", "00100"], ["created_at", "2015-11-11 08:49:14.511176"], ["name", "ស្រកីត្រី"], ["spare_part_type_id", "10"], ["updated_at", "2015-11-11 08:49:14.511176"]]
+  [1m[36m (6.0ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "spare_parts" ("amount_in_stock", "based_price", "code", "created_at", "name", "spare_part_type_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["amount_in_stock", 10], ["based_price", 10.0], ["code", "00101"], ["created_at", "2015-11-11 08:49:14.518746"], ["name", "ស្រោមដៃលេខ"], ["spare_part_type_id", "10"], ["updated_at", "2015-11-11 08:49:14.518746"]]
+  [1m[35m (1.8ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "spare_parts" ("amount_in_stock", "based_price", "code", "created_at", "name", "spare_part_type_id", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)  [["amount_in_stock", 10], ["based_price", 10.0], ["code", "00102"], ["created_at", "2015-11-11 08:49:14.522057"], ["name", "កញ្ចក់"], ["spare_part_type_id", "10"], ["updated_at", "2015-11-11 08:49:14.522057"]]
+  [1m[36m (8.3ms)[0m  [1mcommit transaction[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 907ms (ActiveRecord: 746.4ms)
+
+
+Started GET "/" for 127.0.0.1 at 2015-11-11 15:49:14 +0700
+
+
+Started GET "/car_histories" for 127.0.0.1 at 2015-11-11 15:49:14 +0700
+Processing by CarHistoriesController#index as HTML
+  [1m[35mUser Load (0.2ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."id" = 1  ORDER BY "users"."id" ASC LIMIT 1
+  [1m[36mCar Load (0.1ms)[0m  [1mSELECT "cars".* FROM "cars"[0m
+  Rendered car_histories/index.html.erb within layouts/application (2.8ms)
+  [1m[35mAlert Load (0.2ms)[0m  SELECT  "alerts".* FROM "alerts"   ORDER BY "alerts"."id" ASC LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "spare_parts"  WHERE (amount_in_stock <= 2)[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "alerts".* FROM "alerts"   ORDER BY "alerts"."id" ASC LIMIT 1
+Completed 200 OK in 368ms (Views: 366.1ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/spare_parts" for 127.0.0.1 at 2015-11-11 15:49:17 +0700
+Processing by SparePartsController#index as HTML
+  Parameters: {"authenticity_token"=>"0GnsO4AjmvG2jPkhxJyyT6Sn8hnKRWuNNCdR53lsOdE="}
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = 1  ORDER BY "users"."id" ASC LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "spare_parts"
+  [1m[36mSparePart Load (0.2ms)[0m  [1mSELECT  "spare_parts".* FROM "spare_parts"   ORDER BY id LIMIT 10 OFFSET 0[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT COUNT(*) FROM "spare_parts"
+  Rendered spare_parts/index.html.erb within layouts/application (9.9ms)
+  [1m[36mAlert Load (0.2ms)[0m  [1mSELECT  "alerts".* FROM "alerts"   ORDER BY "alerts"."id" ASC LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "spare_parts"  WHERE (amount_in_stock <= 2)
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "alerts".* FROM "alerts"   ORDER BY "alerts"."id" ASC LIMIT 1[0m
+Completed 200 OK in 405ms (Views: 402.4ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/spare_parts?_method=get&authenticity_token=0GnsO4AjmvG2jPkhxJyyT6Sn8hnKRWuNNCdR53lsOdE%3D&page=4" for 127.0.0.1 at 2015-11-11 15:49:20 +0700
+Processing by SparePartsController#index as HTML
+  Parameters: {"authenticity_token"=>"0GnsO4AjmvG2jPkhxJyyT6Sn8hnKRWuNNCdR53lsOdE=", "page"=>"4"}
+  [1m[35mUser Load (0.2ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."id" = 1  ORDER BY "users"."id" ASC LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "spare_parts"[0m
+  [1m[35mSparePart Load (0.1ms)[0m  SELECT  "spare_parts".* FROM "spare_parts"   ORDER BY id LIMIT 10 OFFSET 30
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT COUNT(*) FROM "spare_parts"[0m
+  Rendered spare_parts/index.html.erb within layouts/application (7.6ms)
+  [1m[35mAlert Load (0.1ms)[0m  SELECT  "alerts".* FROM "alerts"   ORDER BY "alerts"."id" ASC LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "spare_parts"  WHERE (amount_in_stock <= 2)[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "alerts".* FROM "alerts"   ORDER BY "alerts"."id" ASC LIMIT 1
+Completed 200 OK in 372ms (Views: 370.1ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/spare_parts?_method=get&authenticity_token=0GnsO4AjmvG2jPkhxJyyT6Sn8hnKRWuNNCdR53lsOdE%3D&page=7" for 127.0.0.1 at 2015-11-11 15:49:22 +0700
+Processing by SparePartsController#index as HTML
+  Parameters: {"authenticity_token"=>"0GnsO4AjmvG2jPkhxJyyT6Sn8hnKRWuNNCdR53lsOdE=", "page"=>"7"}
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = 1  ORDER BY "users"."id" ASC LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "spare_parts"
+  [1m[36mSparePart Load (0.1ms)[0m  [1mSELECT  "spare_parts".* FROM "spare_parts"   ORDER BY id LIMIT 10 OFFSET 60[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT COUNT(*) FROM "spare_parts"
+  Rendered spare_parts/index.html.erb within layouts/application (6.7ms)
+  [1m[36mAlert Load (0.2ms)[0m  [1mSELECT  "alerts".* FROM "alerts"   ORDER BY "alerts"."id" ASC LIMIT 1[0m
+  [1m[35m (0.3ms)[0m  SELECT COUNT(*) FROM "spare_parts"  WHERE (amount_in_stock <= 2)
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "alerts".* FROM "alerts"   ORDER BY "alerts"."id" ASC LIMIT 1[0m
+Completed 200 OK in 378ms (Views: 376.3ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/spare_parts?_method=get&authenticity_token=0GnsO4AjmvG2jPkhxJyyT6Sn8hnKRWuNNCdR53lsOdE%3D&page=9" for 127.0.0.1 at 2015-11-11 15:49:23 +0700
+Processing by SparePartsController#index as HTML
+  Parameters: {"authenticity_token"=>"0GnsO4AjmvG2jPkhxJyyT6Sn8hnKRWuNNCdR53lsOdE=", "page"=>"9"}
+  [1m[35mUser Load (0.2ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."id" = 1  ORDER BY "users"."id" ASC LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "spare_parts"[0m
+  [1m[35mSparePart Load (0.1ms)[0m  SELECT  "spare_parts".* FROM "spare_parts"   ORDER BY id LIMIT 10 OFFSET 80
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT COUNT(*) FROM "spare_parts"[0m
+  Rendered spare_parts/index.html.erb within layouts/application (6.6ms)
+  [1m[35mAlert Load (0.2ms)[0m  SELECT  "alerts".* FROM "alerts"   ORDER BY "alerts"."id" ASC LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "spare_parts"  WHERE (amount_in_stock <= 2)[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "alerts".* FROM "alerts"   ORDER BY "alerts"."id" ASC LIMIT 1
+Completed 200 OK in 361ms (Views: 359.4ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/spare_parts?_method=get&authenticity_token=0GnsO4AjmvG2jPkhxJyyT6Sn8hnKRWuNNCdR53lsOdE%3D&page=1" for 127.0.0.1 at 2015-11-11 15:50:04 +0700
+Processing by SparePartsController#index as HTML
+  Parameters: {"authenticity_token"=>"0GnsO4AjmvG2jPkhxJyyT6Sn8hnKRWuNNCdR53lsOdE=", "page"=>"1"}
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = 1  ORDER BY "users"."id" ASC LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "spare_parts"
+  [1m[36mSparePart Load (0.1ms)[0m  [1mSELECT  "spare_parts".* FROM "spare_parts"   ORDER BY id LIMIT 10 OFFSET 0[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT COUNT(*) FROM "spare_parts"
+  Rendered spare_parts/index.html.erb within layouts/application (6.5ms)
+  [1m[36mAlert Load (0.1ms)[0m  [1mSELECT  "alerts".* FROM "alerts"   ORDER BY "alerts"."id" ASC LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "spare_parts"  WHERE (amount_in_stock <= 2)
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "alerts".* FROM "alerts"   ORDER BY "alerts"."id" ASC LIMIT 1[0m
+Completed 200 OK in 347ms (Views: 344.9ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/car_histories" for 127.0.0.1 at 2015-11-11 15:50:05 +0700
+Processing by CarHistoriesController#index as HTML
+  Parameters: {"authenticity_token"=>"0GnsO4AjmvG2jPkhxJyyT6Sn8hnKRWuNNCdR53lsOdE="}
+  [1m[35mUser Load (0.2ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."id" = 1  ORDER BY "users"."id" ASC LIMIT 1
+  [1m[36mCar Load (0.1ms)[0m  [1mSELECT "cars".* FROM "cars"[0m
+  Rendered car_histories/index.html.erb within layouts/application (3.6ms)
+  [1m[35mAlert Load (0.2ms)[0m  SELECT  "alerts".* FROM "alerts"   ORDER BY "alerts"."id" ASC LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "spare_parts"  WHERE (amount_in_stock <= 2)[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "alerts".* FROM "alerts"   ORDER BY "alerts"."id" ASC LIMIT 1
+Completed 200 OK in 391ms (Views: 388.7ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/cars" for 127.0.0.1 at 2015-11-11 15:50:09 +0700
+Processing by CarsController#index as HTML
+  Parameters: {"authenticity_token"=>"0GnsO4AjmvG2jPkhxJyyT6Sn8hnKRWuNNCdR53lsOdE="}
+  [1m[36mUser Load (0.5ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = 1  ORDER BY "users"."id" ASC LIMIT 1[0m
+  [1m[35mCar Load (0.1ms)[0m  SELECT  "cars".* FROM "cars"  LIMIT 10 OFFSET 0
+  Rendered cars/index.html.erb within layouts/application (1.4ms)
+  [1m[36mAlert Load (0.1ms)[0m  [1mSELECT  "alerts".* FROM "alerts"   ORDER BY "alerts"."id" ASC LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "spare_parts"  WHERE (amount_in_stock <= 2)
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "alerts".* FROM "alerts"   ORDER BY "alerts"."id" ASC LIMIT 1[0m
+Completed 200 OK in 396ms (Views: 393.4ms | ActiveRecord: 0.9ms)
+
+
+Started GET "/cars/new" for 127.0.0.1 at 2015-11-11 15:50:11 +0700
+Processing by CarsController#new as HTML
+  [1m[35mUser Load (0.2ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."id" = 1  ORDER BY "users"."id" ASC LIMIT 1
+  Rendered cars/_form.html.erb (5.5ms)
+  Rendered cars/new.html.erb within layouts/application (6.5ms)
+  [1m[36mAlert Load (0.2ms)[0m  [1mSELECT  "alerts".* FROM "alerts"   ORDER BY "alerts"."id" ASC LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "spare_parts"  WHERE (amount_in_stock <= 2)
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "alerts".* FROM "alerts"   ORDER BY "alerts"."id" ASC LIMIT 1[0m
+Completed 200 OK in 392ms (Views: 390.0ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/historical_reports" for 127.0.0.1 at 2015-11-11 15:50:15 +0700
+Processing by HistoricalReportsController#index as HTML
+  Parameters: {"authenticity_token"=>"0GnsO4AjmvG2jPkhxJyyT6Sn8hnKRWuNNCdR53lsOdE="}
+  [1m[35mUser Load (0.2ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."id" = 1  ORDER BY "users"."id" ASC LIMIT 1
+  [1m[36mCarHistory Load (0.1ms)[0m  [1mSELECT  "car_histories".* FROM "car_histories"  LIMIT 10 OFFSET 0[0m
+  Rendered historical_reports/index.html.erb within layouts/application (1.6ms)
+  [1m[35mAlert Load (0.2ms)[0m  SELECT  "alerts".* FROM "alerts"   ORDER BY "alerts"."id" ASC LIMIT 1
+  [1m[36m (0.2ms)[0m  [1mSELECT COUNT(*) FROM "spare_parts"  WHERE (amount_in_stock <= 2)[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "alerts".* FROM "alerts"   ORDER BY "alerts"."id" ASC LIMIT 1
+Completed 200 OK in 388ms (Views: 386.0ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/spare_parts" for 127.0.0.1 at 2015-11-11 15:50:17 +0700
+Processing by SparePartsController#index as HTML
+  Parameters: {"authenticity_token"=>"0GnsO4AjmvG2jPkhxJyyT6Sn8hnKRWuNNCdR53lsOdE="}
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = 1  ORDER BY "users"."id" ASC LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "spare_parts"
+  [1m[36mSparePart Load (0.1ms)[0m  [1mSELECT  "spare_parts".* FROM "spare_parts"   ORDER BY id LIMIT 10 OFFSET 0[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT COUNT(*) FROM "spare_parts"
+  Rendered spare_parts/index.html.erb within layouts/application (9.5ms)
+  [1m[36mAlert Load (0.2ms)[0m  [1mSELECT  "alerts".* FROM "alerts"   ORDER BY "alerts"."id" ASC LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "spare_parts"  WHERE (amount_in_stock <= 2)
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "alerts".* FROM "alerts"   ORDER BY "alerts"."id" ASC LIMIT 1[0m
+Completed 200 OK in 418ms (Views: 415.6ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/cars" for 127.0.0.1 at 2015-11-11 15:50:25 +0700
+Processing by CarsController#index as HTML
+  Parameters: {"authenticity_token"=>"0GnsO4AjmvG2jPkhxJyyT6Sn8hnKRWuNNCdR53lsOdE="}
+  [1m[35mUser Load (0.2ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."id" = 1  ORDER BY "users"."id" ASC LIMIT 1
+  [1m[36mCar Load (0.1ms)[0m  [1mSELECT  "cars".* FROM "cars"  LIMIT 10 OFFSET 0[0m
+  Rendered cars/index.html.erb within layouts/application (0.7ms)
+  [1m[35mAlert Load (0.2ms)[0m  SELECT  "alerts".* FROM "alerts"   ORDER BY "alerts"."id" ASC LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "spare_parts"  WHERE (amount_in_stock <= 2)[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "alerts".* FROM "alerts"   ORDER BY "alerts"."id" ASC LIMIT 1
+Completed 200 OK in 383ms (Views: 381.3ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/" for 127.0.0.1 at 2015-11-16 15:36:58 +0700
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+
+
+Started GET "/car_histories" for 127.0.0.1 at 2015-11-16 15:36:58 +0700
+Processing by CarHistoriesController#index as HTML
+Completed 401 Unauthorized in 34ms
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2015-11-16 15:36:58 +0700
+Processing by Devise::SessionsController#new as HTML
+  Rendered /Users/mrreaksmey/.rbenv/versions/2.1.6/lib/ruby/gems/2.1.0/gems/devise-3.5.2/app/views/devise/shared/_links.html.erb (1.3ms)
+  Rendered /Users/mrreaksmey/.rbenv/versions/2.1.6/lib/ruby/gems/2.1.0/gems/devise-3.5.2/app/views/devise/sessions/new.html.erb within layouts/application (41.9ms)
+Completed 200 OK in 788ms (Views: 777.7ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/assets/alert.css?body=1" for 127.0.0.1 at 2015-11-16 15:36:59 +0700
+
+
+Started GET "/assets/car_histories.css?body=1" for 127.0.0.1 at 2015-11-16 15:36:59 +0700
+
+
+Started GET "/assets/cars.css?body=1" for 127.0.0.1 at 2015-11-16 15:36:59 +0700
+
+
+Started GET "/assets/historical_reports.css?body=1" for 127.0.0.1 at 2015-11-16 15:36:59 +0700
+
+
+Started GET "/assets/car_repairing_quotes.css?body=1" for 127.0.0.1 at 2015-11-16 15:36:59 +0700
+
+
+Started GET "/assets/alerts_controller.css?body=1" for 127.0.0.1 at 2015-11-16 15:36:59 +0700
+
+
+Started GET "/assets/home.css?body=1" for 127.0.0.1 at 2015-11-16 15:36:59 +0700
+
+
+Started GET "/assets/main.css?body=1" for 127.0.0.1 at 2015-11-16 15:36:59 +0700
+
+
+Started GET "/assets/spare_part_types.css?body=1" for 127.0.0.1 at 2015-11-16 15:36:59 +0700
+
+
+Started GET "/assets/users.css?body=1" for 127.0.0.1 at 2015-11-16 15:36:59 +0700
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2015-11-16 15:36:59 +0700
+
+
+Started GET "/assets/rails_bootstrap_forms.css?body=1" for 127.0.0.1 at 2015-11-16 15:36:59 +0700
+
+
+Started GET "/assets/spare_parts.css?body=1" for 127.0.0.1 at 2015-11-16 15:36:59 +0700
+
+
+Started GET "/assets/jquery.datetimepicker.css?body=1" for 127.0.0.1 at 2015-11-16 15:36:59 +0700
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2015-11-16 15:36:59 +0700
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2015-11-16 15:36:59 +0700
+
+
+Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2015-11-16 15:36:59 +0700
+
+
+Started GET "/assets/bootstrap/affix.js?body=1" for 127.0.0.1 at 2015-11-16 15:36:59 +0700
+
+
+Started GET "/assets/bootstrap/alert.js?body=1" for 127.0.0.1 at 2015-11-16 15:36:59 +0700
+
+
+Started GET "/assets/bootstrap/button.js?body=1" for 127.0.0.1 at 2015-11-16 15:36:59 +0700
+
+
+Started GET "/assets/bootstrap/carousel.js?body=1" for 127.0.0.1 at 2015-11-16 15:36:59 +0700
+
+
+Started GET "/assets/bootstrap/collapse.js?body=1" for 127.0.0.1 at 2015-11-16 15:36:59 +0700
+
+
+Started GET "/assets/bootstrap/dropdown.js?body=1" for 127.0.0.1 at 2015-11-16 15:36:59 +0700
+
+
+Started GET "/assets/bootstrap/tab.js?body=1" for 127.0.0.1 at 2015-11-16 15:36:59 +0700
+
+
+Started GET "/assets/bootstrap/transition.js?body=1" for 127.0.0.1 at 2015-11-16 15:36:59 +0700
+
+
+Started GET "/assets/bootstrap/scrollspy.js?body=1" for 127.0.0.1 at 2015-11-16 15:36:59 +0700
+
+
+Started GET "/assets/bootstrap/modal.js?body=1" for 127.0.0.1 at 2015-11-16 15:36:59 +0700
+
+
+Started GET "/assets/bootstrap/tooltip.js?body=1" for 127.0.0.1 at 2015-11-16 15:36:59 +0700
+
+
+Started GET "/assets/bootstrap/popover.js?body=1" for 127.0.0.1 at 2015-11-16 15:36:59 +0700
+
+
+Started GET "/assets/bootstrap-sprockets.js?body=1" for 127.0.0.1 at 2015-11-16 15:36:59 +0700
+
+
+Started GET "/assets/alert.js?body=1" for 127.0.0.1 at 2015-11-16 15:36:59 +0700
+
+
+Started GET "/assets/alerts_controller.js?body=1" for 127.0.0.1 at 2015-11-16 15:36:59 +0700
+
+
+Started GET "/assets/car_histories.js?body=1" for 127.0.0.1 at 2015-11-16 15:36:59 +0700
+
+
+Started GET "/assets/car_repairing_quotes.js?body=1" for 127.0.0.1 at 2015-11-16 15:36:59 +0700
+
+
+Started GET "/assets/cars.js?body=1" for 127.0.0.1 at 2015-11-16 15:36:59 +0700
+
+
+Started GET "/assets/historical_reports.js?body=1" for 127.0.0.1 at 2015-11-16 15:36:59 +0700
+
+
+Started GET "/assets/home.js?body=1" for 127.0.0.1 at 2015-11-16 15:36:59 +0700
+
+
+Started GET "/assets/spare_part_types.js?body=1" for 127.0.0.1 at 2015-11-16 15:36:59 +0700
+
+
+Started GET "/assets/spare_parts.js?body=1" for 127.0.0.1 at 2015-11-16 15:36:59 +0700
+
+
+Started GET "/assets/users.js?body=1" for 127.0.0.1 at 2015-11-16 15:36:59 +0700
+
+
+Started GET "/assets/jquery.datetimepicker.js?body=1" for 127.0.0.1 at 2015-11-16 15:36:59 +0700
+
+
+Started GET "/assets/jquery.datetimepicker/init.js?body=1" for 127.0.0.1 at 2015-11-16 15:36:59 +0700
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2015-11-16 15:36:59 +0700
+
+
+Started POST "/users/sign_in" for 127.0.0.1 at 2015-11-16 15:37:10 +0700
+Processing by Devise::SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"XXS0XrFaorhHcpOABtkXy+HBT0ImUO5TE/sgSZpzLRs=", "user"=>{"email"=>"reaksmey@enspiral.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+  [1m[35mUser Load (0.3ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."email" = 'reaksmey@enspiral.com'  ORDER BY "users"."id" ASC LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.5ms)[0m  UPDATE "users" SET "current_sign_in_at" = ?, "sign_in_count" = ?, "updated_at" = ? WHERE "users"."id" = 1  [["current_sign_in_at", "2015-11-16 08:37:10.861879"], ["sign_in_count", 2], ["updated_at", "2015-11-16 08:37:10.863186"]]
+  [1m[36m (39.6ms)[0m  [1mcommit transaction[0m
+Redirected to http://localhost:3000/car_histories
+Completed 302 Found in 484ms (ActiveRecord: 40.4ms)
+
+
+Started GET "/car_histories" for 127.0.0.1 at 2015-11-16 15:37:11 +0700
+Processing by CarHistoriesController#index as HTML
+  [1m[35mUser Load (0.2ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."id" = 1  ORDER BY "users"."id" ASC LIMIT 1
+  [1m[36mCar Load (0.3ms)[0m  [1mSELECT "cars".* FROM "cars"[0m
+  Rendered car_histories/index.html.erb within layouts/application (64.1ms)
+  [1m[35mAlert Load (40.7ms)[0m  SELECT  "alerts".* FROM "alerts"   ORDER BY "alerts"."id" ASC LIMIT 1
+  [1m[36m (1.2ms)[0m  [1mSELECT COUNT(*) FROM "spare_parts"  WHERE (amount_in_stock <= 2)[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "alerts".* FROM "alerts"   ORDER BY "alerts"."id" ASC LIMIT 1
+Completed 200 OK in 557ms (Views: 474.7ms | ActiveRecord: 44.1ms)
+
+
+Started GET "/assets/bootstrap/glyphicons-halflings-regular.woff" for 127.0.0.1 at 2015-11-16 15:37:11 +0700
+
+
+Started GET "/spare_parts" for 127.0.0.1 at 2015-11-16 15:37:15 +0700
+Processing by SparePartsController#index as HTML
+  Parameters: {"authenticity_token"=>"M38agaElnvuwWEf8HitTowq7Xt8LI9TvoQg+Y3nQhzE="}
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = 1  ORDER BY "users"."id" ASC LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "spare_parts"
+  [1m[36mSparePart Load (0.1ms)[0m  [1mSELECT  "spare_parts".* FROM "spare_parts"   ORDER BY id LIMIT 10 OFFSET 0[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT COUNT(*) FROM "spare_parts"
+  Rendered spare_parts/index.html.erb within layouts/application (11.0ms)
+  [1m[36mAlert Load (0.2ms)[0m  [1mSELECT  "alerts".* FROM "alerts"   ORDER BY "alerts"."id" ASC LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "spare_parts"  WHERE (amount_in_stock <= 2)
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "alerts".* FROM "alerts"   ORDER BY "alerts"."id" ASC LIMIT 1[0m
+Completed 200 OK in 432ms (Views: 430.3ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/spare_parts?_method=get&authenticity_token=M38agaElnvuwWEf8HitTowq7Xt8LI9TvoQg%2BY3nQhzE%3D&page=11" for 127.0.0.1 at 2015-11-16 15:37:18 +0700
+Processing by SparePartsController#index as HTML
+  Parameters: {"authenticity_token"=>"M38agaElnvuwWEf8HitTowq7Xt8LI9TvoQg+Y3nQhzE=", "page"=>"11"}
+  [1m[35mUser Load (0.2ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."id" = 1  ORDER BY "users"."id" ASC LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "spare_parts"[0m
+  [1m[35mSparePart Load (0.1ms)[0m  SELECT  "spare_parts".* FROM "spare_parts"   ORDER BY id LIMIT 10 OFFSET 100
+  Rendered spare_parts/index.html.erb within layouts/application (6.0ms)
+  [1m[36mAlert Load (0.1ms)[0m  [1mSELECT  "alerts".* FROM "alerts"   ORDER BY "alerts"."id" ASC LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "spare_parts"  WHERE (amount_in_stock <= 2)
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "alerts".* FROM "alerts"   ORDER BY "alerts"."id" ASC LIMIT 1[0m
+Completed 200 OK in 379ms (Views: 377.5ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/spare_parts?_method=get&authenticity_token=M38agaElnvuwWEf8HitTowq7Xt8LI9TvoQg%2BY3nQhzE%3D&page=1" for 127.0.0.1 at 2015-11-16 15:37:20 +0700
+Processing by SparePartsController#index as HTML
+  Parameters: {"authenticity_token"=>"M38agaElnvuwWEf8HitTowq7Xt8LI9TvoQg+Y3nQhzE=", "page"=>"1"}
+  [1m[35mUser Load (0.2ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."id" = 1  ORDER BY "users"."id" ASC LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "spare_parts"[0m
+  [1m[35mSparePart Load (0.1ms)[0m  SELECT  "spare_parts".* FROM "spare_parts"   ORDER BY id LIMIT 10 OFFSET 0
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT COUNT(*) FROM "spare_parts"[0m
+  Rendered spare_parts/index.html.erb within layouts/application (6.7ms)
+  [1m[35mAlert Load (0.2ms)[0m  SELECT  "alerts".* FROM "alerts"   ORDER BY "alerts"."id" ASC LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "spare_parts"  WHERE (amount_in_stock <= 2)[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "alerts".* FROM "alerts"   ORDER BY "alerts"."id" ASC LIMIT 1
+Completed 200 OK in 372ms (Views: 370.5ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/car_histories" for 127.0.0.1 at 2015-11-16 15:37:22 +0700
+Processing by CarHistoriesController#index as HTML
+  Parameters: {"authenticity_token"=>"M38agaElnvuwWEf8HitTowq7Xt8LI9TvoQg+Y3nQhzE="}
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = 1  ORDER BY "users"."id" ASC LIMIT 1[0m
+  [1m[35mCar Load (0.1ms)[0m  SELECT "cars".* FROM "cars"
+  Rendered car_histories/index.html.erb within layouts/application (3.1ms)
+  [1m[36mAlert Load (0.2ms)[0m  [1mSELECT  "alerts".* FROM "alerts"   ORDER BY "alerts"."id" ASC LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "spare_parts"  WHERE (amount_in_stock <= 2)
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "alerts".* FROM "alerts"   ORDER BY "alerts"."id" ASC LIMIT 1[0m
+Completed 200 OK in 413ms (Views: 410.5ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/" for 127.0.0.1 at 2015-12-03 14:29:58 +0700
+  [1m[36mActiveRecord::SchemaMigration Load (0.6ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+
+
+Started GET "/car_histories" for 127.0.0.1 at 2015-12-03 14:29:58 +0700
+Processing by CarHistoriesController#index as HTML
+Completed 401 Unauthorized in 37ms
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2015-12-03 14:29:58 +0700
+Processing by Devise::SessionsController#new as HTML
+  Rendered /Users/mrreaksmey/.rbenv/versions/2.1.6/lib/ruby/gems/2.1.0/gems/devise-3.5.2/app/views/devise/shared/_links.html.erb (1.3ms)
+  Rendered /Users/mrreaksmey/.rbenv/versions/2.1.6/lib/ruby/gems/2.1.0/gems/devise-3.5.2/app/views/devise/sessions/new.html.erb within layouts/application (52.5ms)
+Completed 200 OK in 1020ms (Views: 996.7ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/assets/car_histories.css?body=1" for 127.0.0.1 at 2015-12-03 14:30:00 +0700
+
+
+Started GET "/assets/alert.css?body=1" for 127.0.0.1 at 2015-12-03 14:30:00 +0700
+
+
+Started GET "/assets/car_repairing_quotes.css?body=1" for 127.0.0.1 at 2015-12-03 14:30:00 +0700
+
+
+Started GET "/assets/historical_reports.css?body=1" for 127.0.0.1 at 2015-12-03 14:30:00 +0700
+
+
+Started GET "/assets/alerts_controller.css?body=1" for 127.0.0.1 at 2015-12-03 14:30:00 +0700
+
+
+Started GET "/assets/cars.css?body=1" for 127.0.0.1 at 2015-12-03 14:30:00 +0700
+
+
+Started GET "/assets/home.css?body=1" for 127.0.0.1 at 2015-12-03 14:30:00 +0700
+
+
+Started GET "/assets/main.css?body=1" for 127.0.0.1 at 2015-12-03 14:30:00 +0700
+
+
+Started GET "/assets/spare_part_types.css?body=1" for 127.0.0.1 at 2015-12-03 14:30:00 +0700
+
+
+Started GET "/assets/spare_parts.css?body=1" for 127.0.0.1 at 2015-12-03 14:30:00 +0700
+
+
+Started GET "/assets/users.css?body=1" for 127.0.0.1 at 2015-12-03 14:30:00 +0700
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2015-12-03 14:30:00 +0700
+
+
+Started GET "/assets/rails_bootstrap_forms.css?body=1" for 127.0.0.1 at 2015-12-03 14:30:00 +0700
+
+
+Started GET "/assets/jquery.datetimepicker.css?body=1" for 127.0.0.1 at 2015-12-03 14:30:00 +0700
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2015-12-03 14:30:00 +0700
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2015-12-03 14:30:00 +0700
+
+
+Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2015-12-03 14:30:00 +0700
+
+
+Started GET "/assets/bootstrap/affix.js?body=1" for 127.0.0.1 at 2015-12-03 14:30:00 +0700
+
+
+Started GET "/assets/bootstrap/alert.js?body=1" for 127.0.0.1 at 2015-12-03 14:30:00 +0700
+
+
+Started GET "/assets/bootstrap/button.js?body=1" for 127.0.0.1 at 2015-12-03 14:30:00 +0700
+
+
+Started GET "/assets/bootstrap/carousel.js?body=1" for 127.0.0.1 at 2015-12-03 14:30:00 +0700
+
+
+Started GET "/assets/bootstrap/collapse.js?body=1" for 127.0.0.1 at 2015-12-03 14:30:00 +0700
+
+
+Started GET "/assets/bootstrap/dropdown.js?body=1" for 127.0.0.1 at 2015-12-03 14:30:00 +0700
+
+
+Started GET "/assets/bootstrap/tab.js?body=1" for 127.0.0.1 at 2015-12-03 14:30:00 +0700
+
+
+Started GET "/assets/bootstrap/transition.js?body=1" for 127.0.0.1 at 2015-12-03 14:30:00 +0700
+
+
+Started GET "/assets/bootstrap/scrollspy.js?body=1" for 127.0.0.1 at 2015-12-03 14:30:00 +0700
+
+
+Started GET "/assets/bootstrap/modal.js?body=1" for 127.0.0.1 at 2015-12-03 14:30:00 +0700
+
+
+Started GET "/assets/bootstrap/tooltip.js?body=1" for 127.0.0.1 at 2015-12-03 14:30:00 +0700
+
+
+Started GET "/assets/bootstrap/popover.js?body=1" for 127.0.0.1 at 2015-12-03 14:30:00 +0700
+
+
+Started GET "/assets/bootstrap-sprockets.js?body=1" for 127.0.0.1 at 2015-12-03 14:30:00 +0700
+
+
+Started GET "/assets/alert.js?body=1" for 127.0.0.1 at 2015-12-03 14:30:00 +0700
+
+
+Started GET "/assets/alerts_controller.js?body=1" for 127.0.0.1 at 2015-12-03 14:30:00 +0700
+
+
+Started GET "/assets/car_histories.js?body=1" for 127.0.0.1 at 2015-12-03 14:30:00 +0700
+
+
+Started GET "/assets/car_repairing_quotes.js?body=1" for 127.0.0.1 at 2015-12-03 14:30:00 +0700
+
+
+Started GET "/assets/cars.js?body=1" for 127.0.0.1 at 2015-12-03 14:30:00 +0700
+
+
+Started GET "/assets/historical_reports.js?body=1" for 127.0.0.1 at 2015-12-03 14:30:00 +0700
+
+
+Started GET "/assets/home.js?body=1" for 127.0.0.1 at 2015-12-03 14:30:00 +0700
+
+
+Started GET "/assets/spare_part_types.js?body=1" for 127.0.0.1 at 2015-12-03 14:30:00 +0700
+
+
+Started GET "/assets/spare_parts.js?body=1" for 127.0.0.1 at 2015-12-03 14:30:00 +0700
+
+
+Started GET "/assets/users.js?body=1" for 127.0.0.1 at 2015-12-03 14:30:00 +0700
+
+
+Started GET "/assets/jquery.datetimepicker.js?body=1" for 127.0.0.1 at 2015-12-03 14:30:00 +0700
+
+
+Started GET "/assets/jquery.datetimepicker/init.js?body=1" for 127.0.0.1 at 2015-12-03 14:30:00 +0700
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2015-12-03 14:30:00 +0700
+
+
+Started POST "/users/sign_in" for 127.0.0.1 at 2015-12-03 14:30:16 +0700
+Processing by Devise::SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"2AqpDLUNRxS3FbWqV76pqakWW/kpRamR1dABnzFLLow=", "user"=>{"email"=>"admin@vkh.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+  [1m[35mUser Load (30.0ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."email" = 'admin@vkh.com'  ORDER BY "users"."id" ASC LIMIT 1
+Completed 401 Unauthorized in 68ms
+Processing by Devise::SessionsController#new as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"2AqpDLUNRxS3FbWqV76pqakWW/kpRamR1dABnzFLLow=", "user"=>{"email"=>"admin@vkh.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+  Rendered /Users/mrreaksmey/.rbenv/versions/2.1.6/lib/ruby/gems/2.1.0/gems/devise-3.5.2/app/views/devise/shared/_links.html.erb (0.4ms)
+  Rendered /Users/mrreaksmey/.rbenv/versions/2.1.6/lib/ruby/gems/2.1.0/gems/devise-3.5.2/app/views/devise/sessions/new.html.erb within layouts/application (3.5ms)
+Completed 200 OK in 516ms (Views: 406.5ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users/sign_in" for 127.0.0.1 at 2015-12-03 14:30:24 +0700
+Processing by Devise::SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"2AqpDLUNRxS3FbWqV76pqakWW/kpRamR1dABnzFLLow=", "user"=>{"email"=>"reaksmey@enspiral.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+  [1m[36mUser Load (0.6ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."email" = 'reaksmey@enspiral.com'  ORDER BY "users"."id" ASC LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.3ms)[0m  [1mUPDATE "users" SET "current_sign_in_at" = ?, "last_sign_in_at" = ?, "sign_in_count" = ?, "updated_at" = ? WHERE "users"."id" = 1[0m  [["current_sign_in_at", "2015-12-03 07:30:24.590029"], ["last_sign_in_at", "2015-11-16 08:37:10.861879"], ["sign_in_count", 3], ["updated_at", "2015-12-03 07:30:24.591116"]]
+  [1m[35m (2.1ms)[0m  commit transaction
+Redirected to http://localhost:3000/car_histories
+Completed 302 Found in 99ms (ActiveRecord: 3.2ms)
+
+
+Started GET "/car_histories" for 127.0.0.1 at 2015-12-03 14:30:24 +0700
+Processing by CarHistoriesController#index as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = 1  ORDER BY "users"."id" ASC LIMIT 1[0m
+  [1m[35mCar Load (7.8ms)[0m  SELECT "cars".* FROM "cars"
+  Rendered car_histories/index.html.erb within layouts/application (73.7ms)
+  [1m[36mAlert Load (0.5ms)[0m  [1mSELECT  "alerts".* FROM "alerts"   ORDER BY "alerts"."id" ASC LIMIT 1[0m
+  [1m[35m (1.3ms)[0m  SELECT COUNT(*) FROM "spare_parts"  WHERE (amount_in_stock <= 2)
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "alerts".* FROM "alerts"   ORDER BY "alerts"."id" ASC LIMIT 1[0m
+Completed 200 OK in 569ms (Views: 521.6ms | ActiveRecord: 10.9ms)
+
+
+Started GET "/assets/bootstrap/glyphicons-halflings-regular.woff" for 127.0.0.1 at 2015-12-03 14:30:25 +0700
+
+
+Started GET "/spare_parts" for 127.0.0.1 at 2015-12-03 14:30:30 +0700
+Processing by SparePartsController#index as HTML
+  Parameters: {"authenticity_token"=>"gVGLKAQ8J862wDO+ZuhcXpDBCKJkU7TMGKGiEQBmGOY="}
+  [1m[35mUser Load (0.4ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."id" = 1  ORDER BY "users"."id" ASC LIMIT 1
+  [1m[36m (0.2ms)[0m  [1mSELECT COUNT(*) FROM "spare_parts"[0m
+  [1m[35mSparePart Load (0.3ms)[0m  SELECT  "spare_parts".* FROM "spare_parts"   ORDER BY id LIMIT 10 OFFSET 0
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT COUNT(*) FROM "spare_parts"[0m
+  Rendered spare_parts/index.html.erb within layouts/application (17.2ms)
+  [1m[35mAlert Load (0.2ms)[0m  SELECT  "alerts".* FROM "alerts"   ORDER BY "alerts"."id" ASC LIMIT 1
+  [1m[36m (0.2ms)[0m  [1mSELECT COUNT(*) FROM "spare_parts"  WHERE (amount_in_stock <= 2)[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "alerts".* FROM "alerts"   ORDER BY "alerts"."id" ASC LIMIT 1
+Completed 200 OK in 446ms (Views: 442.3ms | ActiveRecord: 1.2ms)
