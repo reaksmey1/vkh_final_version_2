@@ -4,7 +4,7 @@ jQuery.ajaxSetup({
 
 $(document).ready(function() {
 
-	$("#spare_part_code").keypress(function(e) {
+	$("#spare_part_name").keypress(function(e) {
     if(e.which == 13) {
       $.post($(this).attr("action"), $(this).serialize(), null, "script");
       return false;

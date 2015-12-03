@@ -17,6 +17,7 @@ Rails.application.routes.draw do
       post 'add_more_detail'
     end
   end
+  get 'spare_parts/autocomplete_spare_part_name'
   resources :spare_parts do
     collection { post :import }
     collection do

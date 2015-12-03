@@ -4,12 +4,16 @@ class CarHistoriesController < ApplicationController
 		@spare_part = SparePart.new
 	end
 
+	def new
+
+	end
+
 	def create
 		if params[:spare_part]
-			spare_part_params = params[:spare_part][:code].split(",")
+			spare_part_params = params[:spare_part][:name].split(",")
 			@amount = spare_part_params[1]
-			code = spare_part_params[0]
-			@spare_part = SparePart.find_by_code(code)
+			name = spare_part_params[0]
+			@spare_part = SparePart.find_by_name(name)
 			@total = @amount.to_i * @spare_part.selling_price if @spare_part
 		end
 		if @spare_part

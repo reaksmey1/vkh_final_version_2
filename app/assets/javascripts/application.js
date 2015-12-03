@@ -11,9 +11,11 @@
 // about supported directives.
 //
 //= require jquery
-//= require jquery_ujs
 //= require turbolinks
 //= require bootstrap-sprockets
+//= require jquery_ujs
+//= require jquery-ui
+//= require autocomplete-rails
 //= require_tree .
 //= require jquery.datetimepicker
 //= require jquery.datetimepicker/init

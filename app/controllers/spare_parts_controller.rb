@@ -1,4 +1,5 @@
 class SparePartsController < ApplicationController
+	autocomplete :spare_part, :name, :full => true
 	def index
 		if params[:search]
 			params_search = String(params[:search]).downcase

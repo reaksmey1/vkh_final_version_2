@@ -5,7 +5,7 @@
 
 	<div class="input-spare-part">
 		<%= bootstrap_form_for(@spare_part, layout: :horizontal) do |f| %>
-		  <%= f.text_field :code, :label_col => "col-sm-3", :control_col => "col-sm-9", :label => "លេខកូដ" %>
+		  <%= f.text_field :name, :label_col => "col-sm-3", :control_col => "col-sm-9", :label => "លេខកូដ", data: {autocomplete: spare_parts_autocomplete_spare_part_name_path} %>
 		<% end %>
 	</div>
 
