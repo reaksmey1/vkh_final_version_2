@@ -1,12 +1,6 @@
 <div style="float: left; width: 30%;">
 	<div class="car-history">
-		<%= params[:car_plate] %>
-		<%= bootstrap_form_for(@car, url: new_car_repairing_quote_path, method: 'GET', layout: :horizontal, :html => {:target => '_blank'}) do |f| %>
-		  <%= f.collection_select :id, Car.all, :id, :plate_number, :label_col => "col-sm-3", :control_col => "col-sm-9", :label => "ផ្លាកលេខ",  :selected => params[:car_id] ? params[:car_id][0] : nil %>
-		  <%= f.text_field :entry_date, :id => "datetimepicker", :label_col => "col-sm-3", :control_col => "col-sm-9", :label => "ថ្ងៃចូល", :value => params[:car_id] ? params[:car_id][1] : nil %>
-		  <%= f.text_field :kilo_metre,:label_col => "col-sm-3", :control_col => "col-sm-9", :label => "គិឡូ/ម៉ាយ", :value => params[:car_id] ? params[:car_id][2] : nil %>
-		  <%= f.submit "បន្តែមពត៍មាន", :style => "margin-left: 90px;" %> 
-		<% end %>
+		todo: record car details
 	</div>
 
 	<div class="input-spare-part">
