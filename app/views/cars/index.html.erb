@@ -12,12 +12,14 @@
 
 	  <div class="panel panel-default">
 			<table class="table table-striped table-hover">
-				<th style="width: 40%"> ផ្លាកលេខ </th>
-				<th style="width: 40%"> ប្រភេទឡាន </th>
+				<th style="width: 20%"> លេខវិក័យប័ត្រ </th>
+				<th style="width: 30%"> ផ្លាកលេខ </th>
+				<th style="width: 30%"> ប្រភេទឡាន </th>
 				<th style="width: 20%"> </th>
 
 				<% @cars.each do |car| %>
 					<tr>
+						<td> <%= car.invoice_number %></td>
 						<td> <%= car.plate_number %> </td>
 						<td> <%= car.name %> </td>
 						<td>

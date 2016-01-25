@@ -35,7 +35,7 @@ $(document).ready(function() {
 		      var sub_total = $("#total").val();
 		      var recieved = $("#recieved").val();
 		      var return_money = $("#return").val();
-		      var car_id = $("#car_history_id").val();
+		      var car_id = $("#car_id").val();
 		      var entry_date = $("#datetimepicker").val();
 		      sell_data.push({code: code, name: name, amount: amount, unit_price: unit_price, total_price: total_price, sub_total: sub_total, recieved: recieved, return_money: return_money, car_id: car_id, entry_date: entry_date})
 		    }
@@ -43,7 +43,7 @@ $(document).ready(function() {
 	  $.ajax({
 	      type: "POST",
 	      contentType: "application/json; charset=utf-8",
-	      url: "/car_histories/"+$("#car_history_id").val()+"/print",
+	      url: "/cars/"+$("#car_id").val()+"/print",
 	      //data: "{'data1':'" + value1+ "', 'data2':'" + value2+ "', 'data3':'" + value3+ "'}",
 	      data: JSON.stringify(sell_data),
 	      // dataType: "json",
@@ -53,7 +53,7 @@ $(document).ready(function() {
 	      		window.alert("សូមបន្តែមពត៍មាន មុននឹង PRINT");
 	      	} else {
 	      		par = data.split("-");
-	      		window.open("car_histories/"+par[1]+".pdf", '_blank');
+	      		window.open("../"+par[1]+".pdf", '_blank');
 	      	}
 	      },
 	      error: function (data){

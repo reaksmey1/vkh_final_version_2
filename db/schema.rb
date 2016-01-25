@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150601062244) do
+ActiveRecord::Schema.define(version: 20151204051957) do
 
   create_table "alerts", force: true do |t|
     t.integer  "amount"
@@ -67,6 +67,11 @@ ActiveRecord::Schema.define(version: 20150601062244) do
     t.integer  "type"
     t.datetime "entry_date"
     t.string   "detail"
+    t.string   "color"
+    t.string   "phone_number"
+    t.string   "conteur"
+    t.string   "customer_name"
+    t.string   "invoice_number"
   end
 
   create_table "sell_reports", force: true do |t|

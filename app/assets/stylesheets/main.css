@@ -44,3 +44,8 @@ body {
     top: 11px;
     left: -6px;
 }
+
+@font-face {
+    font-family: "Khmer";
+    src: url(/assets/fonts/Battambang-Regular.ttf);
+}

@@ -33,8 +33,8 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li class=<%= section_active("car_histories")  %> style="padding-left: 20px; padding-right: 10px;"> <%= link_to raw('<i class="glyphicon glyphicon-usd" style="margin-right: 5px;"></i> Sell '), car_histories_path, :method => :get %> </li>
          <li class="nav-divider"></li>
+         <li class=<%= section_active("cars")  %> style="padding-left: 20px; padding-right: 10px;"> <%= link_to raw('<i class="glyphicon glyphicon-open" style="margin-right: 5px;"></i> Car '), cars_path, :method => :get %> </li>
         <li class="divider"></li>
         <li class="dropdown <%= section_active("spare_parts")  %>"> <%= link_to raw('<i class="glyphicon glyphicon-folder-open" style="margin-right: 5px;"></i> Spare Parts <span class="caret"></span>'), spare_parts_path, :method => :get, :'data-toggle' => 'dropdown', :target => "_blank" %>
           <ul class="dropdown-menu" role="menu">

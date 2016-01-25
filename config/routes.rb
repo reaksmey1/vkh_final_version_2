@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  root :to => redirect('/car_histories')
+  root :to => redirect('/cars/new')
   resources :users do
     member do
       put 'update_password'
@@ -13,6 +13,13 @@ Rails.application.routes.draw do
   end
 
   resources :cars do
+    post 'print'
+    resources :car_histories do
+      member do
+        post 'new'
+        get 'show_print'
+      end
+    end
     member do
       post 'add_more_detail'
     end

@@ -1,7 +1,14 @@
 <%= bootstrap_form_for(@car, layout: :horizontal ,label_col: "col-sm-2", control_col: "col-sm-3") do |f| %>
+	<%= f.text_field :invoice_number, :label => "លេខរៀង", :value => @invoice_number %>
   <%= f.text_field :plate_number, :label => "ផ្លាកលេខឡាន" %>
   <%= f.text_field :name, :label => "ប្រភេទ" %>
+  <%= f.text_field :color, :label => "ពណ័" %>
+  <%= f.text_field :phone_number, :label => "លេខទំនាក់ទំនង" %>
+  <%= f.text_field :conteur, :label => "កង់ទ័រ" %>
+  <%= f.text_field :customer_name, :label => "ឈ្មោះអតិថិជន" %>
+  <%= f.text_field :entry_date, :id => "datetimepicker", :label => "ថ្ងៃចូល" %>
+  <%= f.text_area :detail, :size => "50X50", :label => "តំរូវការអតិថិជន" %>
   <%= f.form_group do %>
-    <%= f.submit "រក្សាទុក" %>
+    <%= f.submit "កត់ត្រាគ្រឿងបរិក្ខារ", :class => "btn btn-primary" %>
   <% end %>
 <% end %>

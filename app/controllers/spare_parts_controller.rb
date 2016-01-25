@@ -11,7 +11,6 @@ class SparePartsController < ApplicationController
 
 	def new
 		@spare_part = SparePart.new
-		@spare_part.code = SparePart.last.code.next
 	end
 
 	def create

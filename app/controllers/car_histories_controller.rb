@@ -2,19 +2,22 @@ class CarHistoriesController < ApplicationController
 	def index
 		@car = CarHistory.new
 		@spare_part = SparePart.new
+		@car_info = Car.find_by_id(params[:car_id])
 	end
 
 	def new
-
+		@car = CarHistory.new
+		@spare_part = SparePart.new
 	end
 
 	def create
 		if params[:spare_part]
 			spare_part_params = params[:spare_part][:name].split(",")
-			@amount = spare_part_params[1]
+			@amount = spare_part_params[1].nil? ? 1 : spare_part_params[1]
 			name = spare_part_params[0]
 			@spare_part = SparePart.find_by_name(name)
-			@total = @amount.to_i * @spare_part.selling_price if @spare_part
+			@sell_price = @spare_part.selling_price.nil? ? 0 : @spare_part.selling_price
+			@total = @amount.to_i * @sell_price if @spare_part
 		end
 		if @spare_part
 			@result = "success"
@@ -47,9 +50,9 @@ class CarHistoriesController < ApplicationController
 			params[:_json].each do |el| 
 				car_id = el[:car_id]
 				entry_date = el[:entry_date]
-				car_history = CarHistory.find_by_car_id_and_entry_date(car_id, entry_date)
+				car_history = CarHistory.last.id + 1
 				if car_history
-					SellReport.create!(:car_id => params[:id],
+					@sell_report = SellReport.create!(:car_id => params[:id],
 														 :spare_part_id => SparePart.find_by_code(el[:code].delete(" ")).id,
 														 :unit => el[:amount],
 														 :selling_price => el[:unit_price],
