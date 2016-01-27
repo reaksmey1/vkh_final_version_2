@@ -4,21 +4,22 @@ function updateTotal() {
 		var price = $(this);
 		sum += parseFloat(price.val());
 	});
-
-	$("#total").val(sum.toFixed(2));
+	var discount = $("#discount").val();
+	total = sum * ((100-discount)/100)
+	$("#total").val(total.toFixed(2));
 }
 
 function updateReturnMoney() {
 	var total = $("#total").val();
 	var recieved = $("#recieved").val();
 	var return_back = recieved - total;
-	$("#return").val(return_back);
+	$("#return").val(return_back.toFixed(2));
 }
 
 function checkSparePartCode() {
 	var result = "<%= @result %>";
 	if (result == "success") {
-		$('#spare_part_detail > tbody:last').append("<tr><td class='code'> <%= @spare_part.code if @spare_part %> </td><td class='spare_part'> <%= @spare_part.name if @spare_part %> </td> <td> <input class='amount' type='text' value='<%= @amount %>'/> </td> <td> <input class='based_price' type='text' value='<%= @spare_part.selling_price if @spare_part %>'/> </td><td> <input class='total_price' type='text' value='<%= @total %>'/> </td><td class='delete_item'><b style='color: red; cursor: pointer;'>X</b></td></tr>");
+		$('#spare_part_detail > tbody:last').append("<tr><td class='code'> <%= @spare_part.code if @spare_part %> </td><td class='spare_part'> <%= @spare_part.name if @spare_part %> </td> <td> <input class='amount' type='text' size='10' value='<%= @amount %>'/> </td> <td> <input class='based_price' type='text' size='10' value='<%= @spare_part.selling_price if @spare_part %>'/> </td> <td> <input class='discounted' type='text' size='10' value=''/> </td> <td> <input class='total_price' type='text' size='10' value='<%= @total %>'/> </td><td class='delete_item'><b style='color: red; cursor: pointer;'>X</b></td></tr>");
 	} else {
 		window.alert("លេខកូដដែលលោកអ្នកបញ្ចូលមិនត្រឹមត្រូវទេ");
 	}
@@ -44,7 +45,18 @@ $(".based_price").change(function(){
 	var based_price = parseFloat($(this).val()).toFixed(2);
 	var amount = parseFloat($(this).parents("tr").children().find('input')[0].value).toFixed(2);
 	var total = based_price * amount;
-	$(this).parents("tr").children().find('input')[2].value = total.toFixed(2);
+	$(this).parents("tr").children().find('input')[3].value = total.toFixed(2);
+	updateTotal();
+	updateReturnMoney();
+});
+
+$(".discounted").change(function(){
+	var discount = parseFloat($(this).val()).toFixed(2);
+	var based_price = parseFloat($(this).parents("tr").children().find('input')[1].value).toFixed(2);
+	var amount = parseFloat($(this).parents("tr").children().find('input')[0].value).toFixed(2);
+	var fix_discount = (100 - discount)/100;
+	var total = (based_price * amount) * fix_discount;
+	$(this).parents("tr").children().find('input')[3].value = total.toFixed(2);
 	updateTotal();
 	updateReturnMoney();
 });
@@ -53,7 +65,7 @@ $(".amount").change(function(){
 	var amount = parseFloat($(this).val()).toFixed(2);
 	var based_price = parseFloat($(this).parents("tr").children().find('input')[1].value).toFixed(2);
 	var total = based_price * amount;
-	$(this).parents("tr").children().find('input')[2].value = total.toFixed(2);
+	$(this).parents("tr").children().find('input')[3].value = total.toFixed(2);
 	updateTotal();
 	updateReturnMoney();
 });
@@ -63,6 +75,11 @@ $("#recieved").change(function(){
 });
 
 $("#total").change(function(){
+	updateReturnMoney();
+});
+
+$("#discount").change(function(){
+	updateTotal();
 	updateReturnMoney();
 });
 
