@@ -68,6 +68,8 @@ class CarsController < ApplicationController
 														 :recieved => el[:recieved],
 														 :sub_total => el[:sub_total],
 														 :return => el[:return_money],
+														 :discount => el[:discount],
+														 :total_discount => el[:total_discount],
 														 :status => "Paid",
 														 :car_history_id => 1
 														)

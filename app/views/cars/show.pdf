@@ -86,11 +86,12 @@ tfoot tr th:last-child {
 <table width="100%">
   <thead>
   <tr border="1" style="background-color: gray ; color: white;">
-    <th border="1"> <span style="font-size: 200%">ល.រ <br/> <span style="font-size: 50%;"> Nº </span> </span> </th>
-    <th style="text-align: center;"> <span style="font-size: 200%"> បរិយាយ <br/> <span style="font-size: 50%;"> Description </span></span> </th>
-    <th style="text-align: center;"> <span style="font-size: 200%"> ចំនួន <br/> <span style="font-size: 50%;"> Quantity </span> </span> </th>
-    <th style="text-align: center;"> <span style="font-size: 200%"> តំលែរាយ <br/> <span style="font-size: 50%;"> Unit Price </span> </span> </th>
-    <th style="text-align: center;"> <span style="font-size: 200%"> តំលែសរុប <br/> <span style="font-size: 50%;"> Total Price </span> </span> </th>
+    <th border="1" width="5%"> <span style="font-size: 200%">ល.រ <br/> <span style="font-size: 50%;"> Nº </span> </span> </th>
+    <th style="text-align: center;" width="45%"> <span style="font-size: 200%"> បរិយាយ <br/> <span style="font-size: 50%;"> Description </span></span> </th>
+    <th style="text-align: center;" width="15%"> <span style="font-size: 200%"> ចំនួន <br/> <span style="font-size: 50%;"> Quantity </span> </span> </th>
+    <th style="text-align: center;" width="15%"> <span style="font-size: 200%"> តំលែរាយ <br/> <span style="font-size: 50%;"> Unit Price </span> </span> </th>
+    <th style="text-align: center;" width="15%"> <span style="font-size: 200%"> បញ្ចុះតំលែ <br/> <span style="font-size: 50%;"> Unit Price </span> </span> </th>
+    <th style="text-align: center;" width="15%"> <span style="font-size: 200%"> តំលែសរុប <br/> <span style="font-size: 50%;"> Total Price </span> </span> </th>
   </tr>
 </thead>
 <tbody>
@@ -98,28 +99,33 @@ tfoot tr th:last-child {
   <tr>
     <td> 1 </td>
     <td style="font-size: 150%; padding: 5px;"> <%= el.spare_part.name %> </td>
-    <td style="font-size: 100%;"><%= el.unit %></td>
-    <td style="font-size: 100%;"><%= el.selling_price %></td>
-    <td style="font-size: 100%;"><%= el.total_price %></td>
+    <td style="font-size: 100%; text-align: center;"><%= el.unit %></td>
+    <td style="font-size: 100%; text-align: center;"><%= el.selling_price %></td>
+    <td style="font-size: 100%; text-align: center;"><%= el.discount %></td>
+    <td style="font-size: 100%; text-align: center;"><%= el.total_price %></td>
   </tr>
   <% end %>
 </tbody>
 <tfoot>
   <tr>
-    <td rowspan=4 colspan=3 style="width: 50px;"> 
+    <td rowspan=5 colspan=3 style="width: 50px;"> 
       <span style="font-size: 150%; color: green;"> កំណត់សំគាល់ ៖ <%= @car.detail %> </span>
     </td>
   </tr>
   <tr>
-    <td style="font-size: 200%; text-align: right;"><span style="font-weight: bold; margin-right: 20px;"> សរុប <span style="font-size: 50%"> Total </span ></span> </td>
+    <td style="font-size: 200%; text-align: right;" colspan=2><span style="font-weight: bold; margin-right: 20px;"> បញ្ចុះតំលែ <span style="font-size: 50%"> Discount </span ></span> </td>
+    <td> <span style="font-weight: bold;"> <%= @sell[0].total_discount %> % </span></td>
+  </tr>
+  <tr>
+    <td style="font-size: 200%; text-align: right;" colspan=2><span style="font-weight: bold; margin-right: 20px;"> សរុប <span style="font-size: 50%"> Total </span ></span> </td>
     <td> <span style="font-weight: bold;"> <%= @sell[0].sub_total %> $ </span></td>
   </tr>
   <tr>
-    <td style="font-size: 200%; text-align: right;"><span style="font-weight: bold; margin-right: 20px;"> កក់មុខ <span style="font-size: 50%"> Deposit </span> </span> </td>
+    <td style="font-size: 200%; text-align: right;" colspan=2><span style="font-weight: bold; margin-right: 20px;"> កក់មុខ <span style="font-size: 50%"> Deposit </span> </span> </td>
     <td> <span style="font-weight: bold;"> </span></td>
   </tr>
   <tr>
-    <td style="font-size: 200%; text-align: right;"><span style="font-weight: bold; margin-right: 20px;"> នៅខ្វះ <span style="font-size: 50%"> Balance </span> </span> </td>
+    <td style="font-size: 200%; text-align: right;" colspan=2><span style="font-weight: bold; margin-right: 20px;"> នៅខ្វះ <span style="font-size: 50%"> Balance </span> </span> </td>
     <td> <span style="font-weight: bold;"> </span></td>
   </tr>
 </tfoot>

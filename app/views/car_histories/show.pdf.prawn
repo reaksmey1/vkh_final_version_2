@@ -45,6 +45,7 @@
 			<th style="text-align: center;"> ឈ្មោះ </th>
 			<th style="text-align: center;"> Amount </th>
 			<th style="text-align: center;"> Unit price </th>
+			<th style="text-align: center;">  </th>
 			<th style="text-align: center;"> Selling price </th>
 		</tr>
 		<% @sell.each do |el| %>
