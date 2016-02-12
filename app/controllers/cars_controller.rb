@@ -25,7 +25,7 @@ class CarsController < ApplicationController
 		respond_to do |format|
     format.html
     format.pdf do
-      render pdf: "file_name", encoding: "UTF-8"   # Excluding ".pdf" extension.
+      render pdf: "file_name", encoding: "UTF-8", print_media_type: true   # Excluding ".pdf" extension.
     end
     end
 	end
@@ -71,6 +71,7 @@ class CarsController < ApplicationController
 														 :discount => el[:discount],
 														 :total_discount => el[:total_discount],
 														 :status => "Paid",
+														 :vat => el[:vat],
 														 :car_history_id => 1
 														)
 					spare_part = SparePart.find_by_code(el[:code].delete(" "))

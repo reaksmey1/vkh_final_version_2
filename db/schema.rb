@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160127074032) do
+ActiveRecord::Schema.define(version: 20160202031612) do
 
   create_table "alerts", force: true do |t|
     t.integer  "amount"
@@ -89,6 +89,7 @@ ActiveRecord::Schema.define(version: 20160127074032) do
     t.integer  "car_history_id"
     t.float    "discount"
     t.float    "total_discount"
+    t.float    "vat"
   end
 
   create_table "spare_part_types", force: true do |t|

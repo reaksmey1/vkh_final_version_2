@@ -62,6 +62,7 @@ class CarHistoriesController < ApplicationController
 														 :return => el[:return_money],
 														 :discount => el[:discount],
 														 :total_discount => el[:total_discount],
+														 :vat => el[:vat],
 														 :status => "Paid",
 														 :car_history_id => car_history.id
 														)
