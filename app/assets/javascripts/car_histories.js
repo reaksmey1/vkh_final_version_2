@@ -39,8 +39,7 @@ $(document).ready(function() {
 		      var total_discount = $("#discount").val();
 		      var car_id = $("#car_id").val();
 		      var entry_date = $("#datetimepicker").val();
-		      var vat = $("#vat").val();
-		      sell_data.push({code: code, name: name, amount: amount, unit_price: unit_price, total_price: total_price, sub_total: sub_total, recieved: recieved, return_money: return_money, car_id: car_id, entry_date: entry_date, discount: discount, total_discount: total_discount, vat: vat})
+		      sell_data.push({code: code, name: name, amount: amount, unit_price: unit_price, total_price: total_price, sub_total: sub_total, recieved: recieved, return_money: return_money, car_id: car_id, entry_date: entry_date, discount: discount, total_discount: total_discount})
 		    }
 		 });
 	  $.ajax({

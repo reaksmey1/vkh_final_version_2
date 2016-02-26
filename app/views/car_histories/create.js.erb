@@ -5,9 +5,7 @@ function updateTotal() {
 		sum += parseFloat(price.val());
 	});
 	var discount = $("#discount").val();
-	var vat = $("#vat").val();
-	total = sum + ((sum * vat)/100);
-	total = total * ((100-discount)/100)
+	total = sum - discount;
 	$("#total").val(total.toFixed(2));
 }
 
@@ -68,11 +66,6 @@ $(".amount").change(function(){
 	var based_price = parseFloat($(this).parents("tr").children().find('input')[1].value).toFixed(2);
 	var total = based_price * amount;
 	$(this).parents("tr").children().find('input')[3].value = total.toFixed(2);
-	updateTotal();
-	updateReturnMoney();
-});
-
-$("#vat").change(function(){	
 	updateTotal();
 	updateReturnMoney();
 });
