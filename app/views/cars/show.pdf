@@ -54,32 +54,32 @@ tfoot tr th:last-child {
   </head>
 <div style="float: left; width: 30%;">
   <%= wicked_pdf_image_tag 'logo.png' %><br/>
-  <span style="font-size: 100%;"> រថយន្ត ៖ <span style="font-size: 100%"> <%= @car.name %> </span> </span> <br/>
-  <span style="font-size: 100%;"> ស្លាកលេខ ៖ <span style="font-size: 100%"> <%= @car.plate_number %> </span> </span> <br/><br/>
-  <span style="font-size: 100%;">
+  <span style="font-size: 80%;"> រថយន្ត : <span style="font-size: 100%"> <%= @car.name %> </span> </span> <br/>
+  <span style="font-size: 80%;"> ស្លាកលេខ : <span style="font-size: 100%"> <%= @car.plate_number %> </span> </span> <br/><br/>
+  <span style="font-size: 70%;">
     ផ្ទះលេខ <span style="font-size: 100%;"> 25 </span> ផ្លូវ <span style="font-size: 100%;"> 237 </span> សង្កាត់ផ្សារដេប៉ូ <span style="font-size: 100%;"> 1 </span> ខណ្ឌទួលគោក រាជធានីភ្នំពេញ 
   </span>
 </div>
 
 <div style="display: inline-block; width: 35%;">
-  <div style="font-size: 100%; margin-left: 80px;" > វិក័យប័ត្រ </div>
-  <div style="margin-left: 78px; margin-bottom: 10px;"> INVOICE </div>
-  <div style="margin-left: 60px; margin-top: 20px;"> Nº : .................. </div>
-  <div style="margin-left: 35px; margin-top: 40px;">Tel : (855) 12 2000 49</div>
-  <div style="margin-left: 65px;">(855) 16 2000 19</div>
-  <div style="margin-left: 65px;">(855) 11 8388 83</div>
-  <div style="margin-left: 0px; margin-top: 20px; font-size: 95%;"> Email:  vkh_motosport@yahoo.com </div>
-  <div style="margin-left: 45px; font-size: 95%;"> info@vkhmotorsports.com  </div>
+  <div style="font-size: 100%; margin-left: 90px;" > វិក័យប័ត្រ </div>
+  <div style="margin-left: 88px; margin-bottom: 10px;"> INVOICE </div>
+  <div style="margin-left: 70px; margin-top: 20px;"> Nº : .................. </div>
+  <div style="margin-left: 65px; margin-top: 30px; font-size: 80%;">Tel : (855) 12 2000 49</div>
+  <div style="margin-left: 90px; font-size: 80%;">(855) 16 2000 19</div>
+  <div style="margin-left: 90px; font-size: 80%;">(855) 11 8388 83</div>
+  <div style="margin-left: 30px; margin-top: 10px; font-size: 70%;"> Email:  vkh_motosport@yahoo.com </div>
+  <div style="margin-left: 65px; font-size: 75%;"> info@vkhmotorsports.com  </div>
 </div>
 
-<div style="float: right; width: 33%; margin-top: 0px;">
+<div style="float: right; width: 33%; margin-top: -5px;">
   <div style="margin-left: 20px;"><%= wicked_pdf_image_tag 'vkh-khmer.png' %></div>
   <div style="margin-left: 50px;"><%= wicked_pdf_image_tag 'vkh4x4.jpg' %></div>
-  <div style="font-size: 95%; margin-top: 5px; margin-left: 20px;">
-    លក់គ្រឿងតុបតែងរថយន្ត ទំលាក់និងតំឡើងបូមរថយន្ត ទទួលចាក់ស្មាច់<br/> តោន និង បាញ់ថ្នាំ ជុសជុលរថយន្តគ្រប់ប្រភេទ
+  <div style="font-size: 70%; margin-top: 5px; margin-left: 30px;">
+    លក់គ្រឿងតុបតែងរថយន្ត ទំលាក់និងតំឡើងបូមរថយន្ត ទទួលចាក់ស្មាច់ តោន និង បាញ់ថ្នាំ ជុសជុលរថយន្តគ្រប់ប្រភេទ
   </div>
-  <div style="margin-left: 20px; margin-top: 5px; font-size: 95%;">www.vkhmotorsports.com</div>
-  <div style="margin-left: 20px; font-size: 95%;">www.facebook/vkhmotorsports</div>
+  <div style="margin-left: 30px; margin-top: 5px; font-size: 70%;">www.vkhmotorsports.com</div>
+  <div style="margin-left: 30px; font-size: 70%;">www.facebook/vkhmotorsports</div>
 
 </div>
 
@@ -87,12 +87,12 @@ tfoot tr th:last-child {
 <table width="100%">
   <thead>
   <tr border="1" style="background-color: gray ; color: white;">
-    <th border="1" width="5%"> <span style="font-size: 100%">ល.រ <br/> <span style="font-size: 100%;"> Nº </span> </span> </th>
-    <th style="text-align: center;" width="45%"> <span style="font-size: 100%"> បរិយាយ <br/> <span style="font-size: 100%;"> Description </span></span> </th>
-    <th style="text-align: center;" width="10%"> <span style="font-size: 100%"> ចំនួន <br/> <span style="font-size: 100%;"> Quantity </span> </span> </th>
-    <th style="text-align: center;" width="10%"> <span style="font-size: 100%"> តំលែរាយ <br/> <span style="font-size: 100%;"> Unit Price </span> </span> </th>
-    <th style="text-align: center;" width="10%"> <span style="font-size: 100%"> បញ្ចុះតំលែ <br/> <span style="font-size: 100%;"> Discount(%) </span> </span> </th>
-    <th style="text-align: center;" width="10%"> <span style="font-size: 100%"> តំលែសរុប <br/> <span style="font-size: 100%;"> Sub Total </span> </span> </th>
+    <th border="1" width="5%"> <span style="font-size: 90%">ល.រ <br/> <span style="font-size: 100%;"> Nº </span> </span> </th>
+    <th style="text-align: center;" width="45%"> <span style="font-size: 90%"> បរិយាយ <br/> <span style="font-size: 100%;"> Description </span></span> </th>
+    <th style="text-align: center;" width="10%"> <span style="font-size: 90%"> ចំនួន <br/> <span style="font-size: 100%;"> Quantity </span> </span> </th>
+    <th style="text-align: center;" width="10%"> <span style="font-size: 90%"> តំលែរាយ <br/> <span style="font-size: 90%;"> Unit Price </span> </span> </th>
+    <th style="text-align: center;" width="10%"> <span style="font-size: 90%"> បញ្ចុះតំលែ <br/> <span style="font-size: 100%;"> Discount(%) </span> </span> </th>
+    <th style="text-align: center;" width="10%"> <span style="font-size: 90%"> តំលែសរុប <br/> <span style="font-size: 100%;"> Sub Total </span> </span> </th>
   </tr>
 </thead>
 <tbody>
@@ -100,50 +100,50 @@ tfoot tr th:last-child {
   <% @sell.each do |el| %>
   <tr>
     <% i = i+1 %>
-    <td> <%= i %> </td>
-    <td style="font-size: 100%; padding: 5px;"> <%= el.spare_part.name %> </td>
-    <td style="font-size: 100%; text-align: center;"><%= el.unit %></td>
-    <td style="font-size: 100%; text-align: center;"><%= el.selling_price %> $</td>
+    <td style="font-size: 90%;"> <%= i %> </td>
+    <td style="font-size: 90%; padding: 5px; text-align: left;"> <%= el.spare_part.name %> </td>
+    <td style="font-size: 90%; text-align: center;"><%= el.unit %></td>
+    <td style="font-size: 90%; text-align: right;"><%= el.selling_price %> $</td>
     <% if el.discount %>
-    <td style="font-size: 100%; text-align: center;"><%= el.discount %> %</td>
+    <td style="font-size: 90%; text-align: right;"><%= el.discount %> %</td>
     <% else %>
-    <td style="font-size: 100%; text-align: center;"></td>
+    <td style="font-size: 90%; text-align: right;"></td>
     <%end%>
-    <td style="font-size: 100%; text-align: center;"><%= el.total_price %> $</td>
+    <td style="font-size: 90%; text-align: right;"><%= el.total_price %> $</td>
   </tr>
   <% end %>
 </tbody>
 <tfoot>
   <tr>
     <td rowspan=6 colspan=3 style="width: 50px;"> 
-      <span style="font-size: 100%; color: green;"> កំណត់សំគាល់ ៖ <%= @car.detail %> </span>
+      <span style="font-size: 90%; color: green;"> កំណត់សំគាល់ ៖ <%= @car.detail %> </span>
     </td>
   </tr>
   <tr>
-    <td style="font-size: 100%; text-align: right;" colspan=2><span style="font-weight: bold; margin-right: 20px;"> បញ្ចុះតំលែ <span style="font-size: 100%"> Discount </span ></span> </td>
-    <td> <span style="font-weight: bold;"> <%= @sell[0].total_discount %> $ </span></td>
+    <td style="font-size: 90%; text-align: right;" colspan=2><span style="font-weight: bold; margin-right: 20px;"> បញ្ចុះតំលែ <span style="font-size: 100%"> Discount </span ></span> </td>
+    <td style="text-align: right;"> <span style="font-weight: bold;"> <%= @sell[0].total_discount %> $ </span></td>
   </tr>
   <tr>
-    <td style="font-size: 100%; text-align: right;" colspan=2><span style="font-weight: bold; margin-right: 20px;"> សរុប <span style="font-size: 100%;"> Total </span ></span> </td>
-    <td> <span style="font-weight: bold;"> <%= @sell[0].sub_total %> $ </span></td>
+    <td style="font-size: 90%; text-align: right;" colspan=2><span style="font-weight: bold; margin-right: 20px;"> សរុប <span style="font-size: 100%;"> Total </span ></span> </td>
+    <td style="text-align: right;"> <span style="font-weight: bold;"> <%= @sell[0].sub_total %> $ </span></td>
   </tr>
   <tr>
-    <td style="font-size: 100%; text-align: right;" colspan=2><span style="font-weight: bold; margin-right: 20px;"> កក់មុខ <span style="font-size: 100%"> Deposit </span> </span> </td>
+    <td style="font-size: 90%; text-align: right;" colspan=2><span style="font-weight: bold; margin-right: 20px;"> កក់មុខ <span style="font-size: 100%"> Deposit </span> </span> </td>
     <td> <span style="font-weight: bold;"> </span></td>
   </tr>
   <tr>
-    <td style="font-size: 100%; text-align: right;" colspan=2><span style="font-weight: bold; margin-right: 20px;"> នៅខ្វះ <span style="font-size: 100%"> Balance </span> </span> </td>
+    <td style="font-size: 90%; text-align: right;" colspan=2><span style="font-weight: bold; margin-right: 20px;"> នៅខ្វះ <span style="font-size: 100%"> Balance </span> </span> </td>
     <td> <span style="font-weight: bold;"> </span></td>
   </tr>
 </tfoot>
   </table>
 
 <div style="float: left; width: 70%;">
-<span style="font-size: 100%"> ថ្ងែទី ៖ <span style="font-size: 100%"> <%= Date.today %> </span>  </span> <br/>
-<span style="font-size: 100%"> អ្នកទិញ <span style="font-size: 100%"> / The Buyer </span> </span>
+<span style="font-size: 90%"> ថ្ងែទី ៖ <span style="font-size: 100%"> <%= Date.today %> </span>  </span> <br/>
+<span style="font-size: 90%"> អ្នកទិញ <span style="font-size: 100%"> / The Buyer </span> </span>
 </div>
-<div style="float: right; width: 30%; margin-top: 30px;">
-  <span style="font-size: 100%"> អ្នកលក់ <span style="font-size: 100%"> / The Seller </span> </span>
+<div style="float: right; width: 30%; margin-top: 20px;">
+  <span style="font-size: 90%"> អ្នកលក់ <span style="font-size: 100%"> / The Seller </span> </span>
 </div>
 
 

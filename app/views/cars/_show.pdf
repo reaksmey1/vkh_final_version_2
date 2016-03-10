@@ -1,0 +1,149 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+     <%= wicked_pdf_javascript_include_tag "application" %>
+     <%= csrf_meta_tags %>
+     <meta content="text/html; charset=utf-8" http-equiv="content-type">
+     <style>
+      table {
+  font-family: "Helvetica Neue", Helvetica, sans-serif
+}
+
+caption {
+  text-align: left;
+  color: silver;
+  font-weight: bold;
+  text-transform: uppercase;
+  padding: 5px;
+}
+
+thead {
+  background: SteelBlue;
+  color: white;
+}
+
+th,
+td {
+  padding: 5px 10px;
+}
+
+tbody tr:nth-child(even) {
+  background: WhiteSmoke;
+}
+
+tbody tr td:nth-child(2) {
+  text-align:center;
+}
+
+tbody tr td:nth-child(3),
+tbody tr td:nth-child(4) {
+  text-align: right;
+}
+
+tfoot {
+  background: WhiteSmoke;
+  color: Black;
+  text-align: left;
+}
+
+tfoot tr th:last-child {
+  font-family: monospace;
+}
+
+</style>
+  </head>
+<div style="float: left; width: 30%;">
+  <%= wicked_pdf_image_tag 'logo.png' %><br/>
+  <span style="font-size: 60%;"> រថយន្ត : <span style="font-size: 100%"> <%= @car.name %> </span> </span> <br/>
+  <span style="font-size: 60%;"> ស្លាកលេខ : <span style="font-size: 100%"> <%= @car.plate_number %> </span> </span> <br/><br/>
+  <span style="font-size: 60%;">
+    ផ្ទះលេខ <span style="font-size: 100%;"> 25 </span> ផ្លូវ <span style="font-size: 100%;"> 237 </span> សង្កាត់ផ្សារដេប៉ូ <span style="font-size: 100%;"> 1 </span> ខណ្ឌទួលគោក រាជធានីភ្នំពេញ 
+  </span>
+</div>
+
+<div style="display: inline-block; width: 35%;">
+  <div style="font-size: 70%; margin-left: 100px;" > វិក័យប័ត្រ </div>
+  <div style="margin-left: 98px; margin-bottom: 10px; font-size: 70%;"> INVOICE </div>
+  <div style="margin-left: 80px; margin-top: 20px; font-size: 70%"> Nº : .................. </div>
+  <div style="margin-left: 70px; margin-top: 20px; font-size: 60%;">Tel : (855) 12 2000 49</div>
+  <div style="margin-left: 85px; font-size: 60%;">(855) 16 2000 19</div>
+  <div style="margin-left: 85px; font-size: 60%;">(855) 11 8388 83</div>
+  <div style="margin-left: 50px; margin-top: 20px; font-size: 60%;"> Email:  vkh_motosport@yahoo.com </div>
+  <div style="margin-left: 80px; font-size: 60%;"> info@vkhmotorsports.com  </div>
+</div>
+
+<div style="float: right; width: 33%; margin-top: 0px;">
+  <div style="margin-left: 90px;"><%= wicked_pdf_image_tag 'vkh-khmer.png' %></div>
+  <div style="margin-left: 110px;"><%= wicked_pdf_image_tag 'vkh4x4.jpg' %></div>
+  <div style="font-size: 60%; margin-top: 5px; margin-left: 80px;">
+    លក់គ្រឿងតុបតែងរថយន្ត ទំលាក់និងតំឡើងបូមរថយន្ត ទទួលចាក់ស្មាច់ តោន និង បាញ់ថ្នាំ ជុសជុលរថយន្តគ្រប់ប្រភេទ
+  </div>
+  <div style="margin-left: 80px; margin-top: 5px; font-size: 60%;">www.vkhmotorsports.com</div>
+  <div style="margin-left: 80px; font-size: 60%;">www.facebook/vkhmotorsports</div>
+
+</div>
+
+
+<table width="100%">
+  <thead>
+  <tr border="1" style="background-color: gray ; color: white;">
+    <th border="1" width="5%"> <span style="font-size: 60%">ល.រ <br/> <span style="font-size: 100%;"> Nº </span> </span> </th>
+    <th style="text-align: center;" width="45%"> <span style="font-size: 60%"> បរិយាយ <br/> <span style="font-size: 100%;"> Description </span></span> </th>
+    <th style="text-align: center;" width="10%"> <span style="font-size: 60%"> ចំនួន <br/> <span style="font-size: 100%;"> Quantity </span> </span> </th>
+    <th style="text-align: center;" width="10%"> <span style="font-size: 60%"> តំលែរាយ <br/> <span style="font-size: 90%;"> Unit Price </span> </span> </th>
+    <th style="text-align: center;" width="10%"> <span style="font-size: 60%"> បញ្ចុះតំលែ <br/> <span style="font-size: 100%;"> Discount(%) </span> </span> </th>
+    <th style="text-align: center;" width="10%"> <span style="font-size: 60%"> តំលែសរុប <br/> <span style="font-size: 100%;"> Sub Total </span> </span> </th>
+  </tr>
+</thead>
+<tbody>
+  <% i = 0%>
+  <% @sell.each do |el| %>
+  <tr>
+    <% i = i+1 %>
+    <td style="font-size: 60%; text-align: center;"> <%= i %> </td>
+    <td style="font-size: 60%; padding: 5px;"> <%= el.spare_part.name %> </td>
+    <td style="font-size: 60%; text-align: center;"><%= el.unit %></td>
+    <td style="font-size: 60%; text-align: center;"><%= el.selling_price %> $</td>
+    <% if el.discount %>
+    <td style="font-size: 60%; text-align: center;"><%= el.discount %> %</td>
+    <% else %>
+    <td style="font-size: 60%; text-align: center;"></td>
+    <%end%>
+    <td style="font-size: 60%; text-align: center;"><%= el.total_price %> $</td>
+  </tr>
+  <% end %>
+</tbody>
+<tfoot>
+  <tr>
+    <td rowspan=6 colspan=3 style="width: 50px;"> 
+      <span style="font-size: 60%; color: green;"> កំណត់សំគាល់ ៖ <%= @car.detail %> </span>
+    </td>
+  </tr>
+  <tr>
+    <td style="font-size: 60%; text-align: right;" colspan=2><span style="font-weight: bold; margin-right: 20px;"> បញ្ចុះតំលែ <span style="font-size: 100%"> Discount </span ></span> </td>
+    <td> <span style="font-weight: bold; font-size: 60%;"> <%= @sell[0].total_discount %> $ </span></td>
+  </tr>
+  <tr>
+    <td style="font-size: 60%; text-align: right;" colspan=2><span style="font-weight: bold; margin-right: 20px;"> សរុប <span style="font-size: 100%;"> Total </span ></span> </td>
+    <td> <span style="font-weight: bold; font-size: 60%;"> <%= @sell[0].sub_total %> $ </span></td>
+  </tr>
+  <tr>
+    <td style="font-size: 60%; text-align: right;" colspan=2><span style="font-weight: bold; margin-right: 20px;"> កក់មុខ <span style="font-size: 100%"> Deposit </span> </span> </td>
+    <td> <span style="font-weight: bold; font-size: 60%;"> </span></td>
+  </tr>
+  <tr>
+    <td style="font-size: 60%; text-align: right;" colspan=2><span style="font-weight: bold; margin-right: 20px;"> នៅខ្វះ <span style="font-size: 100%"> Balance </span> </span> </td>
+    <td> <span style="font-weight: bold; font-size: 60%;"> </span></td>
+  </tr>
+</tfoot>
+  </table>
+
+<div style="float: left; width: 70%;">
+<span style="font-size: 60%"> ថ្ងែទី ៖ <span style="font-size: 100%"> <%= Date.today %> </span>  </span> <br/>
+<span style="font-size: 60%"> អ្នកទិញ <span style="font-size: 100%"> / The Buyer </span> </span>
+</div>
+<div style="float: right; width: 30%; margin-top: 20px;">
+  <span style="font-size: 60%"> អ្នកលក់ <span style="font-size: 100%"> / The Seller </span> </span>
+</div>
+
+
