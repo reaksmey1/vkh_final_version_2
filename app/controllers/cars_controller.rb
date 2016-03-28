@@ -55,6 +55,7 @@ class CarsController < ApplicationController
 	def print
 		# redirect_to show_print_car_history_path
 		if params[:_json].count > 0
+			SellReport.where(:car_id => params[:car_id]).destroy_all
 			params[:_json].each do |el| 
 				car_id = el[:car_id]
 				entry_date = el[:entry_date]

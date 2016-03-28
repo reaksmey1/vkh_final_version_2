@@ -52,6 +52,8 @@ class CarHistoriesController < ApplicationController
 				entry_date = el[:entry_date]
 				car_history = CarHistory.last.id + 1
 				if car_history
+					@sell_report_old = SellReport.where(:car_id => params[:id])
+					@sell_report_old.destroy_alldfs
 					@sell_report = SellReport.create!(:car_id => params[:id],
 														 :spare_part_id => SparePart.find_by_code(el[:code].delete(" ")).id,
 														 :unit => el[:amount],
