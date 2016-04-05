@@ -47,6 +47,12 @@ class SparePartsController < ApplicationController
 		@spare_part = SparePart.find(params[:id])
 	end
 
+	def quick_create
+		name = params[:name]
+		last_code = SparePart.last.code.next
+		spare_part = SparePart.create(:code => last_code, :name => name)
+	end
+
 	def import_page
 
 	end

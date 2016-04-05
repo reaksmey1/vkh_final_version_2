@@ -14,6 +14,7 @@ Rails.application.routes.draw do
 
   resources :cars do
     post 'print'
+    get 'show_history'
     resources :car_histories do
       member do
         post 'new'
@@ -25,6 +26,7 @@ Rails.application.routes.draw do
     end
   end
   get 'spare_parts/autocomplete_spare_part_name'
+  post 'spare_parts/quick_create'
   resources :spare_parts do
     collection { post :import }
     collection do

@@ -9,12 +9,12 @@ class SparePart < ActiveRecord::Base
 	  # spreadsheet = open_spreadsheet(file)
 	  CSV.foreach(file.path) do |row|
 	  	sparepart = SparePart.new
-	  	sparepart.code = row[0]
-	  	sparepart.name = row[1]
-	  	sparepart.spare_part_type_id = row[2]
-	  	sparepart.amount_in_stock = row[3]
-	  	sparepart.based_price = row[4]
-	  	sparepart.selling_price = row[5]
+	  	sparepart.code = SparePart.last.code.next
+	  	sparepart.name = row[0]
+	  	# sparepart.spare_part_type_id = row[2]
+	  	# sparepart.amount_in_stock = row[3]
+	  	# sparepart.based_price = row[4]
+	  	# sparepart.selling_price = row[5]
 	  	sparepart.save
     # use row here...
   	end

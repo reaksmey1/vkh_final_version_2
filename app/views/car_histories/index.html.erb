@@ -7,8 +7,13 @@
 
 	<div class="input-spare-part">
 		<%= bootstrap_form_for(@spare_part, layout: :horizontal) do |f| %>
-		  <%= f.text_field :name, :label_col => "col-sm-3", :control_col => "col-sm-9", :label => "លេខកូដ", data: {autocomplete: spare_parts_autocomplete_spare_part_name_path} %>
+		  <%= f.text_field :name, :label_col => "col-sm-3", :control_col => "col-sm-9", :label => "ទំនិញ", data: {autocomplete: spare_parts_autocomplete_spare_part_name_path} %>
+		  <input type="button" id="btn_link_new" value="បង្កើតថ្មី">
 		<% end %>
+		<div id="new-spare-part" hidden="true">
+			<input type="text" id="txt_spare_part" />
+		  <input type="button" id="btn_new_spare_part" value="Create" />
+		</div>
 	</div>
 
 	<div class="calculation">
