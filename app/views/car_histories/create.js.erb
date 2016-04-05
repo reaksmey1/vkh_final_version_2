@@ -44,7 +44,12 @@ $(".total_price").change(function(){
 $(".based_price").change(function(){
 	var based_price = parseFloat($(this).val()).toFixed(2);
 	var amount = parseFloat($(this).parents("tr").children().find('input')[0].value).toFixed(2);
-	var total = based_price * amount;
+	var discount = parseFloat($(this).parents("tr").children().find('input')[2].value).toFixed(2);
+	if(discount == "NaN") {
+		discount = 0;
+	}
+	var fix_discount = (100 - discount)/100;
+	var total = (based_price * amount) * fix_discount;
 	$(this).parents("tr").children().find('input')[3].value = total.toFixed(2);
 	updateTotal();
 	updateReturnMoney();
@@ -64,7 +69,12 @@ $(".discounted").change(function(){
 $(".amount").change(function(){
 	var amount = parseFloat($(this).val()).toFixed(2);
 	var based_price = parseFloat($(this).parents("tr").children().find('input')[1].value).toFixed(2);
-	var total = based_price * amount;
+	var discount = parseFloat($(this).parents("tr").children().find('input')[2].value).toFixed(2);
+	if(discount == "NaN") {
+		discount = 0;
+	}
+	var fix_discount = (100 - discount)/100;
+	var total = (based_price * amount) * fix_discount;
 	$(this).parents("tr").children().find('input')[3].value = total.toFixed(2);
 	updateTotal();
 	updateReturnMoney();
