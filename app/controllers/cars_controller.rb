@@ -57,7 +57,18 @@ class CarsController < ApplicationController
 	end
 
 	def show_history
-		@sell_report = SellReport.where(:car_id => params[:id])
+		@car_history = CarHistory.where(:car_id => params[:car_id]).paginate(:page => params[:page], :per_page => 10)
+	end
+
+	def show_invoice
+		@sell = SellReport.where(:car_history_id => params[:car_id])
+		@car = Car.find(@sell.first.car_id)
+		respond_to do |format|
+    format.html
+    format.pdf do
+      render pdf: "file_name", encoding: "UTF-8", print_media_type: true   # Excluding ".pdf" extension.
+    end
+    end
 	end
 
 	def print

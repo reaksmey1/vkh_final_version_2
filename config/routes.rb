@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   resources :cars do
     post 'print'
     get 'show_history'
+    get 'show_invoice'
     resources :car_histories do
       member do
         post 'new'
