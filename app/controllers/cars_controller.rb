@@ -74,7 +74,12 @@ class CarsController < ApplicationController
 	def print
 		# redirect_to show_print_car_history_path
 		if params[:_json].count > 0
-			car_history = CarHistory.create(:car_id => params[:car_id], :entry_date => params[:_json][0][:entry_date])
+			if CarHistory.last.invoice_number.nil? 
+				invoice_number = "00000001"
+			else
+				invoice_number = CarHistory.last.invoice_number.next
+			end
+			car_history = CarHistory.create(:car_id => params[:car_id], :entry_date => params[:_json][0][:entry_date], :invoice_number => invoice_number)
 			last_history_id = car_history.id
 			params[:_json].each do |el| 
 				car_id = el[:car_id]

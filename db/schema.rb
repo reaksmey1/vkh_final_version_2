@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160202031612) do
+ActiveRecord::Schema.define(version: 20160503021757) do
 
   create_table "alerts", force: true do |t|
     t.integer  "amount"
@@ -26,6 +26,7 @@ ActiveRecord::Schema.define(version: 20160202031612) do
     t.datetime "updated_at"
     t.datetime "entry_date"
     t.string   "kilo_metre"
+    t.string   "invoice_number"
   end
 
   create_table "car_history_spare_parts", force: true do |t|
