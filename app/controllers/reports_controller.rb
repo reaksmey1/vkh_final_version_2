@@ -10,7 +10,7 @@ class ReportsController < ApplicationController
 			end
 			@sell_report_temp = SellReport.where("spare_part_id in (?)",@spare_part_ids)
 			if params[:from] != "" && params[:to] != ""
-				@sell_report_temp = @sell_report_temp.where(:created_at => params[:from].to_date..params[:to].to_date)
+				@sell_report_temp = @sell_report_temp.where(:created_at => params[:from].to_date.beginning_of_day..params[:to].to_date.end_of_day)
 			end
 			@sell_reports = @sell_report_temp.group('spare_part_id').sum(:total_price)
 			@total = @sell_report_temp.sum(:total_price)
@@ -22,8 +22,8 @@ class ReportsController < ApplicationController
 			else
 				@sell_report_temp = SellReport.all
 			end
-			@sell_reports = @sell_report_temp.where(:created_at => params[:from].to_date..params[:to].to_date).group('spare_part_id').sum(:total_price)
-			@total = @sell_report_temp.where(:created_at => params[:from].to_date..params[:to].to_date).sum(:total_price)
+			@sell_reports = @sell_report_temp.where(:created_at => params[:from].to_date.beginning_of_day..params[:to].to_date.end_of_day).group('spare_part_id').sum(:total_price)
+			@total = @sell_report_temp.where(:created_at => params[:from].to_date.beginning_of_day..params[:to].to_date.end_of_day).sum(:total_price)
 		else
 			@sell_reports = SellReport.group('spare_part_id').sum(:total_price)
 			@total = SellReport.all.sum(:total_price)
