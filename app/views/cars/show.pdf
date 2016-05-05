@@ -64,7 +64,7 @@ tfoot tr th:last-child {
 <div style="display: inline-block; width: 35%;">
   <div style="font-size: 100%; margin-left: 90px;" > វិក័យប័ត្រ </div>
   <div style="margin-left: 88px; margin-bottom: 10px;"> INVOICE </div>
-  <div style="margin-left: 70px; margin-top: 20px;"> Nº : .................. </div>
+  <div style="margin-left: 70px; margin-top: 20px;"> Nº : <%= @car_history.invoice_number %> </div>
   <div style="margin-left: 65px; margin-top: 30px; font-size: 80%;">Tel : (855) 12 2000 49</div>
   <div style="margin-left: 90px; font-size: 80%;">(855) 16 2000 19</div>
   <div style="margin-left: 90px; font-size: 80%;">(855) 11 8388 83</div>

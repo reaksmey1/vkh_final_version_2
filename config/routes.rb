@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   resources :cars do
     post 'print'
     get 'show_history'
+    get 'show_invoice'
     resources :car_histories do
       member do
         post 'new'
@@ -31,6 +32,7 @@ Rails.application.routes.draw do
     collection { post :import }
     collection do
       get 'import_page'
+      get 'download'
     end
   end
   resources :spare_part_types
@@ -47,6 +49,8 @@ Rails.application.routes.draw do
       get 'quote'
     end
   end
+
+  resources :reports
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

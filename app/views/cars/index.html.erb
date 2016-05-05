@@ -2,9 +2,11 @@
 	<div class="col-md-1"></div>
 	<div class="col-md-6">
 		<div class="nav">
-		<div class="navbar-nav navbar-left" style="margin-bottom: 10px;">
-			<input type="text" class="form-control" placeholder="Search ..." aria-describedby="sizing-addon1">
-		</div>
+		<%= form_tag cars_path, :method => 'get', :class => "form-inline" do %>
+			<div class="navbar-nav navbar-left" style="margin-bottom: 10px;">
+				<%= text_field_tag :search, params[:search], class: "form-control", placeholder: "Search ..." %>
+			</div>
+		<% end %>
 	  <div class="navbar-nav navbar-right" style="margin-right: 0px;">
 	  	<%= button_to "បង្កើតឡានថ្មី", new_car_path, :class => "btn btn-default", :method => "get" %>
 	  </div>

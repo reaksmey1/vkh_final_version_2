@@ -1,0 +1,39 @@
+<div class="row">
+	<div class="col-md-1"></div>
+	<div class="col-md-8">
+		<div class="nav">
+		<%= form_tag reports_path, :method => 'get', :class => "form-inline" do %>
+			<div class="navbar-nav navbar-left" style="margin-bottom: 10px;">
+				<%= text_field_tag :search, params[:search], class: "form-control", placeholder: "Search ..." %>
+				From:
+				<%= text_field_tag :from, params[:from], class: "form-control", id: "datetimepicker1", label: "From" %>
+				To:
+				<%= text_field_tag :to, params[:to], class: "form-control", id: "datetimepicker2", label: "To" %>
+				Type: 
+				<%= select_tag "type"	, options_from_collection_for_select(SparePartType.all, "id", "name", @type), class: 'form_input', include_blank: true %>
+				<%= submit_tag "Search", :class => "btn btn-default" %>
+			</div>
+		<% end %>
+  	</div>
+
+	  <div class="panel panel-default">
+			<table class="table table-striped table-hover">
+				<th style="width: 50%"> ឈ្មោះទំនិញ </th>
+				<th style="width: 30%"> ប្រភេទ </th>
+				<th style="width: 20%"> ចំណូល </th>
+
+				<% @sell_reports.select {|key,value| %>
+					<tr>
+						<td> <%= SparePart.find(key).name %> </td>
+						<td> <%= SparePart.find(key).spare_part_type.nil? ? "គ្មាន" : SparePart.find(key).spare_part_type.name %> </td>
+						<td> $ <%= value %> </td>
+					</tr>
+				<%}%>
+				<tr style="color: green; font-weight: bold;">
+					<td colspan="2" style="text-align: right;"> សរុប </td>
+					<td> $ <%= @total %> </td>
+				</tr>
+			</table>
+		</div>
+	</div>
+</div>

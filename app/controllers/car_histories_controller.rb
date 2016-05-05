@@ -3,6 +3,11 @@ class CarHistoriesController < ApplicationController
 		@car = CarHistory.new
 		@spare_part = SparePart.new
 		@car_info = Car.find_by_id(params[:car_id])
+		if CarHistory.last.invoice_number.nil? 
+			@invoice_number = "00000001"
+		else
+			@invoice_number = CarHistory.last.invoice_number.next
+		end
 	end
 
 	def new
