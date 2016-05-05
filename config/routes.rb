@@ -49,6 +49,8 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :reports
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

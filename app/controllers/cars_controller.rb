@@ -1,7 +1,12 @@
 class CarsController < ApplicationController
 
 	def index
-		@cars = Car.paginate(:page => params[:page], :per_page => 10)
+		if params[:search] != ""
+			params_search = String(params[:search]).downcase
+			@cars = Car.where("lower(plate_number) like ?", "%#{params[:search]}%").paginate(:page => params[:page], :per_page => 10)
+		else
+			@cars = Car.paginate(:page => params[:page], :per_page => 10)
+		end
 	end
 
 	def new
@@ -24,6 +29,7 @@ class CarsController < ApplicationController
 		two_id = params[:id].split("-")
 		car_id = two_id[0]
 		car_history_id = two_id[1]
+		@car_history = CarHistory.find(car_history_id)
 		@sell = SellReport.where(:car_id => car_id, :car_history_id => car_history_id)
 		@car = Car.find(car_id)
 		respond_to do |format|
@@ -61,6 +67,7 @@ class CarsController < ApplicationController
 	end
 
 	def show_invoice
+		@car_history = CarHistory.find(params[:car_id])
 		@sell = SellReport.where(:car_history_id => params[:car_id])
 		@car = Car.find(@sell.first.car_id)
 		respond_to do |format|
@@ -74,12 +81,7 @@ class CarsController < ApplicationController
 	def print
 		# redirect_to show_print_car_history_path
 		if params[:_json].count > 0
-			if CarHistory.last.invoice_number.nil? 
-				invoice_number = "00000001"
-			else
-				invoice_number = CarHistory.last.invoice_number.next
-			end
-			car_history = CarHistory.create(:car_id => params[:car_id], :entry_date => params[:_json][0][:entry_date], :invoice_number => invoice_number)
+			car_history = CarHistory.create(:car_id => params[:car_id], :entry_date => params[:_json][0][:entry_date], :invoice_number => params[:_json][0][:invoice_number])
 			last_history_id = car_history.id
 			params[:_json].each do |el| 
 				car_id = el[:car_id]

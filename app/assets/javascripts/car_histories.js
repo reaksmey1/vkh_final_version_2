@@ -16,6 +16,16 @@ $(document).ready(function() {
 		format:'Y/m/d'
 	});
 
+	$('#datetimepicker1').datetimepicker({
+		timepicker:false,
+		format:'Y/m/d'
+	});
+
+	$('#datetimepicker2').datetimepicker({
+		timepicker:false,
+		format:'Y/m/d'
+	});
+
 	$("#invoice").click(function() {
 		alert("invoice is clicked");
 	});
@@ -57,7 +67,8 @@ $(document).ready(function() {
 		      var total_discount = $("#discount").val();
 		      var car_id = $("#car_id").val();
 		      var entry_date = $("#datetimepicker").val();
-		      sell_data.push({code: code, name: name, amount: amount, unit_price: unit_price, total_price: total_price, sub_total: sub_total, recieved: recieved, return_money: return_money, car_id: car_id, entry_date: entry_date, discount: discount, total_discount: total_discount})
+		      var invoice_number = $("#invoice_number").val();
+		      sell_data.push({code: code, name: name, amount: amount, unit_price: unit_price, total_price: total_price, sub_total: sub_total, recieved: recieved, return_money: return_money, car_id: car_id, entry_date: entry_date, discount: discount, total_discount: total_discount, invoice_number: invoice_number})
 		    }
 		 });
 	  $.ajax({
