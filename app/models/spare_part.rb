@@ -18,13 +18,18 @@ class SparePart < ActiveRecord::Base
 	  	sparepart.save
     # use row here...
   	end
-	  # debugger
-	  # header = spreadsheet.row(1)
-	  # (2..spreadsheet.last_row).each do |i|
-	  #   row = Hash[[header, spreadsheet.row(i)].transpose]
-	  #   product = find_by_id(row["id"]) || new
-	  #   product.attributes = row.to_hash.slice(*accessible_attributes)
-	  #   product.save!
-  	# end
 	end
+
+	def self.download_csv
+		spare_parts = SparePart.all
+    CSV.generate do |csv|
+      spare_parts.each do |ar|
+        csv << [
+          ar.code,
+          ar.name.force_encoding("UTF-8")
+        ]
+      end
+    end
+  end
+
 end

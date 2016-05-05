@@ -62,6 +62,14 @@ class SparePartsController < ApplicationController
 	  redirect_to root_url, notice: "Products imported."
 	end
 
+	def download
+		@spare_parts= SparePart.all
+	  respond_to do |format|
+	    format.html
+	    format.csv { send_data Iconv.conv('iso-8859-15', 'utf-8', SparePart.download_csv)}
+	  end
+	end
+
 	private
 
 	def spare_part_params

@@ -32,6 +32,7 @@ Rails.application.routes.draw do
     collection { post :import }
     collection do
       get 'import_page'
+      get 'download'
     end
   end
   resources :spare_part_types
